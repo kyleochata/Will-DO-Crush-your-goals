@@ -45,7 +45,23 @@ const resolvers = {
 			const token = signToken(user);
 
 			return { token, user };
-		},
+    },
+    addTask: async (parent, { title, description, completionDate, priority }, context) => {
+      if (context.user) {
+        const task = await Task.create({ title, description, completionDate, priority, user: context.user._id });
+        await User.findByIdAndUpdate(context.user._id, { $push: { tasks: task._id } });
+        return task;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    addGoal: async (parent, { title, description, completionDate }, context) => {
+      if (context.user) {
+        const goal = await Goal.create({ title, description, completionDate, completed, user: context.user._id });
+        await User.findByIdAndUpdate(context.user._id, { $push: { goals: goal._id } });
+        return goal;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
 	},
 };
 
