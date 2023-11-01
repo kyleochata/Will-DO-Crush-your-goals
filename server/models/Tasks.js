@@ -14,6 +14,11 @@ const taskSchema = new Schema({
     type: Date,
     required: true,
   },
+  createdAt: {
+    type: Date, 
+    required: true,
+    default: Date.now,
+  },
   priority: {
     type: String,
     enum: ['High', 'Medium', 'Low'],
