@@ -3,31 +3,40 @@ const { Schema, model } = require('mongoose');
 const goalSchema = new Schema({
   title: {
     type: String,
-    require: true,
+    required: true,
     trim: true,
   },
   description: {
     type: String,
-    require: true,
+    required: true,
   },
   completionDate: {
     type: Date,
-    require: true,
+    required: true,
+    default: () => Date.now() + (30*60*60*24*1000),
   },
   createdAt: {
     type: Date,
-    require: true,
+    required: true,
+    default: Date.now,
   },
-  status: {
-    type: String,
-    require: true,
+  completed: {
+    type: Boolean,
+    required: true,
+    default: false,
   },
   user: [
     {
       type: Schema.Types.ObjectId,
       ref: 'User',
     }
-  ]
+  ],
+  tasks: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Task',
+  }
+]
 });
 
 const Goal = model('Goal', goalSchema);
