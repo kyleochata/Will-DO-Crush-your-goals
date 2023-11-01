@@ -24,10 +24,12 @@ const taskSchema = new Schema({
     required: true,
     default: false,
   },
-  user: {
+  user: [
+    {
     type: Schema.Types.ObjectId,
     ref: 'User',
-  },
+    }
+  ],
   goal: {
     type: Schema.Types.ObjectId,
     ref: 'Goal',
