@@ -13,7 +13,7 @@ const typeDefs = `
   type Task {
     _id: ID
     title: String!
-    description: String!
+    description: String
     completionDate: String!
     priority: String!
     completed: Boolean!
@@ -25,6 +25,8 @@ const typeDefs = `
     _id: ID
     title: String!
     description: String!
+    measurable: String!
+    why: String!
     completionDate: String!
     createdAt: String!
     completed: Boolean!

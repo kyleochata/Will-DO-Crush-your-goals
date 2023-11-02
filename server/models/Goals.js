@@ -10,6 +10,14 @@ const goalSchema = new Schema({
 		type: String,
 		required: true,
 	},
+	measurable: {
+		type: String,
+		required: true,
+	},
+	why: {
+		type: String,
+		required: true,
+	},
 	completionDate: {
 		type: Date,
 		required: true,
