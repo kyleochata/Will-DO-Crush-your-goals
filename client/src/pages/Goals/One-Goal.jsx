@@ -17,3 +17,4 @@ const OneGoal = () => {
   }
 }
 
+export default OneGoal;
