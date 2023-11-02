@@ -9,6 +9,8 @@
 
 // import Header from "./components/Header";
 // import Footer from "./components/Footer";
+import LoginButton from "./components/loginButton/loginButton"
+import LogoutButton from "./components/logoutButton/logoutButton"
 
 // // Construct our main GraphQL API endpoint
 // const httpLink = createHttpLink({
@@ -34,18 +36,20 @@
 // 	cache: new InMemoryCache(),
 // });
 
-// function App() {
-// 	return (
-// 		<ApolloProvider client={client}>
-// 			<div className="flex-column justify-flex-start min-100-vh">
-// 				<Header />
-// 				<div className="container">
-// 					<Outlet />
-// 				</div>
-// 				<Footer />
-// 			</div>
-// 		</ApolloProvider>
-// 	);
-// }
+function App() {
+	return (
+		<ApolloProvider client={client}>
+			<div className="flex-column justify-flex-start min-100-vh">
+				{/* <Header /> */}
+				<div className="container">
+					<Outlet />
+          <LoginButton />
+          <LogoutButton />
+				</div>
+				{/* <Footer /> */}
+			</div>
+		</ApolloProvider>
+	);
+}
 
 // export default App;
