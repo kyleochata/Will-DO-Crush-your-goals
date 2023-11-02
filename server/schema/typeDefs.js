@@ -7,6 +7,7 @@ const typeDefs = `
     email: String!
     password: String!
     tasks: [Task]
+    goals: [Goal]
   }
 
   type Task {
