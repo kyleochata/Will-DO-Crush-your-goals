@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@apollo/server": "^4.9.5",
+    "@auth0/auth0-react": "^2.2.3",
     "@fullcalendar/core": "^6.1.9",
     "@fullcalendar/daygrid": "^6.1.9",
     "@fullcalendar/react": "^6.1.9",
