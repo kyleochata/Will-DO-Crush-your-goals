@@ -11,7 +11,11 @@ import OneGoal from './pages/Goals/One-Goal.jsx';
 // import Home from './pages/Home.jsx';
 import Dashboard from './pages/Dashboard/Dashboard.jsx';
 
-const router = createbrowserRouter([
+const domain = import.meta.env.VITE_REACT_APP_AUTH0_DOMAIN;
+const clientId = import.meta.env.VITE_REACT_APP_AUTH0_CLIENT_ID;
+console.log(domain);
+console.log(clientId);
+const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
@@ -19,18 +23,21 @@ const router = createbrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />
-      }, {
-        path: '/dashboard',
-        element: <Dashboard />
-      }, {
-        path: '/goals',
+        element: <Home />,
+        // }, {
+        //   path: '/dashboard',
+        //   element: <Dashboard />
+      },
+      {
+        path: "/goals",
         element: <Goals />,
-      }, {
-        path: '/goals/:goalId',
+      },
+      {
+        path: "/goals/:goalId",
         element: <OneGoal />,
-      }, {
-        path: '/tasks',
+      },
+      {
+        path: "/tasks",
         element: <Tasks />,
       }, {
         path: '/calendar',
@@ -41,6 +48,6 @@ const router = createbrowserRouter([
 ])
 
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />
-)
+);
