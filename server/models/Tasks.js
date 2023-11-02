@@ -8,7 +8,6 @@ const taskSchema = new Schema({
   },
   description: {
     type: String,
-    required: true,
   },
   completionDate: {
     type: Date,
