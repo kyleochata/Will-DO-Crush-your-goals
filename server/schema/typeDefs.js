@@ -7,12 +7,13 @@ const typeDefs = `
     email: String!
     password: String!
     tasks: [Task]
+    goals: [Goal]
   }
 
   type Task {
     _id: ID
     title: String!
-    description: String!
+    description: String
     completionDate: String!
     priority: String!
     completed: Boolean!
@@ -24,6 +25,8 @@ const typeDefs = `
     _id: ID
     title: String!
     description: String!
+    measurable: String!
+    why: String!
     completionDate: String!
     createdAt: String!
     completed: Boolean!
@@ -46,7 +49,7 @@ const typeDefs = `
     }
     
     type Mutation {
-      addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
+      addUser(firstName: String!, lastName: String!, userName: String!, email: String!, password: String!): Auth
       login(email: String!, password: String!): Auth
       addTask(title: String!, description: String!, completionDate: String!, priority: String!): Task
       addGoal(title: String!, description: String!, completionDate: String!): Goal
