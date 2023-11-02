@@ -13,9 +13,10 @@ import OneGoal from "./pages/Goals/One-Goal.jsx";
 import Home from "./pages/Home/Home.jsx";
 // import Dashboard from './pages/Dashboard.jsx';
 
-const domain = import.meta.env.REACT_APP_AUTH0_DOMAIN;
-const clientId = import.meta.env.REACT_APP_AUTH0_CLIEN_ID;
-
+const domain = import.meta.env.VITE_REACT_APP_AUTH0_DOMAIN;
+const clientId = import.meta.env.VITE_REACT_APP_AUTH0_CLIENT_ID;
+console.log(domain);
+console.log(clientId);
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,7 +24,9 @@ const router = createBrowserRouter([
       <Auth0Provider
         domain={domain}
         clientId={clientId}
-        redirectUri={window.location.origin}
+        authorizationParams={{
+          redirect_uri: window.location.origin,
+        }}
       >
         <App />
       </Auth0Provider>
