@@ -35,6 +35,12 @@ const userSchema = new Schema({
 			ref: "Task",
 		},
 	],
+	goals: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: "Goal",
+		},
+	],
 });
 
 userSchema.pre('save', async function (next) {
