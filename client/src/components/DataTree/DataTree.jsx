@@ -22,7 +22,7 @@ const DataTree = ({ data, style }) => {
     console.log(dimensions)
     const { width, height } =
       dimensions || wrapperRef.current.getBoundingClientRect()
-    const widthOffset = (width / 100) * 17
+    const widthOffset = (width / 100) * 15
     const root = hierarchy(data)
 
     const treeLayout = tree().size([height, width - widthOffset])
@@ -30,7 +30,7 @@ const DataTree = ({ data, style }) => {
     const linkGenerator = linkHorizontal()
       .source((link) => link.source)
       .target((link) => link.target)
-      .x((node) => node.y - 20)
+      .x((node) => node.y + 10)
       .y((node) => node.x)
 
     treeLayout(root)
@@ -42,7 +42,7 @@ const DataTree = ({ data, style }) => {
       .data(root.descendants())
       .join((enter) => enter.append('circle').attr('opacity', 0))
       .attr('class', 'node')
-      .attr('cx', (node) => node.y)
+      .attr('cx', (node) => node.y + 10)
       .attr('cy', (node) => node.x)
       .attr('r', 4)
       .transition()
@@ -80,7 +80,7 @@ const DataTree = ({ data, style }) => {
       .attr('class', 'label')
       .attr('x', (node) => node.y)
       .attr('y', (node) => node.x - 12)
-      .attr('text-anchor', 'middle')
+      .attr('text-anchor', 'center')
       .attr('font-size', 20)
       .text((node) => node.data.name)
       .transition()

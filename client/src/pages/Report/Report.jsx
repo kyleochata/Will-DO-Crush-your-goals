@@ -34,6 +34,12 @@ const Report = () => {
   return (
     <div className={style.reportMain}>
       <h1>Reports</h1>
+      <div className={style.reportProgressContainer}>
+        <div className={style.reportProgress}>overall %</div>
+        <div className={style.reportProgress}>goal %</div>
+        <div className={style.reportProgress}>task %</div>
+        <div className={style.reportProgress}>Wild Card</div>
+      </div>
       <DataTree data={data} style={style} />
     </div>
   )
