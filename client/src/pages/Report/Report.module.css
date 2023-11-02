@@ -1,0 +1,21 @@
+.reportMain {
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 50px 150px;
+}
+svg {
+  overflow-x: auto;
+  /* height: fit-content; */
+  /* object-fit: scale-down; */
+  width: 100%;
+  height: 100%;
+}
+
+.svgWrapper {
+  width: 100%;
+  height: 50vh;
+  background-color: aqua;
+  padding: 10px;
+}
