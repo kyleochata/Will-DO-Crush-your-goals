@@ -3,11 +3,11 @@
 const typeDefs = `
   type User {
     _id: ID
-    firstName: String!
-    lastName: String!
-    userName: String!
-    email: String!
-    password: String!
+    authID: String!
+    firstName: String
+    lastName: String
+    userName: String
+    email: String
     tasks: [Task]
     goals: [Goal]
     measurables: [Measurable]
@@ -60,6 +60,7 @@ const typeDefs = `
     goal(goalId: ID!): Goal
     measurables: [Measurable]
     measurable(measurableId: ID!): Measurable
+    checkUser(authID: String!): { exists: boolean }
   }
   
   type Mutation {

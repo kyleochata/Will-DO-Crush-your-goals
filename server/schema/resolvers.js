@@ -32,25 +32,23 @@ const resolvers = {
 		measurable: async (_, { measurableId }) => {
 			return Measurable.findById(measurableId).populate('user').populate('goal').populate('tasks');
 		},
+		checkUser: async(_, { authID }) => {
+			const userResult = User.find({authID})
+			return userResult != null ? { exists: true } : { exists: false } 
+		}
 	},
 
 	Mutation: {
 		// User-related mutations
-		addUser: async (_, { firstName, lastName, userName, email, password }) => {
-			const user = await User.create({ firstName, lastName, userName, email, password });
+		addUser: async (_, { authID, username }) => {
+			const user = await User.create({ authID, username });
 			const token = signToken(user);
 			return { token, user };
 		},
-		login: async (_, { email, password }) => {
-			const user = await User.findOne({ email });
+		login: async (_, { authID }) => {
+			const user = await User.findOne({ authID });
 
 			if (!user) {
-				throw AuthenticationError;
-			}
-
-			const correctPw = await user.isCorrectPassword(password);
-
-			if (!correctPw) {
 				throw AuthenticationError;
 			}
 
