@@ -1,13 +1,12 @@
+import { Link } from "react-router-dom"
 import { useAuth0 } from "@auth0/auth0-react";
 import "./Home.css";
 import phone from "../../assets/phone.png";
 import mountain from "../../assets/mountain.png";
 
 export default () => {
-  const { user } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, user } = useAuth0();
   console.log(user);
-
-  const { isAuthenticated } = useAuth0();
 
   return (
     <section className="homeMain">
@@ -24,7 +23,8 @@ export default () => {
                 <div>YOUR.</div>
                 <div>GOALS.</div>
               </div>
-              <button>Sign up - It's Free!</button>
+              
+                <button className="login" onClick={() => loginWithRedirect({screen_hint: 'signup'})}>Sign up - It's Free!</button>
             </div>
           </div>
           </div>
