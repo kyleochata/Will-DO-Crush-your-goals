@@ -6,36 +6,32 @@
 }
 
 .navItems {
-    max-width: 75rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-    padding: 0 1rem;
+  max-width: 75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .logo {
-    height: 3.25rem;
-
+  height: 3.25rem;
 }
 
 .navLinks {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style-type: none;
-    padding: 0 1rem;
-    gap: 2rem;
-    margin: 0;
-
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+  padding: 0 1rem;
+  gap: 2rem;
+  margin: 0;
 }
 
 .login {
-    background-color: #276891;
-    color: white;
-    font-weight: 700;
-
+  background-color: #276891;
+  color: white;
+  font-weight: 700;
 }
 
 .navLinkItem {
@@ -58,10 +54,9 @@
 }
 
 .burgerMenu {
-    height: 2.5rem;
-    display: none;
-    object-fit: cover;
-
+  height: 2.5rem;
+  display: none;
+  object-fit: cover;
 }
 
 .mobileMenu {
@@ -109,26 +104,24 @@
 }
 
 .burgerMenu {
-    height: 2.5rem;
-    display: none;
-    object-fit: cover;
-
+  height: 2.5rem;
+  display: none;
+  object-fit: cover;
 }
 
-.Title{
-    width: 100vw;
-    height: 5rem;
-    text-align: center;
-    margin: 0 auto;
-    padding: 0;
-    color:white;
-    background-color: #0BAFC1;
+.Title {
+  width: 100vw;
+  height: 5rem;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+  color: white;
+  background-color: #0bafc1;
 }
 
-.pageTitle{
-    padding: 10px 0 0 0;
-    margin: 0;
-    
+.pageTitle {
+  padding: 10px 0 0 0;
+  margin: 0;
 }
 
 @media screen and (max-width:800px) {
@@ -142,34 +135,29 @@
         
     }
 
-    .navLinks {
-        display: none;
-    }
+  .navLinks {
+    display: none;
+  }
 
-    .logo {
-        height: 2.5rem;
-
-    }
-
+  .logo {
+    height: 2.5rem;
+  }
 }
 
-@media screen and (max-width:500px) {
-    .navItems {
-        flex-direction: column;
-        margin: 1.5rem auto;
+@media screen and (max-width: 500px) {
+  .navItems {
+    flex-direction: column;
+    margin: 1.5rem auto;
+  }
 
-    }
+  .header {
+    height: 125px;
+  }
 
-    .header {
-        height: 125px;
-
-    }
-
-    .mobileMenu {
-        position: absolute;
-        top: 8.5rem;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
+  .mobileMenu {
+    position: absolute;
+    top: 8.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }

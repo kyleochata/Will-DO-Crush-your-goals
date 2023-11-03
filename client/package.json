@@ -21,9 +21,11 @@
     "graphql": "^16.6.0",
     "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
+    "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.18.0",
-    "resize-observer-polyfill": "^1.5.1"
+    "resize-observer-polyfill": "^1.5.1",
+    "react-modal": "3.16.1"
   },
   "devDependencies": {
     "@types/node": "^20.8.10",
