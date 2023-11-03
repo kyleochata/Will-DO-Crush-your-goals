@@ -48,3 +48,24 @@
   color: #1c4b68;
   border-color: #276891;
 }
+
+/* add task modal */
+
+.addTaskModalTxt {
+  color: black;
+  font-size: larger;
+  margin: 20px;
+}
+
+.addTaskForm {
+  display: flex;
+  flex-direction: column;
+  margin: 100px;
+  align-items: start;
+}
+
+.addTaskModalInput {
+  background-color: white;
+  color: black;
+  margin-left: 10px;
+}
