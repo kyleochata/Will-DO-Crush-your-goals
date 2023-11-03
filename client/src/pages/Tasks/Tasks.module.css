@@ -10,6 +10,7 @@
     flex-direction: column; */
     align-items: center;
     justify-content: center;
+    padding: 2%;
     /* width: 100%; */
     /* border-color: gray;
     border-radius: 5%;
@@ -26,6 +27,12 @@
   border-color: #2f7fb0;
 }
 
+.completedBtn:hover {
+  background-color: white;
+  color: #1c4b68;
+  border-color: #276891;
+}
+
 .bottomBtn {
   background-color: #276891;
   color: white;
@@ -37,7 +44,7 @@
 }
 
 .bottomBtn:hover {
-  background-color: #488eb9;
-  color: white;
+  background-color: white;
+  color: #1c4b68;
   border-color: #276891;
 }
