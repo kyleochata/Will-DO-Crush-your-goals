@@ -1,8 +1,5 @@
 .header {
     height: 6rem;
-    position: sticky;
-    top: 0;
-    z-index: 3;
     width: 100vw;
     background-color: #FFFFFF;
 
@@ -44,18 +41,18 @@
 .navLinkItem {
     text-decoration: none;
     color: #276891;
-    font-size: clamp(1rem, 3vw, 2rem);
+    font-size: clamp(1rem, 3vw, 1.6rem);
     font-weight: 700;
 }
 
 .navLinkItem:hover {
     color: #0BAFC1;
-    padding-bottom: 0.5rem;
-    border-bottom: 3px solid #0BAFC1;
+    padding-bottom: 0.1rem;
+    border-bottom: 3px solid black;
 }
 
 .welcome {
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
     font-weight: 600;
 
 }
@@ -69,7 +66,7 @@
 
 .mobileMenu {
     position: absolute;
-    top: 4rem;
+    top: 3rem;
     right: 2rem;
     z-index: 2;
     display: flex;
@@ -87,23 +84,28 @@
     margin: 0.25rem;
     background: #0BAFC1;
     font-size: 1.25rem;
+    font-weight: 600;
 }
 
 .mobileMenuItem:hover {
     color: white;
-    padding: 0.5rem 3rem;
-    margin: 0.25rem;
-    background: #0BAFC1;
     font-size: 1.5rem;
     cursor: pointer;
     border-bottom: 3px solid black;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.1rem;
 }
 
 .active {
     color: #0BAFC1;
     border-bottom: 3px solid black;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.1rem;
+}
+
+.activeMobile {
+    color: #276891;
+    font-weight: 900;
+    border-bottom: 3px solid black;
+    padding-bottom: 0.1rem;
 }
 
 .burgerMenu {
@@ -132,7 +134,12 @@
 @media screen and (max-width:800px) {
     .burgerMenu {
         display: flex;
+        margin: 0 auto;
+    }
 
+    .burgerContainer{
+        width: 151px;
+        
     }
 
     .navLinks {
