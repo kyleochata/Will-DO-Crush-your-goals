@@ -11,13 +11,17 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",
+    "@auth0/auth0-react": "^2.2.3",
     "d3": "^7.8.5",
     "graphql": "^16.6.0",
+    "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "resize-observer-polyfill": "^1.5.1"
+    "resize-observer-polyfill": "^1.5.1",
+    "react-router-dom": "^6.18.0"
   },
   "devDependencies": {
+    "@types/node": "^20.8.10",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react-swc": "^3.3.2",
