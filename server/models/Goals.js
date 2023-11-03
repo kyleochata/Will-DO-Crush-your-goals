@@ -1,3 +1,5 @@
+//server/models/Goals.js
+
 const { Schema, model } = require("mongoose");
 
 const goalSchema = new Schema({
@@ -7,10 +9,6 @@ const goalSchema = new Schema({
 		trim: true,
 	},
 	description: {
-		type: String,
-		required: true,
-	},
-	measurable: {
 		type: String,
 		required: true,
 	},
@@ -33,16 +31,20 @@ const goalSchema = new Schema({
 		required: true,
 		default: false,
 	},
-	user: [
-		{
-			type: Schema.Types.ObjectId,
-			ref: "User",
-		},
-	],
+	user: {
+		type: Schema.Types.ObjectId,
+		ref: "User",
+	},
 	tasks: [
 		{
 			type: Schema.Types.ObjectId,
 			ref: "Task",
+		},
+	],
+	measurables: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: "Measurable",
 		},
 	],
 });

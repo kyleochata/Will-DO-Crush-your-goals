@@ -1,3 +1,4 @@
+// utils/auth.js
 const { GraphQLError } = require("graphql");
 const jwt = require("jsonwebtoken");
 
@@ -11,6 +12,7 @@ module.exports = {
 		},
 	}),
 	authMiddleware: function ({ req }) {
+		// THIS CHUNK OF CODE IS THE ORIGINAL
 		let token = req.body.token || req.query.token || req.headers.authorization;
 
 		if (req.headers.authorization) {
@@ -31,6 +33,22 @@ module.exports = {
 		}
 
 		return req;
+		// END OF THE CHUNK
+
+
+		// // THIS CHUNk OF CODE IS FOR TESTING PURPOSES
+		// const mockUser = {
+		// 	_id: '65451e05ff962b8013b6bb0f',
+		// 	userName: 'john_doe',
+		// 	email: 'john_doe@example.com',
+		// };
+
+		// // Assign the mock user to the request object
+		// req.user = mockUser;
+
+		// // Return the modified request
+		// return req;
+		// // END OF THE CHUNK
 	},
 	signToken: function ({ email, username, _id }) {
 		const payload = { email, username, _id };

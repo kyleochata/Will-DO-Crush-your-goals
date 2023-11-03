@@ -1,3 +1,5 @@
+//server/models/User.js
+
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
@@ -39,6 +41,12 @@ const userSchema = new Schema({
 		{
 			type: Schema.Types.ObjectId,
 			ref: "Goal",
+		},
+	],
+	measurables: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: "Measurable",
 		},
 	],
 });
