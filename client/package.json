@@ -18,7 +18,12 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "resize-observer-polyfill": "^1.5.1",
-    "react-router-dom": "^6.18.0"
+    "react-router-dom": "^6.18.0",
+    "@fullcalendar/core": "^6.1.9",
+    "@fullcalendar/daygrid": "^6.1.9",
+    "@fullcalendar/interaction": "^6.1.9",
+    "@fullcalendar/react": "^6.1.9",
+    "@fullcalendar/timegrid": "^6.1.9"
   },
   "devDependencies": {
     "@types/node": "^20.8.10",
