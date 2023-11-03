@@ -66,8 +66,16 @@ const typeDefs = `
     addUser(firstName: String!, lastName: String!, userName: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addTask(title: String!, description: String!, completionDate: String!, priority: String!, goalId: ID, measurableId: ID): Task
-    addGoal(title: String!, description: String!, measurableIds: [ID]!, why: String!, completionDate: String!): Goal
+    addGoal(title: String!, description: String!, measurableIds: [ID], why: String!, completionDate: String!): Goal
     addMeasurable(title: String!, goalId: ID!): Measurable
+    editUser(userId: ID!, firstName: String, lastName: String, userName: String, email: String): User
+    editGoal(goalId: ID!, title: String, description: String, why: String, completionDate: String, completed: Boolean): Goal
+    editTask(taskId: ID!, title: String, description: String, completionDate: String, priority: String, completed: Boolean): Task
+    editMeasurable(measurableId: ID!, title: String): Measurable
+    deleteUser(userId: ID!): User
+    deleteGoal(goalId: ID!): Goal
+    deleteTask(taskId: ID!): Task
+    deleteMeasurable(measurableId: ID!): Measurable
   }
 `;
 

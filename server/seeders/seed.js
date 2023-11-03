@@ -165,6 +165,7 @@ db.once('open', async () => {
                     $set: {
                         goals: goals.filter(goal => goal.user.toString() === user._id.toString()).map(goal => goal._id),
                         tasks: tasks.filter(task => task.user.toString() === user._id.toString()).map(task => task._id),
+                        measurables: measurables.filter(measurable => measurable.user.toString() === user._id.toString()).map(measurable => measurable._id),
                     },
                 }
             );

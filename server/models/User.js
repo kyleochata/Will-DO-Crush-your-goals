@@ -43,6 +43,12 @@ const userSchema = new Schema({
 			ref: "Goal",
 		},
 	],
+	measurables: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: "Measurable",
+		},
+	],
 });
 
 userSchema.pre('save', async function (next) {

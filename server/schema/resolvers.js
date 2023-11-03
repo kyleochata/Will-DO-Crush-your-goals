@@ -7,7 +7,7 @@ const resolvers = {
 	Query: {
 		// Queries to locate all instances
 		users: async () => {
-			return User.find().populate('tasks').populate('goals');
+			return User.find().populate('tasks').populate('goals').populate('measurables');
 		},
 		goals: async () => {
 			return Goal.find().populate('user').populate('tasks').populate('measurables');
@@ -21,7 +21,7 @@ const resolvers = {
 
 		// Queries to locate a single instance
 		user: async (_, { userId }) => {
-			return User.findById(userId).populate('tasks').populate('goals');
+			return User.findById(userId).populate('tasks').populate('goals').populate('measurables');
 		},
 		goal: async (_, { goalId }) => {
 			return Goal.findById(goalId).populate('user').populate('tasks').populate('measurables');
@@ -62,7 +62,7 @@ const resolvers = {
 		// Task-related mutations
 		addTask: async (_, { title, description, completionDate, priority, goalId, measurableId }, context) => {
 			if (!context.user) {
-				throw new AuthenticationError('You need to be logged in!');
+				throw AuthenticationError;
 			}
 
 			const taskData = {
@@ -109,14 +109,15 @@ const resolvers = {
 
 
 		// Goal-related mutations
-		addGoal: async (_, { title, description, completionDate, measurableIds }, context) => {
+		addGoal: async (_, { title, description, why, completionDate, measurableIds }, context) => {
 			if (!context.user) {
-				throw new AuthenticationError('You need to be logged in!');
+				throw AuthenticationError;
 			}
 
 			const goal = await Goal.create({
 				title,
 				description,
+				why,
 				completionDate,
 				user: context.user._id,
 			});
@@ -137,8 +138,7 @@ const resolvers = {
 
 		// Measurable-related mutations
 		addMeasurable: async (_, { title, goalId }, context) => {
-			console.log(context);
-			
+
 			if (!context.user) {
 				throw AuthenticationError;
 			}
@@ -157,6 +157,151 @@ const resolvers = {
 
 			return measurable;
 		},
+
+		editUser: async (_, { userId, firstName, lastName, userName, email }, context) => {
+			// Authentication check if needed
+			// ... 
+
+			const updatedUser = await User.findByIdAndUpdate(
+				userId,
+				{ firstName, lastName, userName, email },
+				{ new: true }
+			);
+			return updatedUser;
+		},
+
+		// Edit a single goal
+		editGoal: async (_, { goalId, title, description, why, completionDate, completed }, context) => { 
+			if (!context.user) {
+				throw AuthenticationError;
+			}
+
+			const goal = await Goal.findById(goalId);
+
+			if (!goal) {
+				throw new Error('Goal not found');
+			}
+
+			if (goal.user.toString() !== context.user._id.toString()) {
+				throw AuthenticationError;
+			}
+
+			const updatedGoal = await Goal.findByIdAndUpdate(
+				goalId,
+				{ title, description,why, completionDate, completed},
+				{ new: true }
+			);
+			return updatedGoal;
+		},
+
+		// Edit a single task
+		editTask: async (_, { taskId, title, description, completionDate, priority, completed }, context) => {
+			if (!context.user) {
+				throw AuthenticationError;
+			}
+
+			const task = await Task.findById(taskId);
+
+			if (!task) {
+				throw new Error('Task not found');
+			}
+
+			if (task.user.toString() !== context.user._id.toString()) {
+				throw AuthenticationError;
+			}
+
+			const updatedTask = await Task.findByIdAndUpdate(
+				taskId,
+				{ title, description, completionDate, priority, completed },
+				{ new: true }
+			);
+			return updatedTask;
+		},
+
+		// Edit a single measurable
+		editMeasurable: async (_, { measurableId, title }, context) => {
+			if (!context.user) {
+				throw AuthenticationError;
+			}
+
+			const measurable = await Measurable.findById(measurableId);
+
+			if (!measurable) {
+				throw new Error('Measurable not found');
+			}
+
+			if (measurable.user.toString() !== context.user._id.toString()) {
+				throw AuthenticationError;
+			}
+
+			const updatedMeasurable = await Measurable.findByIdAndUpdate(
+				measurableId,
+				{ title },
+				{ new: true }
+			);
+			return updatedMeasurable;
+		},
+
+		// Delete a single goal
+		deleteGoal: async (_, { goalId }, context) => {
+			if (!context.user) {
+				throw AuthenticationError;
+			}
+
+			const goal = await Goal.findById(goalId);
+
+			if (!goal) {
+				throw new Error('Goal not found');
+			}
+
+			if (goal.user.toString() !== context.user._id.toString()) {
+				throw AuthenticationError;
+			}
+
+			const deletedGoal = await Goal.findByIdAndDelete(goalId);
+			return deletedGoal;
+		},
+
+		// Delete a single task
+		deleteTask: async (_, { taskId }, context) => {
+			if (!context.user) {
+				throw AuthenticationError;
+			}
+
+			const task = await Task.findById(taskId);
+
+			if (!task) {
+				throw new Error('Task not found');
+			}
+
+			if (task.user.toString() !== context.user._id.toString()) {
+				throw AuthenticationError;
+			}
+
+			const deletedTask = await Task.findByIdAndDelete(taskId);
+			return deletedTask;
+		},
+
+		// Delete a single measurable
+		deleteMeasurable: async (_, { measurableId }, context) => {
+			if (!context.user) {
+				throw AuthenticationError;
+			}
+
+			const measurable = await Measurable.findById(measurableId);
+
+			if (!measurable) {
+				throw new Error('Measurable not found');
+			}
+
+			if (measurable.user.toString() !== context.user._id.toString()) {
+				throw AuthenticationError;
+			}
+
+			const deletedMeasurable = await Measurable.findByIdAndDelete(measurableId);
+			return deletedMeasurable;
+		},
+
 	},
 };
 
