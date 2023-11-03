@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import CheckboxComponent from './Checkbox';
 
-const TasksList = ({ tasks }) => {
+const TasksList = ({ tasks = [] }) => {
   if (!tasks.length) {
     return <h3>No Tasks Yet</h3>;
   }
