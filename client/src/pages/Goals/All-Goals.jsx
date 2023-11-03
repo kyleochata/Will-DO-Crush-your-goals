@@ -9,7 +9,6 @@ const Goals = () => {
       variables: { userId: userId }
     });
     const goals = data?.goals || [];
-    const length = goals.tasks.length;
 
     if (loading) {
       return <div>Loading...</div>
@@ -22,7 +21,6 @@ const Goals = () => {
           <GoalsList
             goals={goals}
             title={goals.title}
-            numberOfOpenTasks={length}
           />
         </div>
       </main>
