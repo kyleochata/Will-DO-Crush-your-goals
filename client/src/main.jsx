@@ -12,7 +12,7 @@ import OneGoal from './pages/Goals/One-Goal.jsx'
 // import OneTask from './pages/OneTask.jsx';
 import Home from './pages/Home/Home.jsx'
 import Report from './pages/Report/Report.jsx'
-// import Dashboard from './pages/Dashboard.jsx';
+import Profile from './pages/Profile/Profile.jsx'
 
 const domain = import.meta.env.VITE_REACT_APP_AUTH0_DOMAIN
 const clientId = import.meta.env.VITE_REACT_APP_AUTH0_CLIENT_ID
@@ -63,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: '/report',
         element: <Report />,
+      },
+      {
+        path: '/profile',
+        element: <Profile />,
       },
     ],
   },

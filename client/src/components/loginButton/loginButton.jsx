@@ -1,7 +1,8 @@
-import { useAuth0 } from '@auth0/auth0-react';
+import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const LoginButton = () => {
-    const { loginWithRedirect, isAuthenticated } = useAuth0();
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
 
   return (
     <div>
@@ -11,13 +12,13 @@ const LoginButton = () => {
         </button>
       ) : (
         <div>
-            {/* //need to replace this with the user name data once we can pull it */}
-          <p className="welcome">Welcome, user</p>
-          
+          <Link to="/profile">
+            <button className="login">Profile</button>
+          </Link>
         </div>
       )}
     </div>
   );
 };
 
-export default LoginButton
+export default LoginButton;

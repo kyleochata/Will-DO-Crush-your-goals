@@ -10,7 +10,7 @@ const CheckboxComponent = () => {
   return (
     <div>
       <Checkbox
-        label='Completed'
+        label=' Complete'
         value={checked}
         onChange={handleCheckbox}
       />
