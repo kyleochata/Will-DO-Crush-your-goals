@@ -4,6 +4,8 @@ import { useQuery } from '@apollo/client';
 
 import { QUERY_SINGLE_GOAL } from '../../utils/queries';
 
+import SingleGoal from '../../components/Goals-Component/Single-Goal';
+
 const OneGoal = () => {
   const { goalId } = useParams();
 
@@ -15,6 +17,15 @@ const OneGoal = () => {
   if (loading) {
     return <div>Loading...</div>
   }
+  return (
+    <main className="single-goal-main">
+      <div>
+        <SingleGoal
+        goal={goal}
+        />
+      </div>
+    </main>
+  )
 }
 
 export default OneGoal;

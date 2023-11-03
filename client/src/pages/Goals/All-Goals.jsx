@@ -8,7 +8,7 @@ const Goals = () => {
     const { loading, data } = useQuery(QUERY_USER, {
       variables: { userId: userId }
     });
-    const goals = data?.goals || [];
+    const user = data?.user || [];
 
     if (loading) {
       return <div>Loading...</div>
@@ -19,8 +19,8 @@ const Goals = () => {
           <h1>All Goals</h1>
           <aside><button>+ Add Goal</button></aside>
           <GoalsList
-            goals={goals}
-            title={goals.title}
+            goals={user.goals}
+            // title={user.goals.title}
           />
         </div>
       </main>
