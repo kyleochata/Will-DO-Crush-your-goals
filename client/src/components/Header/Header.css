@@ -1,168 +1,153 @@
 .header {
-    height: 6rem;
-    position: sticky;
-    top: 0;
-    z-index: 3;
-    width: 100vw;
-    background-color: #FFFFFF;
-
+  height: 6rem;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  width: 100vw;
+  background-color: #ffffff;
 }
 
 .navItems {
-    max-width: 75rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-    padding: 0 1rem;
+  max-width: 75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .logo {
-    height: 3.25rem;
-
+  height: 3.25rem;
 }
 
 .navLinks {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style-type: none;
-    padding: 0 1rem;
-    gap: 2rem;
-    margin: 0;
-
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+  padding: 0 1rem;
+  gap: 2rem;
+  margin: 0;
 }
 
 .login {
-    background-color: #276891;
-    color: white;
-    font-weight: 700;
-
+  background-color: #276891;
+  color: white;
+  font-weight: 700;
 }
 
 .navLinkItem {
-    text-decoration: none;
-    color: #276891;
-    font-size: clamp(1rem, 3vw, 2rem);
-    font-weight: 700;
+  text-decoration: none;
+  color: #276891;
+  font-size: clamp(1rem, 3vw, 2rem);
+  font-weight: 700;
 }
 
 .navLinkItem:hover {
-    color: #0BAFC1;
-    padding-bottom: 0.5rem;
-    border-bottom: 3px solid #0BAFC1;
+  color: #0bafc1;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #0bafc1;
 }
 
 .welcome {
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
-    font-weight: 600;
-
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 600;
 }
 
 .burgerMenu {
-    height: 2.5rem;
-    display: none;
-    object-fit: cover;
-
+  height: 2.5rem;
+  display: none;
+  object-fit: cover;
 }
 
 .mobileMenu {
-    position: absolute;
-    top: 4rem;
-    right: 2rem;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    padding: 0.5rem;
-    height: fit-content;
-    min-width: 15rem;
-    background: #276891;
-    border-radius: 1rem;
+  position: absolute;
+  top: 4rem;
+  right: 2rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  height: fit-content;
+  min-width: 15rem;
+  background: #276891;
+  border-radius: 1rem;
 }
 
 .mobileMenuItem {
-    color: white;
-    padding: 0.5rem 3rem;
-    margin: 0.25rem;
-    background: #0BAFC1;
-    font-size: 1.25rem;
+  color: white;
+  padding: 0.5rem 3rem;
+  margin: 0.25rem;
+  background: #0bafc1;
+  font-size: 1.25rem;
 }
 
 .mobileMenuItem:hover {
-    color: white;
-    padding: 0.5rem 3rem;
-    margin: 0.25rem;
-    background: #0BAFC1;
-    font-size: 1.5rem;
-    cursor: pointer;
-    border-bottom: 3px solid black;
-    padding-bottom: 0.5rem;
+  color: white;
+  padding: 0.5rem 3rem;
+  margin: 0.25rem;
+  background: #0bafc1;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-bottom: 3px solid black;
+  padding-bottom: 0.5rem;
 }
 
 .active {
-    color: #0BAFC1;
-    border-bottom: 3px solid black;
-    padding-bottom: 0.5rem;
+  color: #0bafc1;
+  border-bottom: 3px solid black;
+  padding-bottom: 0.5rem;
 }
 
 .burgerMenu {
-    height: 2.5rem;
+  height: 2.5rem;
+  display: none;
+  object-fit: cover;
+}
+
+.Title {
+  width: 100vw;
+  height: 5rem;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+  color: white;
+  background-color: #0bafc1;
+}
+
+.pageTitle {
+  padding: 10px 0 0 0;
+  margin: 0;
+}
+
+@media screen and (max-width: 800px) {
+  .burgerMenu {
+    display: flex;
+  }
+
+  .navLinks {
     display: none;
-    object-fit: cover;
+  }
 
+  .logo {
+    height: 2.5rem;
+  }
 }
 
-.Title{
-    width: 100vw;
-    height: 5rem;
-    text-align: center;
-    margin: 0 auto;
-    padding: 0;
-    color:white;
-    background-color: #0BAFC1;
-}
+@media screen and (max-width: 500px) {
+  .navItems {
+    flex-direction: column;
+    margin: 1.5rem auto;
+  }
 
-.pageTitle{
-    padding: 10px 0 0 0;
-    margin: 0;
-    
-}
+  .header {
+    height: 125px;
+  }
 
-@media screen and (max-width:800px) {
-    .burgerMenu {
-        display: flex;
-
-    }
-
-    .navLinks {
-        display: none;
-    }
-
-    .logo {
-        height: 2.5rem;
-
-    }
-
-}
-
-@media screen and (max-width:500px) {
-    .navItems {
-        flex-direction: column;
-        margin: 1.5rem auto;
-
-    }
-
-    .header {
-        height: 125px;
-
-    }
-
-    .mobileMenu {
-        position: absolute;
-        top: 8.5rem;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
+  .mobileMenu {
+    position: absolute;
+    top: 8.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
