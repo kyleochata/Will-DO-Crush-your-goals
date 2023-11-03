@@ -9,12 +9,17 @@ const GoalsList = ({ goals }) => {
     <div className="goals-list">
       {goals.map((goal) => (
         <div>
-          <h2>{goal.title}</h2>
-          <p>{goal.completionDate}</p>
-          <Link to={`/goals/${goal._id}`}>
-            <button>Details</button>
-          </Link>
-          
+          <div>
+            <h2>{goal.title}</h2>
+            <p>{goal.completionDate}</p>
+            <p>{goal.why}</p>
+          </div>
+          <div>
+            <Link to={`/goals/${goal._id}`}>
+              <button>Details</button>
+            </Link>
+            {/* Complete button? <Link to={`/goals/${goal._id}`}> */}
+          </div>
         </div>
       ))}
     </div>

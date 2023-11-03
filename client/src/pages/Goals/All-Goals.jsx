@@ -8,21 +8,17 @@ const Goals = () => {
     const { loading, data } = useQuery(QUERY_USER, {
       variables: { userId: userId }
     });
-    const goals = data?.goals || [];
-    const length = goals.tasks.length;
-
+    const user = data?.user || [];
+    
     if (loading) {
       return <div>Loading...</div>
     }
     return (
-      <main>
-        <div className="Goals">
-          <h1>All Goals</h1>
+      <main className="all-goals">
+        <div>
           <aside><button>+ Add Goal</button></aside>
           <GoalsList
-            goals={goals}
-            title={goals.title}
-            numberOfOpenTasks={length}
+            goals={user.goals}
           />
         </div>
       </main>
