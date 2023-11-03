@@ -40,7 +40,6 @@ const Report = () => {
   // }, [dimensions])
   return (
     <div className={style.reportMain}>
-      <h1>Reports</h1>
       <div className={style.reportProgressContainer}>
         <div className={style.reportProgress}>overall %</div>
         <div className={style.reportProgress}>goal %</div>
