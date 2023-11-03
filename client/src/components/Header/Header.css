@@ -1,5 +1,4 @@
 .header {
-    height: 6rem;
     width: 100vw;
     background-color: #FFFFFF;
 
@@ -148,10 +147,6 @@
   .navItems {
     flex-direction: column;
     margin: 1.5rem auto;
-  }
-
-  .header {
-    height: 125px;
   }
 
   .mobileMenu {

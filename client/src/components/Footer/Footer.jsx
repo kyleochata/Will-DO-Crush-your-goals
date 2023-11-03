@@ -10,7 +10,7 @@ export default () => {
     return (
         <div className="footer">
            <div className="footerEl"><p className="footerText">
-            Turn Should Dos into WILL DOS
+            Turn Should Dos into WILL DOs
            </p>
            <Link to="https://github.com/kyleochata/Task-Manager-Project3"><img src={github} className="github" /></Link>
            </div>
