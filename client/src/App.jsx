@@ -6,10 +6,9 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { Outlet } from "react-router-dom";
-
+import { useAuth0 } from "@auth0/auth0-react";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import LogoutButton from "./components/logoutButton/logoutButton"
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -36,15 +35,22 @@ const client = new ApolloClient({
 });
 
 function App() {
+	const { isLoading, error } = useAuth0();
+
 	return (
 		<ApolloProvider client={client}>
 			<div className="mainBody">
-				<Header />
-				<div>
-					<Outlet />
-				</div>
-				<LogoutButton />
-				<Footer />
+				{error && <p>Authentication Error</p>}
+				{!error && isLoading && <p>Loading...</p>}
+				{!error && !isLoading && (
+					<>
+						<Header />
+						<div>
+						<Outlet />
+						</div>
+						<Footer />
+					</>
+				)}
 			</div>
 		</ApolloProvider>
 	);
