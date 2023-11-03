@@ -3,6 +3,8 @@ import { useQuery } from '@apollo/client';
 
 import TasksList from '../../components/TaskComponents/TasksList.jsx';
 // import PowerList from '../../components/TaskComponents/PowerList';
+import SingleTask from '../../components/TaskComponents/SingleTaskModal.jsx';
+import AddTaskBtn from '../../components/TaskComponents/AddTaskBtn.jsx';
 
 // import Auth from '../../utils/auth';
 
@@ -23,10 +25,12 @@ function Tasks() {
   return (
 		<div>
       All Tasks
-      {/* need to add functionality to button, bring up modal when clicked */}
-      <button className='add-task-btn'>+ Add Task</button>
+      <AddTaskBtn />
       power list here
+      {/* task list card */}
       <TasksList tasks={user.tasks} />
+      {/* single task modal */}
+      <SingleTask />
 		</div>
 	);
 }
