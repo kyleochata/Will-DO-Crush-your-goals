@@ -2,14 +2,14 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 // Create
 
-import { QUERY_SINGLE_GOAL } from '../../utils/queries';
+import { QUERY_GOAL } from '../../utils/queries';
 
 import SingleGoal from '../../components/Goals-Component/Single-Goal';
 
 const OneGoal = () => {
   const { goalId } = useParams();
 
-  const { loading, data } = useQuery(QUERY_SINGLE_GOAL, {
+  const { loading, data } = useQuery(QUERY_GOAL, {
     variables: { goalId: goalId }
   });
   const goal = data?.goals || [];

@@ -17,7 +17,7 @@ const GoalsList = ({ goals = []}) => {
             <Link to={`/goals/${goal._id}`}>
               <button>Details</button>
             </Link>
-            {/* Complete button? <Link to={`/goals/${goal._id}`}> */}
+            {/* add Vanna's task component to addTask which brings up the task modal. */}
           </div>
         </div>
       ))}
