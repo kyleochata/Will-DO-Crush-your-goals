@@ -2,6 +2,7 @@ import DataTree from '../../components/DataTree/DataTree'
 import style from './Report.module.css'
 import useResizeObserver from '../../utils/useResize'
 import { useRef, useEffect } from 'react'
+import ProgressBar from '../../components/ProgressBar/ProgressBar'
 const data = {
   name: 'Lose weight', //Goal
   children: [
@@ -41,10 +42,30 @@ const Report = () => {
   return (
     <div className={style.reportMain}>
       <div className={style.reportProgressContainer}>
-        <div className={style.reportProgress}>overall %</div>
-        <div className={style.reportProgress}>goal %</div>
-        <div className={style.reportProgress}>task %</div>
-        <div className={style.reportProgress}>Wild Card</div>
+        <div className={style.reportProgress}>
+          <h3>Overall %</h3>
+          <div className={style.circleContainer}>
+            <ProgressBar />
+          </div>
+        </div>
+        <div className={style.reportProgress}>
+          <h3>goal %</h3>
+          <div className={style.circleContainer}>
+            <ProgressBar />
+          </div>
+        </div>
+        <div className={style.reportProgress}>
+          <h3>Task %</h3>
+          <div className={style.circleContainer}>
+            <ProgressBar />
+          </div>
+        </div>
+        <div className={style.reportProgress}>
+          <h3>WildCard</h3>
+          <div className={style.circleContainer}>
+            <ProgressBar />
+          </div>
+        </div>
       </div>
 
       <DataTree data={data} style={style} />
