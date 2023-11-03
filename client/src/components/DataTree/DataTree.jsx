@@ -1,107 +1,106 @@
-import { select, hierarchy, tree, linkHorizontal, link } from 'd3'
-import { useEffect, useRef } from 'react'
+import { select, hierarchy, tree, linkHorizontal } from 'd3'
+import { useEffect, useRef, useState } from 'react'
 import useResize from '../../utils/useResize'
 
-const data = {
-  name: 'Lose Weight', // GOAL
-  children: [
-    {
-      name: 'Eat 2 Healthy meals/day', // Measurable
-      children: [
-        { name: 'Grocery shopping 1/week' }, // TASK
-        { name: 'Meal prep for 5+ days of lunches' },
-        { name: 'Try a new recipe 2/week' },
-      ],
-    },
-    {
-      name: 'Exercise 3x/week',
-      children: [
-        { name: 'Get a gym membership' },
-        { name: 'Set a workout plan for the week' },
-        { name: 'Laundry 1/week' },
-      ],
-    },
-    {
-      name: 'Sleep 8 hours/night',
-      children: [
-        { name: 'Set a bedtime alarm' },
-        { name: 'No screens 1 hour before bed' },
-        { name: 'Hot shower no less than 2hrs before bed' },
-      ],
-    },
-  ],
+function usePrevious(value) {
+  const ref = useRef()
+  useEffect(() => {
+    ref.current = value
+  })
+  return ref.current
 }
 
-const DataTree = ({ data }) => {
+const DataTree = ({ data, style }) => {
   const svgRef = useRef()
   const wrapperRef = useRef()
   const dimensions = useResize(wrapperRef)
+  const previousData = usePrevious(data)
   useEffect(() => {
     const svg = select(svgRef.current)
     if (!dimensions) return
 
+    console.log(dimensions)
+    const { width, height } =
+      dimensions || wrapperRef.current.getBoundingClientRect()
+    const widthOffset = (width / 100) * 20
+    // const heightOffset = (height / 100) * 10
     const root = hierarchy(data)
-    const treeLayout = tree().size([dimensions.height, dimensions.width])
-    treeLayout(root)
+
+    const treeLayout = tree().size([height, width - widthOffset])
+    // .padding(2)
 
     const linkGenerator = linkHorizontal()
       .source((link) => link.source)
       .target((link) => link.target)
-      .x((node) => node.y)
+      .x((node) => node.y + 10)
       .y((node) => node.x)
 
+    treeLayout(root)
+
     //nodes
+    // nodes
     svg
       .selectAll('.node')
       .data(root.descendants())
-      .join('circle')
+      .join((enter) => enter.append('circle').attr('opacity', 0))
       .attr('class', 'node')
-      .attr('r', 4)
-      .attr('fill', 'black')
-      .attr('cx', (node) => node.y)
+      .attr('cx', (node) => node.y + 10)
       .attr('cy', (node) => node.x)
-      .attr('opacity', 0)
+      .attr('r', 4)
       .transition()
       .duration(500)
-      .delay((node) => node.depth * 500)
+      .delay((node) => node.depth * 300)
       .attr('opacity', 1)
 
-    //links
+    // links
+    // const enteringAndUpdatingLinks =
     svg
       .selectAll('.link')
       .data(root.links())
       .join('path')
       .attr('class', 'link')
-      .attr('fill', 'none')
-      .attr('stroke', 'black')
       .attr('d', linkGenerator)
       .attr('stroke-dasharray', function () {
         const length = this.getTotalLength()
         return `${length} ${length}`
       })
+      .attr('stroke', 'black')
+      .attr('fill', 'none')
+      .attr('opacity', 1)
       .attr('stroke-dashoffset', function () {
-        const length = this.getTotalLength()
-        return length
+        return this.getTotalLength()
       })
       .transition()
       .duration(500)
-      .delay((linkObj) => linkObj.source.depth * 500)
+      .delay((link) => link.source.depth * 500)
       .attr('stroke-dashoffset', 0)
 
-    //labels
+    // labels
     svg
       .selectAll('.label')
       .data(root.descendants())
+      // .join((enter) => enter.append('text').attr('opacity', 0))
       .join('text')
+      .attr('opacity', 0)
       .attr('class', 'label')
-      .text((node) => node.data.name)
-      .attr('text-anchor', 'middle')
-      .attr('font-size', 24)
       .attr('x', (node) => node.y)
       .attr('y', (node) => node.x - 12)
-  }, [data, dimensions])
+      .attr('text-anchor', 'center')
+      .attr('font-size', 'clamp(0.75rem, 1.5vw, 1.25rem)')
+      .attr('font-weight', 'bold')
+      .text((node) => node.data.name)
+      .transition()
+      .duration(500)
+      .delay((node) => node.depth * 300)
+      .attr('opacity', 1)
+  }, [data, dimensions, previousData])
+
   return (
-    <div ref={wrapperRef}>
+    <div
+      ref={wrapperRef}
+      style={{ marginBottom: '2rem' }}
+      className={style.svgWrapper}
+    >
       <svg ref={svgRef}></svg>
     </div>
   )

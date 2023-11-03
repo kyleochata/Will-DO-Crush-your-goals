@@ -1,26 +1,26 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Auth0Provider } from "@auth0/auth0-react";
-import App from "./App.jsx";
-import "./index.css";
-import Error from "./pages/Error/Error.jsx";
-import Goals from "./pages/Goals/All-Goals.jsx";
-import Tasks from "./pages/Tasks/Tasks.jsx";
-import Calendar from "./components/calendar/calendar.jsx";
-import OneGoal from "./pages/Goals/One-Goal.jsx";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { Auth0Provider } from '@auth0/auth0-react'
+import App from './App.jsx'
+import './index.css'
+import Error from './pages/Error/Error.jsx'
+import Goals from './pages/Goals/All-Goals.jsx'
+import Tasks from './pages/Tasks/Tasks.jsx'
+import Calendar from './components/calendar/calendar.jsx'
+import OneGoal from './pages/Goals/One-Goal.jsx'
 // import OneTask from './pages/OneTask.jsx';
-import Home from "./pages/Home/Home.jsx";
-import Report from "./pages/Report/Report.jsx";
+import Home from './pages/Home/Home.jsx'
+import Report from './pages/Report/Report.jsx'
 // import Dashboard from './pages/Dashboard.jsx';
 
-const domain = import.meta.env.VITE_REACT_APP_AUTH0_DOMAIN;
-const clientId = import.meta.env.VITE_REACT_APP_AUTH0_CLIENT_ID;
-console.log(domain);
-console.log(clientId);
+const domain = import.meta.env.VITE_REACT_APP_AUTH0_DOMAIN
+const clientId = import.meta.env.VITE_REACT_APP_AUTH0_CLIENT_ID
+console.log(domain)
+console.log(clientId)
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: (
       <Auth0Provider
         domain={domain}
@@ -42,33 +42,32 @@ const router = createBrowserRouter([
         //   element: <Dashboard />
       },
       {
-        path: "/goals",
+        path: '/goals',
         element: <Goals />,
       },
       {
-        path: "/goals/:goalId",
+        path: '/goals/:goalId',
         element: <OneGoal />,
       },
       {
-        path: "/tasks",
+        path: '/tasks',
         element: <Tasks />,
         // }, {
         // path: '/tasks/:taskId',
         // element: <OneTask />,
       },
       {
-        path: "/calendar",
+        path: '/calendar',
         element: <Calendar />,
       },
       {
-        path: "/report",
+        path: '/report',
         element: <Report />,
       },
     ],
-    
   },
-]);
+])
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <RouterProvider router={router} />
-);
+)
