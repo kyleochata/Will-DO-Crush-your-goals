@@ -1,4 +1,4 @@
-// module.exports = typeDefs;
+// server/schema/typeDefs.js
 
 const typeDefs = `
   type User {
