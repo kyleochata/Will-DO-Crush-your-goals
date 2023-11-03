@@ -1,0 +1,107 @@
+.homeMain{
+    width: 100vw;
+    margin: 0 auto;
+
+}
+
+.fullColor{
+    width: 100vw;
+    background-color: #0BAFC1;
+}
+
+.heroSection1, .heroSection2{
+    max-width: 70rem;
+    width: 90vw;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    overflow:hidden;
+
+}
+
+.phoneImage{
+    border-radius: 1rem;
+    height: 20rem;
+    margin-bottom: -3rem; 
+    margin-top: 2rem;
+}
+
+.section1Right{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.crush{
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.heroSection2 {
+    background-color: white;
+    gap: 5rem
+
+}
+
+.section2Header{
+    color: #0BAFC1;
+    padding: 2rem 3rem 1rem 0;
+    font-weight: 700;
+    margin: 0;
+}
+
+.section2SubHeader {
+    margin: 0;
+    padding: 0 3rem 1rem 0;
+}
+
+.section2List{
+    font-weight: 600;
+
+}
+
+.mountain{
+    height: 25rem;
+    border-radius: 50%;
+    border: 9px solid #0BAFC1;
+}
+
+@media screen and (max-width:1200px) {
+    .section2Header{
+        padding: 2rem 1rem 1rem 0;
+    }
+    .section2SubHeader {
+        padding: 0 1rem 1rem 0;
+    }
+
+    .mountain{
+        height: 20rem;
+    }
+
+}
+
+@media screen and (max-width:800px) {
+    .section2Header{
+        padding: 2rem 0 1rem 0;
+    }
+    .section2SubHeader {
+        padding: 0 0 1rem 0;
+    }
+
+    .mountain{
+        height: 17rem;
+        border: 7px solid #0BAFC1;
+    }
+    .section2Right{
+        text-align: center;
+    }
+    .heroSection2 {
+        display:block;
+        margin: 0 auto;
+    
+    }
+
+}

@@ -8,8 +8,7 @@ import { setContext } from "@apollo/client/link/context";
 import { Outlet } from "react-router-dom";
 
 import Header from "./components/Header/Header";
-// import Footer from "./components/Footer";
-import LoginButton from "./components/loginButton/loginButton"
+import Footer from "./components/Footer/Footer";
 import LogoutButton from "./components/logoutButton/logoutButton"
 
 // Construct our main GraphQL API endpoint
@@ -41,11 +40,11 @@ function App() {
 		<ApolloProvider client={client}>
 			<div className="mainBody">
 				<Header />
-				<div className="container">
+				<div>
 					<Outlet />
 				</div>
 				<LogoutButton />
-				{/* <Footer /> */}
+				<Footer />
 			</div>
 		</ApolloProvider>
 	);
