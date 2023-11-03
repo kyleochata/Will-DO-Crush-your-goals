@@ -1,7 +1,7 @@
 .header {
     width: 100vw;
     background-color: #FFFFFF;
-
+    margin-bottom: 1rem;
 }
 
 .navItems {
@@ -9,7 +9,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
+  margin: 1.25rem auto;
   padding: 0 1rem;
 }
 
@@ -125,7 +125,6 @@
 
 @media screen and (max-width:800px) {
     .burgerMenu {
-        display: flex;
         margin: 0 auto;
     }
 
@@ -146,12 +145,13 @@
 @media screen and (max-width: 500px) {
   .navItems {
     flex-direction: column;
-    margin: 1.5rem auto;
+    margin: 1rem auto;
+    gap: 1rem;
   }
 
   .mobileMenu {
     position: absolute;
-    top: 8.5rem;
+    top: 10.2rem;
     left: 50%;
     transform: translateX(-50%);
   }

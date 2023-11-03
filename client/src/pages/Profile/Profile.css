@@ -1,0 +1,29 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.userPic{
+    border-radius: 50%;
+    border: 7px solid #276891;
+}
+
+.profileTitle{
+    margin: 1rem;
+    font-size: 2rem;
+}
+
+.userList{
+    max-width: 20rem;
+    margin: 0 0 1rem 0;
+}
+
+.logout {
+    background-color: #276891;
+    color: white;
+    font-weight: 700;
+
+  }
