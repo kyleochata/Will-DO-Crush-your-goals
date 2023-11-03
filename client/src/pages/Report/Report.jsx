@@ -1,5 +1,7 @@
 import DataTree from '../../components/DataTree/DataTree'
 import style from './Report.module.css'
+import useResizeObserver from '../../utils/useResize'
+import { useRef, useEffect } from 'react'
 const data = {
   name: 'Lose weight', //Goal
   children: [
@@ -31,6 +33,11 @@ const data = {
 }
 
 const Report = () => {
+  // const wrapperRef = useRef()
+  // const dimensions = useResizeObserver(wrapperRef)
+  // useEffect(() => {
+  //   console.log(dimensions)
+  // }, [dimensions])
   return (
     <div className={style.reportMain}>
       <h1>Reports</h1>
@@ -40,6 +47,7 @@ const Report = () => {
         <div className={style.reportProgress}>task %</div>
         <div className={style.reportProgress}>Wild Card</div>
       </div>
+
       <DataTree data={data} style={style} />
     </div>
   )

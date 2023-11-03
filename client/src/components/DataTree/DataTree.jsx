@@ -1,5 +1,5 @@
 import { select, hierarchy, tree, linkHorizontal } from 'd3'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import useResize from '../../utils/useResize'
 
 function usePrevious(value) {
@@ -22,10 +22,12 @@ const DataTree = ({ data, style }) => {
     console.log(dimensions)
     const { width, height } =
       dimensions || wrapperRef.current.getBoundingClientRect()
-    const widthOffset = (width / 100) * 15
+    const widthOffset = (width / 100) * 20
+    // const heightOffset = (height / 100) * 10
     const root = hierarchy(data)
 
     const treeLayout = tree().size([height, width - widthOffset])
+    // .padding(2)
 
     const linkGenerator = linkHorizontal()
       .source((link) => link.source)
@@ -51,7 +53,8 @@ const DataTree = ({ data, style }) => {
       .attr('opacity', 1)
 
     // links
-    const enteringAndUpdatingLinks = svg
+    // const enteringAndUpdatingLinks =
+    svg
       .selectAll('.link')
       .data(root.links())
       .join('path')
@@ -76,12 +79,15 @@ const DataTree = ({ data, style }) => {
     svg
       .selectAll('.label')
       .data(root.descendants())
-      .join((enter) => enter.append('text').attr('opacity', 0))
+      // .join((enter) => enter.append('text').attr('opacity', 0))
+      .join('text')
+      .attr('opacity', 0)
       .attr('class', 'label')
       .attr('x', (node) => node.y)
       .attr('y', (node) => node.x - 12)
       .attr('text-anchor', 'center')
-      .attr('font-size', 20)
+      .attr('font-size', 'clamp(0.75rem, 1.5vw, 1.25rem)')
+      .attr('font-weight', 'bold')
       .text((node) => node.data.name)
       .transition()
       .duration(500)
