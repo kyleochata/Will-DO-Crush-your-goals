@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
-import { QUERY_SINGLE_TASK } from "../../utils/queries";
+import { QUERY_TASK } from "../../utils/queries";
 
 const SingleTask = () => {
 	const { taskId: taskId } = useParams();
 
-	const { loading, data } = useQuery(QUERY_SINGLE_TASK, {
+	const { loading, data } = useQuery(QUERY_TASK, {
 		variables: { taskId: taskId },
 	});
 
