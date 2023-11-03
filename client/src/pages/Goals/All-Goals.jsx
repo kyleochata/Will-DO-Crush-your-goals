@@ -9,16 +9,18 @@ const Goals = () => {
       variables: { userId: userId }
     });
     const user = data?.user || [];
-    
+
     if (loading) {
       return <div>Loading...</div>
     }
     return (
-      <main className="all-goals">
-        <div>
+      <main>
+        <div className="Goals">
+          <h1>All Goals</h1>
           <aside><button>+ Add Goal</button></aside>
           <GoalsList
             goals={user.goals}
+            // title={user.goals.title}
           />
         </div>
       </main>
