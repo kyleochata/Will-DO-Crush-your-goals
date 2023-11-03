@@ -26,6 +26,7 @@ const DataTree = ({ data, style }) => {
     // const heightOffset = (height / 100) * 10
     const root = hierarchy(data)
 
+    //if time rework tree size to only max width: 70rem;
     const treeLayout = tree().size([height, width - widthOffset])
     // .padding(2)
 
