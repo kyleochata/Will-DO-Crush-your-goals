@@ -1,0 +1,28 @@
+.cards{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    gap: 2rem;
+}
+
+
+.oneCard {
+    max-width: 32rem;
+    margin: 0 auto;
+    padding: 1rem;
+    border-radius: .5rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+
+.cardTitle{
+    margin: 0 auto;
+    color: #276891;
+    
+}
+
+.cardText{
+    margin: 0 auto;
+
+}
