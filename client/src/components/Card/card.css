@@ -1,14 +1,16 @@
 .cards{
     display:flex;
     justify-content: center;
-    align-items: center;
     padding: 0 1rem;
     gap: 2rem;
+    
 }
 
 
 .oneCard {
+    width: 45%;
     max-width: 32rem;
+    min-height: 5rem;
     margin: 0 auto;
     padding: 1rem;
     border-radius: .5rem;
@@ -17,12 +19,41 @@
 }
 
 .cardTitle{
+    text-align: center;
     margin: 0 auto;
     color: #276891;
-    
+
 }
 
 .cardText{
     margin: 0 auto;
+    font-weight: 500;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    
 
+}
+
+
+.liItem{
+    padding: .3rem ;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    margin-bottom: 1rem;
+}
+
+@media screen and (max-width:900px) {
+    .cards{
+        display:block;
+        align-items: center;
+        padding: 0 1rem;
+    }
+
+    .oneCard {
+        min-width: 350px;
+        width: 95vw;
+        margin: 2rem auto;
+    }
 }

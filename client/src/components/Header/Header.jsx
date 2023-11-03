@@ -11,7 +11,8 @@ export default () => {
     const [showMenu, setShowMenu] = useState(false);
     const { isAuthenticated } = useAuth0();
     const location = useLocation();
-    const showBurgerMenu = window.innerWidth <= 800 && isAuthenticated;
+    const shouldDisplayBurgerMenu = isAuthenticated && window.innerWidth <= 800;
+
 
     const routeToTitle ={
         '/': 'DASHBOARD',
@@ -39,7 +40,7 @@ export default () => {
                 ) : null}
                 <LoginButton />
 
-                {showBurgerMenu && (
+                {shouldDisplayBurgerMenu && (
                 <div className="burgerContainer"><img src={menu} alt="menu" className='burgerMenu' onClick={() => setShowMenu(!showMenu)} /> </div>
                     )}
 
