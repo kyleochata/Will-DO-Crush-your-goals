@@ -2,5 +2,29 @@
     width: 100vw;
     background-color: #0BAFC1;
     height: 4rem;
+    margin-top: 1rem;
     
+}
+
+.footerEl{
+    margin: 0 auto;
+    width: 95vw;
+    max-width: 75rem;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    padding: 0 1rem;
+
+}
+
+.footerEl{
+    color:white;
+    font-size: 1.2rem;
+    font-weight: 600;
+
+}
+
+.github{
+    width: 3rem;
+
 }
