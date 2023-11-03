@@ -18,13 +18,11 @@ const OneGoal = () => {
     return <div>Loading...</div>
   }
   return (
-    <main className="single-goal-main">
-      <div>
+      <div className="single-goal">
         <SingleGoal
         goal={goal}
         />
       </div>
-    </main>
   )
 }
 
