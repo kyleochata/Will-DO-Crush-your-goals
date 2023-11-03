@@ -1,0 +1,71 @@
+.tasks-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* single task modal */
+
+.singleTaskModal {
+    /* display: flex;
+    flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+    /* width: 100%; */
+    /* border-color: gray;
+    border-radius: 5%;
+    border-width: 100px; */
+}
+
+.completedBtn {
+  background-color: #276891;
+  color: white;
+  border-radius: 5%;
+  padding: 1%;
+  margin: 1%;
+  /* float: right; */
+  border-color: #2f7fb0;
+}
+
+.completedBtn:hover {
+  background-color: white;
+  color: #1c4b68;
+  border-color: #276891;
+}
+
+.bottomBtn {
+  background-color: #276891;
+  color: white;
+  border-radius: 5%;
+  padding: 1%;
+  margin: 1%;
+  float: right;
+  border-color: #2f7fb0;
+}
+
+.bottomBtn:hover {
+  background-color: white;
+  color: #1c4b68;
+  border-color: #276891;
+}
+
+/* add task modal */
+
+.addTaskModalTxt {
+  color: black;
+  font-size: larger;
+  margin: 20px;
+}
+
+.addTaskForm {
+  display: flex;
+  flex-direction: column;
+  margin: 100px;
+  align-items: start;
+}
+
+.addTaskModalInput {
+  background-color: white;
+  color: black;
+  margin-left: 10px;
+}
