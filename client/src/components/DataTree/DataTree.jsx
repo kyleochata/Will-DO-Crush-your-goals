@@ -3,11 +3,11 @@ import { useEffect, useRef } from 'react'
 import useResize from '../../utils/useResize'
 
 const data = {
-  name: 'Lose Weight',
-  children: [
+  name: 'Lose Weight', //Goal
+  children: [ // measureable
     {
       name: 'Eat 2 Healthy meals/day',
-      children: [
+      children: [ //task
         { name: 'Grocery shopping 1/week' },
         { name: 'Meal prep for 5+ days of lunches' },
         { name: 'Try a new recipe 2/week' },

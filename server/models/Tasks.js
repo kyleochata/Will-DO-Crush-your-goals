@@ -1,3 +1,5 @@
+//server/models/Tasks.js
+
 const { Schema, model } = require('mongoose');
 
 const taskSchema = new Schema({
@@ -14,7 +16,7 @@ const taskSchema = new Schema({
     required: true,
   },
   createdAt: {
-    type: Date, 
+    type: Date,
     required: true,
     default: Date.now,
   },
@@ -28,15 +30,17 @@ const taskSchema = new Schema({
     required: true,
     default: false,
   },
-  user: [
-    {
+  user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    }
-  ],
+  },
   goal: {
     type: Schema.Types.ObjectId,
     ref: 'Goal',
+  },
+  measurable: {
+    type: Schema.Types.ObjectId,
+    ref: 'Measurable',
   },
 });
 
