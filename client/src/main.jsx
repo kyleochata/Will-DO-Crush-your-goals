@@ -65,6 +65,7 @@ const router = createBrowserRouter([
         element: <Report />,
       },
     ],
+    
   },
 ]);
 

@@ -43,8 +43,8 @@ function App() {
 				<Header />
 				<div className="container">
 					<Outlet />
-          <LogoutButton />
 				</div>
+				<LogoutButton />
 				{/* <Footer /> */}
 			</div>
 		</ApolloProvider>
