@@ -36,13 +36,13 @@ const resolvers = {
 
 	Mutation: {
 		// User-related mutations
-		addUser: async (_, { firstName, lastName, userName, email, password }) => {
-			const user = await User.create({ firstName, lastName, userName, email, password });
+		addUser: async (_, { name, email, auth0 }) => {
+			const user = await User.create({ name, email, auth0 });
 			const token = signToken(user);
 			return { token, user };
 		},
-		login: async (_, { email, password }) => {
-			const user = await User.findOne({ email });
+		login: async (_, { auth0 }) => {
+			const user = await User.findOne({ auth0 });
 
 			if (!user) {
 				throw AuthenticationError;
@@ -158,13 +158,13 @@ const resolvers = {
 			return measurable;
 		},
 
-		editUser: async (_, { userId, firstName, lastName, userName, email }, context) => {
+		editUser: async (_, { userId, name, auth0, email }, context) => {
 			// Authentication check if needed
 			// ... 
 
 			const updatedUser = await User.findByIdAndUpdate(
 				userId,
-				{ firstName, lastName, userName, email },
+				{ name, email, auth0 },
 				{ new: true }
 			);
 			return updatedUser;
