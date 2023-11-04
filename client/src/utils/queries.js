@@ -190,11 +190,5 @@ export const QUERY_ALL_MEASURABLE = gql`
   }
 `;
 
-export const QUERY_USER_CHECK = gql`
-  query userCheck ($authID: String) {
-    userCheck (authID: $authID) {
-    exists
-    }
-  }
-`;
+  
 

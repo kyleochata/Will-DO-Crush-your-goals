@@ -31,10 +31,6 @@ const resolvers = {
 		},
 		measurable: async (_, { measurableId }) => {
 			return Measurable.findById(measurableId).populate('user').populate('goal').populate('tasks');
-		},
-		checkUser: async(_, { authID }) => {
-			const userResult = User.find({authID})
-			return userResult != null ? { exists: true } : { exists: false } 
 		}
 	},
 
@@ -299,6 +295,21 @@ const resolvers = {
 			const deletedMeasurable = await Measurable.findByIdAndDelete(measurableId);
 			return deletedMeasurable;
 		},
+		checkUser: async(_, { authID, username }) => {
+			try{
+				const userResult = await User.find({authID});
+				if(userResult != null && userResult.length > 0){
+					const token = signToken({authID, _id: userResult._id});
+					return { token, userResult };
+				}else{
+					const user = await User.create({ authID, userName: username });
+					const token = signToken({authID, _id: user._id});
+					return { token, user };
+				}
+			}catch(err){
+				console.log(err);
+			}
+		}
 
 	},
 };

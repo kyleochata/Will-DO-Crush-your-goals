@@ -60,7 +60,6 @@ const typeDefs = `
     goal(goalId: ID!): Goal
     measurables: [Measurable]
     measurable(measurableId: ID!): Measurable
-    checkUser(authID: String!): { exists: boolean }
   }
   
   type Mutation {
@@ -77,6 +76,7 @@ const typeDefs = `
     deleteGoal(goalId: ID!): Goal
     deleteTask(taskId: ID!): Task
     deleteMeasurable(measurableId: ID!): Measurable
+    checkUser(authID: String!, username: String!): Auth
   }
 `;
 
