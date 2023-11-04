@@ -1,0 +1,25 @@
+
+.cards{
+    display: flex;
+    justify-content: center;
+    max-width: 72rem;
+    width: 90vw;
+}
+
+
+.dashButtonContainer{
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    justify-content: center;    
+}
+
+.dashButton{
+    background-color: #276891;
+    color: white;
+    font-weight: 700;
+}
+
+.dashButton:hover{
+    background-color: #0BAFC1;
+}

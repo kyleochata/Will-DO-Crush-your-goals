@@ -30,7 +30,7 @@ const AddTaskBtn = ({ createTask }) => {
 
   return (
 		<>
-			<button onClick={() => setShowModal(true)}>Add Task</button>
+			<button onClick={() => setShowModal(true)} className="dashButton">+ Add Task</button>
 			<Modal isOpen={showModal} onRequestClose={() => setShowModal(false)}>
 				<form onSubmit={handleSubmit} className={style.addTaskForm}>
 					<label className={style.addTaskModalTxt}>
@@ -70,9 +70,9 @@ const AddTaskBtn = ({ createTask }) => {
 							onChange={handleInputChange}
 							className={style.addTaskModalInput}
 						>
-							<option value="low">Low</option>
-							<option value="medium">Medium</option>
-							<option value="high">High</option>
+							<option value="Low">Low</option>
+							<option value="Medium">Medium</option>
+							<option value="High">High</option>
 						</select>
           </label>
           <label></label>
