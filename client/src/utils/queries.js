@@ -6,8 +6,9 @@ export const QUERY_USER = gql`
   query getUser($userId: ID!) {
     user(userId: $userId) {
       _id
-      firstName
-      lastName
+      name
+      email
+      auth0
       goals {
         _id
         title
@@ -32,10 +33,9 @@ export const QUERY_ALL_USERS = gql`
   query getAllUsers {
     users {
       _id
-      firstName
-      lastName
-      userName
+      name
       email
+      auth0
     }
   }
 `;
@@ -51,8 +51,9 @@ export const QUERY_TASK = gql`
       completed
       user {
         _id
-        firstName
-        lastName
+        name
+        email
+        auth0
       }
       goal {
         _id
@@ -77,8 +78,9 @@ export const QUERY_ALL_TASKS = gql`
       completed
       user {
         _id
-        firstName
-        lastName
+        name
+        email
+        auth0
       }
     }
   }
@@ -96,8 +98,9 @@ export const QUERY_GOAL = gql`
       completed
       user {
         _id
-        firstName
-        lastName
+        name
+        email
+        auth0
       }
       tasks {
         _id
@@ -127,8 +130,9 @@ export const QUERY_ALL_GOALS = gql`
       completed
       user {
         _id
-        firstName
-        lastName
+        name
+        email
+        auth0
       }
       tasks {
         _id
@@ -157,8 +161,9 @@ export const QUERY_MEASURABLE = gql`
       }
       user {
         _id
-        firstName
-        lastName
+        name
+        email
+        auth0
       }
       tasks {
         _id
@@ -183,8 +188,9 @@ export const QUERY_ALL_MEASURABLE = gql`
       }
       user {
         _id
-        firstName
-        lastName
+        name
+        email
+        auth0
       }
     }
   }

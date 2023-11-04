@@ -3,11 +3,9 @@
 const typeDefs = `
   type User {
     _id: ID
-    firstName: String!
-    lastName: String!
-    userName: String!
-    email: String!
-    password: String!
+    auth0: String!
+    name: String
+    email: String
     tasks: [Task]
     goals: [Goal]
     measurables: [Measurable]
@@ -63,12 +61,12 @@ const typeDefs = `
   }
   
   type Mutation {
-    addUser(firstName: String!, lastName: String!, userName: String!, email: String!, password: String!): Auth
+    addUser(name: String, email: String, auth0: String!): Auth
     login(email: String!, password: String!): Auth
     addTask(title: String!, description: String!, completionDate: String!, priority: String!, goalId: ID, measurableId: ID): Task
     addGoal(title: String!, description: String!, measurableIds: [ID], why: String!, completionDate: String!): Goal
     addMeasurable(title: String!, goalId: ID!): Measurable
-    editUser(userId: ID!, firstName: String, lastName: String, userName: String, email: String): User
+    editUser(userId: ID!, name: String, email: String): User
     editGoal(goalId: ID!, title: String, description: String, why: String, completionDate: String, completed: Boolean): Goal
     editTask(taskId: ID!, title: String, description: String, completionDate: String, priority: String, completed: Boolean): Task
     editMeasurable(measurableId: ID!, title: String): Measurable
