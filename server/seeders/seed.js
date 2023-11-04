@@ -12,39 +12,29 @@ db.once('open', async () => {
 
         const users = await User.insertMany([
             {
-                firstName: 'John',
-                lastName: 'Doe',
-                userName: 'john_doe',
+                name: 'john_doe',
                 email: 'john_doe@example.com',
-                password: 'password123',
+                auth0: 'auth0|1234567890',
             },
             {
-                firstName: 'Jane',
-                lastName: 'Doe',
-                userName: 'jane_doe',
+                name: 'jane_doe',
                 email: 'jane_doe@example.com',
-                password: 'password123',
+                auth0: 'auth0|0987654321',
             },
             {
-                firstName: 'Alice',
-                lastName: 'Smith',
-                userName: 'alice_smith',
+                name: 'alice_smith',
                 email: 'alice_smith@example.com',
-                password: 'password123',
+                auth0: 'auth0|1234509876',
             },
             {
-                firstName: 'Bob',
-                lastName: 'Jones',
-                userName: 'bob_jones',
+                name: 'bob_jones',
                 email: 'bob_jones@example.com',
-                password: 'password123',
+                auth0: 'auth0|6789054321',
             },
             {
-                firstName: 'Charlie',
-                lastName: 'Brown',
-                userName: 'charlie_brown',
+                name: 'charlie_brown',
                 email: 'charlie_brown@example.com',
-                password: 'password123',
+                auth0: 'auth0|1357902468',
             },
         ]);
 

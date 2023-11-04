@@ -3,24 +3,26 @@
 import { gql } from '@apollo/client';
 
 export const ADD_USER = gql`
-  mutation addUser($firstName: String!, $lastName: String!, $userName: String!, $email: String!, $password: String!) {
-    addUser(firstName: $firstName, lastName: $lastName, userName: $userName, email: $email, password: $password) {
+  mutation addUser($name: String, $email: String, $auth0: String!) {
+    addUser(name: $name, email: $email, auth0: $auth0) {
       token
       user {
         _id
-        userName
+        name
+        auth0
       }
     }
   }
 `;
 
 export const LOGIN_USER = gql`
-  mutation login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
+  mutation login($auth0: String!) {
+    login(auth0: $auth0) {
       token
       user {
         _id
-        userName
+        name
+        auth0
       }
     }
   }
@@ -37,7 +39,8 @@ export const ADD_TASK = gql`
       completed
       user {
         _id
-        userName
+        name
+        auth0
       }
       goal {
         _id
@@ -85,17 +88,12 @@ export const ADD_MEASURABLE = gql`
 `;
 
 
-
-
-
 export const EDIT_USER = gql`
-  mutation editUser($userId: ID!, $firstName: String, $lastName: String, $userName: String, $email: String) {
-    editUser(userId: $userId, firstName: $firstName, lastName: $lastName, userName: $userName, email: $email) {
+  mutation editUser() { $_id: ID!, $name: String, $auth0: String!) {
+    editUser(_id: $_id, name: $name, auth0: $auth0) {
       _id
-      firstName
-      lastName
-      userName
-      email
+      name
+      auth0
     }
   }
 `;
@@ -142,7 +140,8 @@ export const DELETE_USER = gql`
   mutation deleteUser($userId: ID!) {
     deleteUser(userId: $userId) {
       _id
-      userName
+      name
+      auth0
     }
   }
 `;

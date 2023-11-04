@@ -48,11 +48,11 @@ const resolvers = {
 				throw AuthenticationError;
 			}
 
-			const correctPw = await user.isCorrectPassword(password);
+			// const correctPw = await user.isCorrectPassword(password);
 
-			if (!correctPw) {
-				throw AuthenticationError;
-			}
+			// if (!correctPw) {
+			// 	throw AuthenticationError;
+			// }
 
 			const token = signToken(user);
 
