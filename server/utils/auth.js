@@ -50,8 +50,8 @@ module.exports = {
 		return req;
 		// // END OF THE CHUNK
 	},
-	signToken: function ({ email, auth0_id }) {
-		const payload = { email, auth0_id };
+	signToken: function ({ authID, _id }) {
+		const payload = { authID, _id };
 		return jwt.sign({ authenticatedPerson: payload }, secret, {
 			expiresIn: expiration,
 		});

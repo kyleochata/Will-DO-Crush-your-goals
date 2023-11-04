@@ -3,11 +3,11 @@
 const typeDefs = `
   type User {
     _id: ID
-    firstName: String!
-    lastName: String!
-    userName: String!
-    email: String!
-    password: String!
+    authID: String!
+    firstName: String
+    lastName: String
+    userName: String
+    email: String
     tasks: [Task]
     goals: [Goal]
     measurables: [Measurable]
@@ -76,6 +76,7 @@ const typeDefs = `
     deleteGoal(goalId: ID!): Goal
     deleteTask(taskId: ID!): Task
     deleteMeasurable(measurableId: ID!): Measurable
+    checkUser(authID: String!, username: String!): Auth
   }
 `;
 
