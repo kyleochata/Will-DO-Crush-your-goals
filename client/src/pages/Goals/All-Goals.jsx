@@ -10,7 +10,7 @@ const Goals = () => {
     variables: { userId: userId }
   });
   const user = data?.user || [];
-
+  
   if (loading) {
     return <div>Loading...</div>
   }
@@ -21,7 +21,6 @@ const Goals = () => {
         goals={user.goals}
         // title={user.goals.title}
       />
-      <button>Add Task</button>
     </div>
   )
 }

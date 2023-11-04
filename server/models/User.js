@@ -6,12 +6,14 @@ const bcrypt = require('bcrypt');
 const userSchema = new Schema({
 	name: {
 		type: String,
-		// required: true,
+		required: true,
 		trim: true,
 		unique: true,
 	},
 	email: {
 		type: String,
+		required: true,
+		unique: true,
 		match: [/.+@.+\..+/, "Please enter a valid email address"],
 	},
 	auth0: {
@@ -19,25 +21,24 @@ const userSchema = new Schema({
 		required: true,
 	},
 	tasks: [
-	{
-		type: Schema.Types.ObjectId,
-		ref: "Task",
-	},
-],
+		{
+			type: Schema.Types.ObjectId,
+			ref: "Task",
+		},
+	],
 	goals: [
-	{
-		type: Schema.Types.ObjectId,
-		ref: "Goal",
-	},
-],
+		{
+			type: Schema.Types.ObjectId,
+			ref: "Goal",
+		},
+	],
 	measurables: [
-	{
-		type: Schema.Types.ObjectId,
-		ref: "Measurable",
-	},
-],
+		{
+			type: Schema.Types.ObjectId,
+			ref: "Measurable",
+		},
+	],
 });
-
 
 // userSchema.pre('save', async function (next) {
 //   if (this.isNew || this.isModified("password")) {
