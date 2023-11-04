@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 // Add task will link to a modal to add a task
-// *** Move EDITGOAL to the individual goal modal ***
 const GoalsList = ({ goals = []}) => {
   if (!goals.length) {
     return <h3>No Goals Yet</h3>;
@@ -18,7 +17,7 @@ const GoalsList = ({ goals = []}) => {
             <Link to={`/goals/${goal._id}`}>
               <button>Details</button>
             </Link>
-            {/* Complete button? <Link to={`/goals/${goal._id}`}> */}
+            {/* add Vanna's task component to addTask which brings up the task modal. */}
           </div>
         </div>
       ))}

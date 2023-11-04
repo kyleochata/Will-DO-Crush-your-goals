@@ -1,10 +1,7 @@
 .header {
-  height: 6rem;
-  position: sticky;
-  top: 0;
-  z-index: 3;
-  width: 100vw;
-  background-color: #ffffff;
+    width: 100vw;
+    background-color: #FFFFFF;
+    margin-bottom: 1rem;
 }
 
 .navItems {
@@ -12,7 +9,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
+  margin: 1.25rem auto;
   padding: 0 1rem;
 }
 
@@ -37,21 +34,22 @@
 }
 
 .navLinkItem {
-  text-decoration: none;
-  color: #276891;
-  font-size: clamp(1rem, 3vw, 2rem);
-  font-weight: 700;
+    text-decoration: none;
+    color: #276891;
+    font-size: clamp(1rem, 3vw, 1.6rem);
+    font-weight: 700;
 }
 
 .navLinkItem:hover {
-  color: #0bafc1;
-  padding-bottom: 0.5rem;
-  border-bottom: 3px solid #0bafc1;
+    color: #0BAFC1;
+    padding-bottom: 0.1rem;
+    border-bottom: 3px solid black;
 }
 
 .welcome {
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
-  font-weight: 600;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-weight: 600;
+
 }
 
 .burgerMenu {
@@ -61,42 +59,47 @@
 }
 
 .mobileMenu {
-  position: absolute;
-  top: 4rem;
-  right: 2rem;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  padding: 0.5rem;
-  height: fit-content;
-  min-width: 15rem;
-  background: #276891;
-  border-radius: 1rem;
+    position: absolute;
+    top: 3rem;
+    right: 2rem;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    height: fit-content;
+    min-width: 15rem;
+    background: #276891;
+    border-radius: 1rem;
 }
 
 .mobileMenuItem {
-  color: white;
-  padding: 0.5rem 3rem;
-  margin: 0.25rem;
-  background: #0bafc1;
-  font-size: 1.25rem;
+    color: white;
+    padding: 0.5rem 3rem;
+    margin: 0.25rem;
+    background: #0BAFC1;
+    font-size: 1.25rem;
+    font-weight: 600;
 }
 
 .mobileMenuItem:hover {
-  color: white;
-  padding: 0.5rem 3rem;
-  margin: 0.25rem;
-  background: #0bafc1;
-  font-size: 1.5rem;
-  cursor: pointer;
-  border-bottom: 3px solid black;
-  padding-bottom: 0.5rem;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-bottom: 3px solid black;
+    padding-bottom: 0.1rem;
 }
 
 .active {
-  color: #0bafc1;
-  border-bottom: 3px solid black;
-  padding-bottom: 0.5rem;
+    color: #0BAFC1;
+    border-bottom: 3px solid black;
+    padding-bottom: 0.1rem;
+}
+
+.activeMobile {
+    color: #276891;
+    font-weight: 900;
+    border-bottom: 3px solid black;
+    padding-bottom: 0.1rem;
 }
 
 .burgerMenu {
@@ -120,10 +123,16 @@
   margin: 0;
 }
 
-@media screen and (max-width: 800px) {
-  .burgerMenu {
-    display: flex;
-  }
+@media screen and (max-width:800px) {
+    .burgerMenu {
+        display: flex;
+        margin: 0 auto;
+    }
+
+    .burgerContainer{
+        width: 151px;
+        
+    }
 
   .navLinks {
     display: none;
@@ -137,16 +146,13 @@
 @media screen and (max-width: 500px) {
   .navItems {
     flex-direction: column;
-    margin: 1.5rem auto;
-  }
-
-  .header {
-    height: 125px;
+    margin: 1rem auto;
+    gap: 1rem;
   }
 
   .mobileMenu {
     position: absolute;
-    top: 8.5rem;
+    top: 10.2rem;
     left: 50%;
     transform: translateX(-50%);
   }

@@ -11,6 +11,7 @@ import AddTaskBtn from '../../components/TaskComponents/AddTaskBtn.jsx';
 import { QUERY_USER } from '../../utils/queries';
 
 function Tasks() {
+  // might need to use auth0_id instead of userId
   const { userId } = useParams();
   const { loading, data } = useQuery(QUERY_USER, {
     variables: { userId: userId }
@@ -21,11 +22,11 @@ function Tasks() {
   if (loading) {
     return <div>Loading...</div>;
   }
-
+  console.log(data);
   return (
 		<div>
       All Tasks
-      <AddTaskBtn />
+      <AddTaskBtn createTask={user.tasks} />
       power list here
       {/* task list card */}
       <TasksList tasks={user.tasks} />

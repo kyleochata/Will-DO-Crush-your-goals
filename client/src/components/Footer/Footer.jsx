@@ -1,10 +1,7 @@
-import { Link, useLocation } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useAuth0 } from '@auth0/auth0-react';
-import { useState } from 'react';
-import LoginButton from "../loginButton/loginButton"
-import "./Header.css"
-import logo from "../../assets/Will Do-logos_black.png"
-import menu from '../../assets/burger-menu.svg'
+import "./Footer.css"
+import github from "../../assets/githubLink.png"
 
 
 export default () => {
@@ -12,7 +9,11 @@ export default () => {
 
     return (
         <div className="footer">
-           
+           <div className="footerEl"><p className="footerText">
+            Turn Should Dos into WILL DOs
+           </p>
+           <Link to="https://github.com/kyleochata/Task-Manager-Project3"><img src={github} className="github" /></Link>
+           </div>
         </div>
     )
 }
