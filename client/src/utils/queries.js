@@ -8,6 +8,7 @@ export const QUERY_USER = gql`
       _id
       name
       email
+      auth0
       goals {
         _id
         title
@@ -34,6 +35,7 @@ export const QUERY_ALL_USERS = gql`
       _id
       name
       email
+      auth0
     }
   }
 `;
@@ -51,6 +53,7 @@ export const QUERY_TASK = gql`
         _id
         name
         email
+        auth0
       }
       goal {
         _id
@@ -77,6 +80,7 @@ export const QUERY_ALL_TASKS = gql`
         _id
         name
         email
+        auth0
       }
     }
   }
@@ -96,6 +100,7 @@ export const QUERY_GOAL = gql`
         _id
         name
         email
+        auth0
       }
       tasks {
         _id
@@ -127,6 +132,7 @@ export const QUERY_ALL_GOALS = gql`
         _id
         name
         email
+        auth0
       }
       tasks {
         _id
@@ -157,6 +163,7 @@ export const QUERY_MEASURABLE = gql`
         _id
         name
         email
+        auth0
       }
       tasks {
         _id
@@ -183,6 +190,7 @@ export const QUERY_ALL_MEASURABLE = gql`
         _id
         name
         email
+        auth0
       }
     }
   }
