@@ -6,7 +6,6 @@ import mountain from '../../assets/mountain.png'
 
 export default () => {
   const { loginWithRedirect, isAuthenticated, user } = useAuth0()
-  // console.log(user);
 
   return (
     <section className="homeMain">
