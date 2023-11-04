@@ -89,7 +89,7 @@ export const ADD_MEASURABLE = gql`
 
 
 export const EDIT_USER = gql`
-  mutation editUser() { $_id: ID!, $name: String, $auth0: String!) {
+  mutation editUser( $_id: ID!, $name: String, $auth0: String!) {
     editUser(_id: $_id, name: $name, auth0: $auth0) {
       _id
       name

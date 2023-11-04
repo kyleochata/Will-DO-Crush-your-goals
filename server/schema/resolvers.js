@@ -158,13 +158,13 @@ const resolvers = {
 			return measurable;
 		},
 
-		editUser: async (_, { userId, name, auth0 }, context) => {
+		editUser: async (_, { userId, name, auth0, email }, context) => {
 			// Authentication check if needed
 			// ... 
 
 			const updatedUser = await User.findByIdAndUpdate(
 				userId,
-				{ name, auth0 },
+				{ name, email, auth0 },
 				{ new: true }
 			);
 			return updatedUser;
