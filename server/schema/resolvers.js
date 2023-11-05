@@ -55,9 +55,8 @@ const resolvers = {
 
 		// Task-related mutations
 		addTask: async (_, { title, description, completionDate, priority, goalId, measurableId }, context) => {
-			console.log(context.user.authID)
-			if (!context.user.authID) {
-				console.log("context user error")
+			console.log(context.user);
+			if (!context.user) {
 				throw AuthenticationError;
 
 			}
@@ -303,13 +302,10 @@ const resolvers = {
 			try {
 				const userResult = await User.find({ authID });
 				if (userResult.length > 0) {
-					console.log("if console log");
 					const token = signToken({ authID, _id: userResult._id });
 					return { token, user: userResult[0] };
 				} else {
-					console.log("else console log");
-					const user = await User.create({ authID, userName: username }, { new: true });
-					console.log(user)
+					const user = await User.create({ authID, userName: username });
 					const token = signToken({ authID, _id: user._id });
 					return { token, user };
 				}
