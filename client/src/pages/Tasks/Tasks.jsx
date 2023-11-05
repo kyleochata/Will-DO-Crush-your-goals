@@ -5,7 +5,7 @@ import TasksList from '../../components/TaskComponents/TasksList.jsx'
 import SingleTask from '../../components/TaskComponents/SingleTaskModal.jsx'
 import AddTaskBtn from '../../components/TaskComponents/AddTaskBtn.jsx'
 import { ADD_TASK } from '../../utils/mutations'
-import Auth from '../../utils'
+import Auth from '../../utils/auth.js'
 import style from './Tasks.module.css'
 import { QUERY_USER } from '../../utils/queries'
 
