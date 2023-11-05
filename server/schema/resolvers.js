@@ -55,17 +55,18 @@ const resolvers = {
 
 		// Task-related mutations
 		addTask: async (_, { title, description, completionDate, priority, goalId, measurableId }, context) => {
-			console.log(context.user);
+			const user = User.find({authID:context.user.authID})
 			if (!context.user) {
 				throw AuthenticationError;
 			}
+
 
 			const taskData = {
 				title,
 				description,
 				completionDate,
 				priority,
-				user: context.user._id,
+				user,
 			};
 
 			if (goalId) {
@@ -99,6 +100,8 @@ const resolvers = {
 				await Measurable.findByIdAndUpdate(measurableId, { $push: { tasks: task._id } });
 			}
 
+			console.log("end of the line");
+			console.log(task);
 			return task;
 		},
 
