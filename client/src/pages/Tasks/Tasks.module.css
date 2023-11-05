@@ -16,14 +16,28 @@
   top: 50%; 
   left: 50%; 
   transform: translate(-50%, -50%); 
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
   overflow-y: auto;
+}
+
+.modalContent{
+  width: 100%;
+  position: absolute;
+  top: 70px;
+  margin: auto;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .modalTitle{
   width: 75%;
+  max-width: 560px;
+  min-width: 280px;
   background-color: #0BAFC1;
-  font-size: 2rem;
+  font-size: clamp(1rem, 8vw, 2rem);
   text-align: center;
   padding: 0.5rem 0;
   font-weight: 700;
@@ -33,6 +47,8 @@
 
 .formContainer{
   padding: 2rem 0;
+  position: relative;
+
 }
 
 .formInputs{
@@ -140,6 +156,7 @@ textarea{
 }
 
 .submitButton{
+  width: 75%;
   background-color: #276891;
   color: white;
   font-weight: 700;

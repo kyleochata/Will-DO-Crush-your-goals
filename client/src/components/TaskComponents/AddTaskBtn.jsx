@@ -41,15 +41,14 @@ const AddTaskBtn = ({ createTask }) => {
 			<Modal
 				isOpen={showModal}
 				onRequestClose={() => setShowModal(false)}
-				className={style.addTaskModal}
-			>
+				className={style.addTaskModal}>
 				<button
 					className={style.closeButton}
-					onClick={() => setShowModal(false)}
-				>
+					onClick={() => setShowModal(false)}>
 					X
 				</button>
-				<div className={style.modalTitle}>ADD TASK</div>
+				<div className={style.modalContent}>
+					<div className={style.modalTitle}>ADD TASK</div>
 				<div className={style.formContainer}>
 					<form onSubmit={handleSubmit} className={style.addTaskForm}>
 						<div className={style.formInputs}>
@@ -108,6 +107,7 @@ const AddTaskBtn = ({ createTask }) => {
 							</button>
 						</div>
 					</form>
+				</div>
 				</div>
 			</Modal>
 		</>
