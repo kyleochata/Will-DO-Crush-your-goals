@@ -14,6 +14,7 @@ import Home from './pages/Home/Home.jsx'
 import Report from './pages/Report/Report.jsx'
 import Profile from './pages/Profile/Profile.jsx'
 
+
 const domain = import.meta.env.VITE_REACT_APP_AUTH0_DOMAIN
 const clientId = import.meta.env.VITE_REACT_APP_AUTH0_CLIENT_ID
 const router = createBrowserRouter([
@@ -69,7 +70,6 @@ const router = createBrowserRouter([
     ],
   },
 ])
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <RouterProvider router={router} />
 )

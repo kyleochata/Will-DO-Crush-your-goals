@@ -1,6 +1,4 @@
 import "./Dashboard.css";
-import "../Card/card.css";
-import Checkbox from "../TaskComponents/Checkbox";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_TASK, ADD_GOAL } from "../../utils/mutations";
@@ -36,22 +34,22 @@ export default () => {
                 <h2 className="cardTitle">TASKS</h2>
                 <ul className="cardText">
                     <li className="liItem">
-                        The list of Tasks for this user would go here
+                        The list of Tasks for this user would go here ;hds af;h ds;fhdsa;jfhsda ;jfhdskajh fgkjdsahfj;d hs fsdafs dafg dsgafdsf
                     </li>
                 </ul>
                 <ul className="cardText">
                     <li className="liItem">
-                        The list of Tasks for this user would go here
+                        The list of Tasks for this user would go hereds afdsagfdagfadgfdagfadf dsfdsagd
                     </li>
                 </ul>
                 <ul className="cardText">
                     <li className="liItem">
-                        The list of Tasks for this user would go here
+                        The list of Tasks for this user would go hereag fdagadsffda sfgdsafdsf
                     </li>
                 </ul>
                 <ul className="cardText">
                     <li className="liItem">
-                        The list of Tasks for this user would go here
+                        The list of Tasks for this user would go here asdfdasfdsa fds
                     </li>
                 </ul>
                 <ul className="cardText">

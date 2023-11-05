@@ -6,17 +6,18 @@
 
 }
 
-.userPic{
+.userPic {
     border-radius: 50%;
     border: 7px solid #276891;
+    height: 7rem
 }
 
-.profileTitle{
+.profileTitle {
     margin: 1rem;
     font-size: 2rem;
 }
 
-.userList{
+.userList {
     max-width: 20rem;
     margin: 0 0 1rem 0;
 }
@@ -26,4 +27,15 @@
     color: white;
     font-weight: 700;
 
-  }
+}
+
+.logout:hover {
+    background-color: #3d779c;
+}
+
+.logout:active {
+    background-color: #225c7f;
+    -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+    -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+    box-shadow: inset 0px 0px 5px #c1c1c1;
+}

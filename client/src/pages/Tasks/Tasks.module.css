@@ -3,7 +3,55 @@
     flex-wrap: wrap;
 }
 
+.addTaskModal {
+  width: 90vw; 
+  height: 90vh;
+  background-color: white; 
+  border-radius: 5px; 
+  position: relative;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+}
+
+.modalTitle{
+  width: 75%;
+  background-color: #0BAFC1;
+  font-size: 2rem;
+  text-align: center;
+  padding: 0.5rem 0;
+  font-weight: 700;
+  color: white;
+  border-radius: 1rem;
+}
+
+.formContainer{
+  padding: 2rem 0;
+}
+
+.formInputs{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  display: flex;
+  flex-direction: column;
+  min-width: 35rem;
+  margin-bottom: 1rem;
+}
+
 /* single task modal */
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
 
 .singleTaskModal {
     /* display: flex;
@@ -53,19 +101,54 @@
 
 .addTaskModalTxt {
   color: black;
-  font-size: larger;
-  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem ;
+  font-weight: 600;
+  font-size: 1.25rem;
 }
 
 .addTaskForm {
   display: flex;
   flex-direction: column;
-  margin: 100px;
-  align-items: start;
+  align-items: flex-start;
+
 }
 
 .addTaskModalInput {
-  background-color: white;
-  color: black;
-  margin-left: 10px;
+  background-color: rgb(243, 243, 243);
+  color: rgb(103, 103, 103);
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 0.85rem;
+}
+
+
+.submitButtonContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.submitButton{
+  background-color: #276891;
+  color: white;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.submitButton:hover{
+  background-color: #3d779c;
+}
+
+.submitButton:active{
+  background-color: #225c7f;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+     -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+          box-shadow: inset 0px 0px 5px #c1c1c1;
 }

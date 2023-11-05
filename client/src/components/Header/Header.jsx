@@ -11,7 +11,7 @@ export default () => {
     const [showMenu, setShowMenu] = useState(false);
     const { isAuthenticated } = useAuth0();
     const location = useLocation();
-    const shouldDisplayBurgerMenu = isAuthenticated && window.innerWidth <= 800;
+    const shouldDisplayBurgerMenu = isAuthenticated;
 
 
     const routeToTitle ={

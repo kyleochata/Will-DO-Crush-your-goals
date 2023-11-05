@@ -34,7 +34,14 @@
 }
 
 .login:hover{
-  background-color: #0BAFC1;
+  background-color: #3d779c;
+}
+
+.login:active{
+  background-color: #225c7f;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+     -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+          box-shadow: inset 0px 0px 5px #c1c1c1;
 }
 
 .navLinkItem {
@@ -114,7 +121,6 @@
 
 .Title {
   width: 100vw;
-  height: 5rem;
   text-align: center;
   margin: 0 auto;
   padding: 0;
@@ -123,7 +129,7 @@
 }
 
 .pageTitle {
-  padding: 10px 0 0 0;
+  padding: 10px 0;
   margin: 0;
 }
 
@@ -144,6 +150,10 @@
 
   .logo {
     height: 2.5rem;
+  }
+
+  .pageTitle{
+    font-size: clamp(2rem, 6vw, 2.5rem);
   }
 }
 

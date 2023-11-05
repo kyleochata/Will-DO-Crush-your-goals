@@ -34,10 +34,12 @@ const client = new ApolloClient({
 	cache: new InMemoryCache(),
 });
 
+
 function App() {
 	const { isLoading, error } = useAuth0();
-
+	
 	return (
+		
 		<ApolloProvider client={client}>
 			<div className="mainBody">
 				{error && <p>Authentication Error</p>}

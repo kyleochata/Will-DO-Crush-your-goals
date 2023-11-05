@@ -2,10 +2,43 @@
 .cards{
     display: flex;
     justify-content: center;
-    max-width: 72rem;
+    padding: 0 1rem;
+    gap: 2rem;
     width: 90vw;
 }
 
+.oneCard {
+    width: 45%;
+    padding: 1rem;
+    border-radius: .5rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+
+.cardTitle{
+    text-align: center;
+    margin: 0 auto;
+    color: #276891;
+
+}
+
+.cardText{
+    margin: 0 auto;
+    font-weight: 500;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    
+
+}
+
+.liItem{
+    padding: .3rem ;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    margin-bottom: 1rem;
+}
 
 .dashButtonContainer{
     display: flex;
@@ -21,5 +54,31 @@
 }
 
 .dashButton:hover{
-    background-color: #0BAFC1;
+    background-color: #3d779c;
+}
+
+.dashButton:active{
+    background-color: #225c7f;
+    -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+       -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+            box-shadow: inset 0px 0px 5px #c1c1c1;
+  }
+
+  @media screen and (max-width:900px) {
+    .cards{
+        flex-direction: column;
+        align-items: center;
+        padding: 0 1rem;
+    }
+
+    .oneCard {
+        width: 85vw;
+
+    }
+}
+
+@media screen and (max-width: 625px) {
+    .cards {
+        width: 70vw;
+    }
 }
