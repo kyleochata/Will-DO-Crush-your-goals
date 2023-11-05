@@ -5,7 +5,7 @@ import TasksList from '../../components/TaskComponents/TasksList.jsx'
 import SingleTask from '../../components/TaskComponents/SingleTaskModal.jsx'
 import AddTaskBtn from '../../components/TaskComponents/AddTaskBtn.jsx'
 import { ADD_TASK } from '../../utils/mutations'
-import Auth from '../../utils/auth.js'
+import Auth from '../../utils/auth'
 import style from './Tasks.module.css'
 import { QUERY_USER } from '../../utils/queries'
 
@@ -29,10 +29,11 @@ function Tasks() {
     variables: { authID: auth_ID },
   })
 
-  console.log(data)
-
+  console.log(auth_ID)
   const user = data?.user || {}
+  console.log(data)
   console.log(user)
+
   return (
     <div className={style.mainTask}>
       <section className="cards">
@@ -74,7 +75,7 @@ function Tasks() {
           {/* task list card */}
           <TasksList tasks={user.tasks} />
           <div className="dashButtonContainer">
-            <AddTaskBtn createTask={createTask} />
+            <AddTaskBtn createTask={createTask} goals={user.goals} />
           </div>
         </article>
       </section>

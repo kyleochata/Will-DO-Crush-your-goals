@@ -9,6 +9,7 @@ mutation checkUser($authID: String!, $username: String!) {
     user {
       _id
       userName
+      authID
     }
   }
 }
@@ -182,6 +183,16 @@ export const DELETE_MEASURABLE = gql`
     deleteMeasurable(measurableId: $measurableId) {
       _id
       title
+    }
+  }
+`;
+
+export const UPDATE_TASK_COMPLETION = gql`
+  mutation updateTaskCompletion($taskId: ID!, $completed: Boolean!) {
+    updateTaskCompletion(taskId: $taskId, completed: $completed) {
+      _id
+      title
+      completed
     }
   }
 `;
