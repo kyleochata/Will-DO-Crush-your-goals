@@ -73,6 +73,7 @@ const typeDefs = `
     deleteGoal(goalId: ID!): Goal
     deleteTask(taskId: ID!): Task
     deleteMeasurable(measurableId: ID!): Measurable
+    updateTaskCompletion(taskId: ID!, completed: Boolean!): Task
     checkUser(authID: String!, username: String!): Auth
   }
 `;
