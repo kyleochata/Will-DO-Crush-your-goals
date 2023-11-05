@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom"
 import { useAuth0 } from "@auth0/auth0-react";
 import "./Home.css";
+import Dashboard from "../../components/Dashboard/Dashboard.jsx";
 import phone from "../../assets/phone.png";
 import mountain from "../../assets/mountain.png";
 
 export default () => {
   const { loginWithRedirect, isAuthenticated, user } = useAuth0();
-  console.log(user);
 
   return (
     <section className="homeMain">
@@ -61,7 +60,9 @@ export default () => {
           </div>
 
         </div>
-      ) : null}
+      ) : (
+      <Dashboard />
+      )}
     </section>
   );
 };
