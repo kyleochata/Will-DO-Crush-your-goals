@@ -20,19 +20,18 @@ function Tasks() {
 				console.error("Error creating task:", error);
 			});
 	};
-	// might need to use auth0_id instead of userId
-	const { userId } = useParams();
-	const { loading, data } = useQuery(QUERY_USER, {
-		variables: { userId: userId },
+
+  // const { auth_ID } = useParams();
+  const auth_ID = Auth.getProfile().authenticatedPerson.authID;
+	const { data } = useQuery(QUERY_USER, {
+		variables: { authID: auth_ID },
 	});
 
+  console.log(auth_ID)
 	const user = data?.user || {};
-	console.log(data);
+  console.log(data);
+  console.log(user);
 
-	if (loading) {
-		return <div>Loading...</div>;
-	}
-	console.log(data);
 	return (
 		<div className={style.mainTask}>
 			<section className="cards">
@@ -74,7 +73,10 @@ function Tasks() {
 					{/* task list card */}
 					<TasksList tasks={user.tasks} />
 					<div className="dashButtonContainer">
-						<AddTaskBtn createTask={createTask} />
+            <AddTaskBtn
+              createTask={createTask}
+              goals={user.goals}
+            />
 					</div>
 				</article>
 			</section>

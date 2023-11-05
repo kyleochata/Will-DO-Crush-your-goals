@@ -186,3 +186,13 @@ export const DELETE_MEASURABLE = gql`
     }
   }
 `;
+
+export const UPDATE_TASK_COMPLETION = gql`
+  mutation updateTaskCompletion($taskId: ID!, $completed: Boolean!) {
+    updateTaskCompletion(taskId: $taskId, completed: $completed) {
+      _id
+      title
+      completed
+    }
+  }
+`;

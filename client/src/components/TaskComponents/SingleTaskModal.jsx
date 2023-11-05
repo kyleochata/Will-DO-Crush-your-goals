@@ -25,7 +25,6 @@ const SingleTask = () => {
       <p>Description: {task.description}</p>
       <p>Due Date: {task.completionDate}</p>
       <p>Priority: {task.priority}</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad reprehenderit consequatur itaque mollitia eveniet dolores quaerat odio reiciendis tenetur sed earum provident dolore ratione impedit, nesciunt vero quod, delectus praesentium.</p>
       {/* add functionality to edit task and delete task buttons */}
       <button className={style.bottomBtn}>Edit Task</button>
       <button className={style.bottomBtn}>Delete Task</button>

@@ -299,6 +299,28 @@ const resolvers = {
 			const deletedMeasurable = await Measurable.findByIdAndDelete(measurableId);
 			return deletedMeasurable;
 		},
+
+		// update task completion
+		updateTaskCompletion: async (_, { taskId, completed }, context) => {
+			if(!context.user) {
+				throw AuthenticationError;
+			}
+			
+			const task = await Task.findById(taskId);
+
+			if (!task) {
+				throw new Error('Task not found');
+			}
+
+			if (task.user.toString() !== context.user._id.toString()) {
+				throw AuthenticationError;
+			}
+
+			const updatedTask = await Task.findByIdAndUpdate(completed, { completed }, { new: true });
+			
+			return updatedTask;
+		},
+		
 		checkUser: async (_, { authID, username }) => {
 			try {
 				const userResult = await User.find({ authID });
