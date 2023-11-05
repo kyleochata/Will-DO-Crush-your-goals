@@ -45,7 +45,7 @@ const AddGoalBtn = ({ createGoal }) => {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Add Goal</button>
+      <button onClick={() => setShowModal(true)} className="dashButton">+ Add Goal</button>
       <Modal className="" isOpen={showModal} onRequestClose={() => setShowModal(false)}>
         <form className={style.addGoalModal} >
           <label className={style.addGoalText}>

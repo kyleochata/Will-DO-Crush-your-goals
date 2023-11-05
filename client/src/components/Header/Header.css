@@ -33,6 +33,17 @@
   font-weight: 700;
 }
 
+.login:hover{
+  background-color: #3d779c;
+}
+
+.login:active{
+  background-color: #225c7f;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+     -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+          box-shadow: inset 0px 0px 5px #c1c1c1;
+}
+
 .navLinkItem {
     text-decoration: none;
     color: #276891;
@@ -97,7 +108,7 @@
 
 .activeMobile {
     color: #276891;
-    font-weight: 900;
+    font-weight: 800;
     border-bottom: 3px solid black;
     padding-bottom: 0.1rem;
 }
@@ -110,7 +121,6 @@
 
 .Title {
   width: 100vw;
-  height: 5rem;
   text-align: center;
   margin: 0 auto;
   padding: 0;
@@ -119,7 +129,7 @@
 }
 
 .pageTitle {
-  padding: 10px 0 0 0;
+  padding: 10px 0;
   margin: 0;
 }
 
@@ -140,6 +150,10 @@
 
   .logo {
     height: 2.5rem;
+  }
+
+  .pageTitle{
+    font-size: clamp(2rem, 6vw, 2.5rem);
   }
 }
 
