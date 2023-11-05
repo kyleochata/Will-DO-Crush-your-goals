@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth0 } from '@auth0/auth0-react';
 import { useState } from 'react';
 import LoginButton from "../loginButton/loginButton";
+import LoginModal from "../loginModal/Login";
 import "./Header.css";
 import logo from "../../assets/Will Do-logos_black.png";
 import menu from '../../assets/burger-menu.svg';
@@ -39,6 +40,7 @@ export default () => {
                     </ul>
                 ) : null}
                 <LoginButton />
+                <LoginModal />
 
                 {shouldDisplayBurgerMenu && (
                 <div className="burgerContainer"><img src={menu} alt="menu" className='burgerMenu' onClick={() => setShowMenu(!showMenu)} /> </div>

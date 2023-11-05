@@ -41,7 +41,8 @@ const AddTaskBtn = ({ createTask }) => {
 			<Modal
 				isOpen={showModal}
 				onRequestClose={() => setShowModal(false)}
-				className={style.addTaskModal}>
+				className={style.addTaskModal}
+				>
 				<button
 					className={style.closeButton}
 					onClick={() => setShowModal(false)}>

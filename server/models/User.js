@@ -4,12 +4,6 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
-	authID:{
-		type: String,
-		require: true,
-		trim: true,
-		unique: true,
-	},
 	// firstName: {
 	// 	type: String,
 	// 	trim: true,
@@ -18,15 +12,24 @@ const userSchema = new Schema({
 	// 	type: String,
 	// 	trim: true,
 	// },
-	userName: {
+	username: {
 		type: String,
+		required: true,
 		trim: true,
+		unique: true,
 	},
-	// email: {
-	// 	type: String,
-	// 	unique: true,
-	// 	match: [/.+@.+\..+/, "Please enter a valid email address"],
-	// },
+	email: {
+		type: String,
+		unique: true,
+		trim: true,
+		required: true,
+		match: [/.+@.+\..+/, "Please enter a valid email address"],
+	},
+	password: {
+		type: String,
+		required: true,
+		minlength: 5,
+	},
 	tasks: [
 		{
 			type: Schema.Types.ObjectId,
@@ -47,17 +50,17 @@ const userSchema = new Schema({
 	],
 });
 
-// userSchema.pre('save', async function (next) {
-//   if (this.isNew || this.isModified("password")) {
-//     const saltRounds = 10;
-//     this.password = await bcrypt.hash(this.password, saltRounds);
-//   }
-//   next();
-// });
+userSchema.pre('save', async function (next) {
+	if (this.isNew || this.isModified("password")) {
+		const saltRounds = 10;
+		this.password = await bcrypt.hash(this.password, saltRounds);
+	}
+	next();
+});
 
-// userSchema.methods.isCorrectPassword = async function (password) {
-// 	return bcrypt.compare(password, this.password);
-// };
+userSchema.methods.isCorrectPassword = async function (password) {
+	return bcrypt.compare(password, this.password);
+};
 
 const User = model('User', userSchema);
 
