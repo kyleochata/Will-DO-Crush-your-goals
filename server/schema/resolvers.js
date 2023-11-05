@@ -60,13 +60,14 @@ const resolvers = {
 				throw AuthenticationError;
 
 			}
+			const user = await User.findOne({ authID: context.user.authID });
 
 			const taskData = {
 				title,
 				description,
 				completionDate,
 				priority,
-				user: context.user.authID,
+				user
 			};
 
 			console.log(taskData)
@@ -89,7 +90,7 @@ const resolvers = {
 			const task = await Task.create(taskData);
 
 			// Update user's tasks
-			await User.findByIdAndUpdate(context.user.authId, { $push: { tasks: task._id } });
+			await User.findOneAndUpdate({ authID: context.user.authID }, { $push: { tasks: task._id } });
 
 			// Update goal's tasks
 			if (goalId) {
