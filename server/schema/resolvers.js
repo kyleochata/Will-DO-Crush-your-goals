@@ -301,9 +301,7 @@ const resolvers = {
 				if(userResult != null){
 					console.log("this is console logged");
 					const token = signToken({authID, _id: userResult._id});
-					console.log(token);
-					console.log(userResult);
-					return { token, userResult };
+					return { token, user:userResult[0] };
 				}else{
 					const user = await User.create({ authID, userName: username });
 					const token = signToken({authID, _id: user._id});
