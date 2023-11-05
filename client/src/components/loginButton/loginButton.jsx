@@ -6,7 +6,7 @@ import { CHECK_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
 const LoginButton = () => {
-  const [ checkUser, { error }] = useMutation(CHECK_USER);
+  const [checkUser] = useMutation(CHECK_USER);
   const { user, loginWithRedirect, isAuthenticated } = useAuth0();
   const mountRef = useRef(0);
   if (user != null){
