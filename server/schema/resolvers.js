@@ -21,7 +21,7 @@ const resolvers = {
 
 		// Queries to locate a single instance
 		user: async (_, { userId }) => {
-			return User.findById({ authID: userId }).populate('tasks').populate('goals').populate('measurables');
+			return User.findOne({ authID: userId }).populate('tasks').populate('goals').populate('measurables');
 		},
 		goal: async (_, { goalId }) => {
 			return Goal.findById(goalId).populate('user').populate('tasks').populate('measurables');
