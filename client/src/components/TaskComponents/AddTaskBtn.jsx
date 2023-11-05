@@ -61,6 +61,7 @@ const AddTaskBtn = ({ createTask }) => {
 										value={taskData.title}
 										onChange={handleInputChange}
 										className={style.addTaskModalInput}
+										required
 									/>
 								</label>
 							<label className={style.addTaskModalTxt}>
@@ -71,6 +72,7 @@ const AddTaskBtn = ({ createTask }) => {
 									value={taskData.description}
 									onChange={handleInputChange}
 									className={style.addTaskModalInput}
+									required
 								/>
 							</label>
 							<label className={style.addTaskModalTxt}>
@@ -81,6 +83,7 @@ const AddTaskBtn = ({ createTask }) => {
 									value={taskData.completionDate}
 									onChange={handleInputChange}
 									className={style.addTaskModalInput}
+									required
 								/>
 							</label>
 							<label className={style.addTaskModalTxt}>
@@ -90,6 +93,7 @@ const AddTaskBtn = ({ createTask }) => {
 									value={taskData.priority}
 									onChange={handleInputChange}
 									className={style.addTaskModalInput}
+									required
 								>
 									<option value="Low">Low</option>
 									<option value="Medium">Medium</option>
