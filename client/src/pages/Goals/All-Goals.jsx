@@ -4,6 +4,7 @@ import { QUERY_USER } from '../../utils/queries';
 import GoalsList from '../../components/Goals-Component/Goals';
 import AddGoalBtn from '../../components/Goals-Component/AddGoalBtn';
 import { ADD_GOAL } from "../../utils/mutations";
+import style from '../Tasks/Tasks.module.css';
 
 console.log("before createGoal func")
 function Goals() {
@@ -31,12 +32,50 @@ function Goals() {
   }
   console.log("before return jsx")
   return (
-    <div className="Goals">
-      <AddGoalBtn createGoal={createGoal} />
-      <GoalsList
+      <div className={style.mainTask}>
+      <section className="cards">
+            <article className="oneCard">
+                <h2 className="cardTitle">ALL GOALS</h2>
+                <ul className="cardText">
+                    <li className="liItem">
+                        The list of Goals for this user would go here ;hds af;h ds;fhdsa;jfhsda ;jfhdskajh fgkjdsahfj;d hs fsdafs dafg dsgafdsf
+                    </li>
+                </ul>
+                <ul className="cardText">
+                    <li className="liItem">
+                        The list of Goals for this user would go hereds afdsagfdagfadgfdagfadf dsfdsagd
+                    </li>
+                </ul>
+                <ul className="cardText">
+                    <li className="liItem">
+                        The list of Goals for this user would go hereag fdagadsffda sfgdsafdsf
+                    </li>
+                </ul>
+                <ul className="cardText">
+                    <li className="liItem">
+                        The list of Goals for this user would go here asdfdasfdsa fds
+                    </li>
+                </ul>
+                <ul className="cardText">
+                    <li className="liItem">
+                        The list of Goals for this user would go here
+                    </li>
+                </ul>
+                <ul className="cardText">
+                    <li className="liItem">
+                        The list of Goals for this user would go here
+                    </li>
+                </ul>
+                {/* goal list card */}
+                <GoalsList
         goals={user.goals}
-
       />
+                <div className="dashButtonContainer">
+                    <AddGoalBtn createGoal={createGoal} />
+                </div>
+                
+            </article>
+        </section>
     </div>
   )
 }

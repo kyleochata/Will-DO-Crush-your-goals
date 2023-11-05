@@ -1,7 +1,6 @@
 .footer{
-    width: 100vw;
+    
     background-color: #0BAFC1;
-    height: 4rem;
     margin-top: 1rem;
     
 }
@@ -25,6 +24,7 @@
 }
 
 .github{
+    margin-top: 0.5rem;
     width: 3rem;
 
 }
