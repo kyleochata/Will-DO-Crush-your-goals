@@ -1,8 +1,11 @@
 import DataTree from '../../components/DataTree/DataTree'
 import style from './Report.module.css'
 import useResizeObserver from '../../utils/useResize'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
+import { useMutation } from '@apollo/client'
+import { QUERY_ALL_GOALS } from '../../utils/queries'
+import { useParams } from 'react-router-dom'
 const data = {
   name: 'Lose weight', //Goal
   children: [
@@ -34,11 +37,26 @@ const data = {
 }
 
 const Report = () => {
-  // const wrapperRef = useRef()
-  // const dimensions = useResizeObserver(wrapperRef)
-  // useEffect(() => {
-  //   console.log(dimensions)
-  // }, [dimensions])
+  const [userGoal, setUserGoal] = useState('') //keep track of all goals
+  const [treeData, setTreeData] = useState({}) //data to sent to tree
+  const [overallPercent, setOverallPercent] = useState(0) //overall percent
+  const [goalPercent, setGoalPercent] = useState(0) //goal percent
+  const [taskPercent, setTaskPercent] = useState(0) //task percent
+  const [wildCardPercent, setWildCardPercent] = useState(0) //wildcard percent
+  const [getGoal, { error }] = useMutation(QUERY_ALL_GOALS) //get goalS from db
+
+  useEffect(() => {
+    const getGoals = async () => {
+      try {
+        const { data } = await getGoal()
+        console.log(data)
+      } catch (err) {
+        console.log('no goals found', err)
+      }
+    }
+    getGoals()
+  }, [])
+
   return (
     <div className={style.reportMain}>
       <div className={style.reportProgressContainer}>

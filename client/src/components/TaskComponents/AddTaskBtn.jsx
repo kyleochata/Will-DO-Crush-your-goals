@@ -1,24 +1,27 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
+import React, { useState } from 'react'
+import Modal from 'react-modal'
+import { useMutation } from '@apollo/client'
 
-import style from "../../pages/Tasks/Tasks.module.css";
+import { ADD_TASK } from '../../utils/mutations'
+
+import style from '../../pages/Tasks/Tasks.module.css'
 
 const AddTaskBtn = ({ createTask }) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false)
   const [taskData, setTaskData] = useState({
     title: '',
     description: '',
     completionDate: '',
-    priority: ''
-  });
-	// const [createSingleTask, {err}] = useMutation(ADD_TASK); 
-
-	const handleInputChange = (event) => {
-		setTaskData({
-			...taskData,
-			[event.target.name]: event.target.value,
-		});
-	};
+    priority: 'Low',
+  })
+  // const [createSingleTask, {err}] = useMutation(ADD_TASK);
+	// TEST
+  const handleInputChange = (event) => {
+    setTaskData({
+      ...taskData,
+      [event.target.name]: event.target.value,
+    })
+  }
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -28,7 +31,7 @@ const AddTaskBtn = ({ createTask }) => {
 			title: "",
 			description: "",
 			completionDate: "",
-			priority: "",
+			priority: "Low",
 		});
 		setShowModal(false);
 	};
@@ -114,4 +117,4 @@ const AddTaskBtn = ({ createTask }) => {
 	);
 };
 
-export default AddTaskBtn;
+export default AddTaskBtn
