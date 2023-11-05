@@ -3,7 +3,7 @@
 import { gql } from '@apollo/client';
 
 export const CHECK_USER = gql`
-mutation Mutation($authID: String!, $username: String!) {
+mutation checkUser($authID: String!, $username: String!) {
   checkUser(authID: $authID, username: $username) {
     token
     user {
