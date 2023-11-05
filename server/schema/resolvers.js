@@ -55,7 +55,7 @@ const resolvers = {
 
 		// Task-related mutations
 		addTask: async (_, { title, description, completionDate, priority, goalId, measurableId }, context) => {
-			if (!context.user) {
+			if (!context.user.person) {
 				throw AuthenticationError;
 			}
 
@@ -64,7 +64,7 @@ const resolvers = {
 				description,
 				completionDate,
 				priority,
-				user: context.user._id,
+				user: context.user.authenticatedPerson.authId,
 			};
 
 			if (goalId) {
@@ -86,7 +86,7 @@ const resolvers = {
 			const task = await Task.create(taskData);
 
 			// Update user's tasks
-			await User.findByIdAndUpdate(context.user._id, { $push: { tasks: task._id } });
+			await User.findByIdAndUpdate(context.user.authId, { $push: { tasks: task._id } });
 
 			// Update goal's tasks
 			if (goalId) {
@@ -165,7 +165,7 @@ const resolvers = {
 		},
 
 		// Edit a single goal
-		editGoal: async (_, { goalId, title, description, why, completionDate, completed }, context) => { 
+		editGoal: async (_, { goalId, title, description, why, completionDate, completed }, context) => {
 			if (!context.user) {
 				throw AuthenticationError;
 			}
@@ -182,7 +182,7 @@ const resolvers = {
 
 			const updatedGoal = await Goal.findByIdAndUpdate(
 				goalId,
-				{ title, description,why, completionDate, completed},
+				{ title, description, why, completionDate, completed },
 				{ new: true }
 			);
 			return updatedGoal;
@@ -295,18 +295,18 @@ const resolvers = {
 			const deletedMeasurable = await Measurable.findByIdAndDelete(measurableId);
 			return deletedMeasurable;
 		},
-		checkUser: async(_, { authID, username }) => {
-			try{
-				const userResult = await User.find({authID});
-				if(userResult != null && userResult.length > 0){
-					const token = signToken({authID, _id: userResult._id});
+		checkUser: async (_, { authID, username }) => {
+			try {
+				const userResult = await User.find({ authID });
+				if (userResult != null && userResult.length > 0) {
+					const token = signToken({ authID, _id: userResult._id });
 					return { token, userResult };
-				}else{
+				} else {
 					const user = await User.create({ authID, userName: username });
-					const token = signToken({authID, _id: user._id});
+					const token = signToken({ authID, _id: user._id });
 					return { token, user };
 				}
-			}catch(err){
+			} catch (err) {
 				console.log(err);
 			}
 		}
