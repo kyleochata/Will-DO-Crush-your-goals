@@ -4,13 +4,14 @@ import Modal from "react-modal";
 import style from "../../pages/Tasks/Tasks.module.css";
 
 const AddTaskBtn = ({ createTask }) => {
-	const [showModal, setShowModal] = useState(false);
-	const [taskData, setTaskData] = useState({
-		title: "",
-		description: "",
-		completionDate: "",
-		priority: "",
-	});
+  const [showModal, setShowModal] = useState(false);
+  const [taskData, setTaskData] = useState({
+    title: '',
+    description: '',
+    completionDate: '',
+    priority: ''
+  });
+	// const [createSingleTask, {err}] = useMutation(ADD_TASK); 
 
 	const handleInputChange = (event) => {
 		setTaskData({

@@ -14,6 +14,8 @@ const AddGoalBtn = ({ createGoal }) => {
     why: ''
   });
 
+
+
   const handleInputChange = (event) => {
     setGoalData({
       ...goalData,
@@ -21,8 +23,18 @@ const AddGoalBtn = ({ createGoal }) => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    // try {
+    //   const { data } = await createSingleGoal({ variables: 
+    //     { ...goalData }
+    //   })
+    //   console.log(data);
+    //   // createSingleGoal(goalData);
+    //   setShowModal(false);
+    // } catch(err) {
+    //   throw err;
+    // }
     createGoal(goalData);
     setShowModal(false);
   };
@@ -38,38 +50,38 @@ const AddGoalBtn = ({ createGoal }) => {
         <form className={style.addGoalModal} >
           <label className={style.addGoalText}>
             Title:
-            <input 
-            type="text" 
-            name="title" 
-            value={goalData.title} 
-            onChange={handleInputChange} />
+            <input
+              type="text"
+              name="title"
+              value={goalData.title}
+              onChange={handleInputChange} />
           </label>
-          <label 
-          className={style.addGoalText}>
+          <label
+            className={style.addGoalText}>
             Description:
-            <textarea 
-            name="description" 
-            value={goalData.description} 
-            onChange={handleInputChange} />
+            <textarea
+              name="description"
+              value={goalData.description}
+              onChange={handleInputChange} />
           </label>
           <label className={style.addGoalText}>
             Due Date:
-            <input 
-            type="date" 
-            name="completionDate" 
-            value={goalData.completionDate} 
-            onChange={handleInputChange} />
+            <input
+              type="date"
+              name="completionDate"
+              value={goalData.completionDate}
+              onChange={handleInputChange} />
           </label>
           <label className={style.addGoalText}>
             Why:
-            <textarea 
-            name="why" 
-            value={goalData.why} 
-            onChange={handleInputChange} />
+            <textarea
+              name="why"
+              value={goalData.why}
+              onChange={handleInputChange} />
           </label>
-          <button 
-          onSubmit={handleSubmit}
-          className={style.createGoalBtn} type="submit">Create Goal</button>
+          <button
+            onSubmit={handleSubmit}
+            className={style.createGoalBtn} type="submit">Create Goal</button>
         </form>
       </Modal>
     </>
