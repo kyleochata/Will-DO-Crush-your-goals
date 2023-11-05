@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "@apollo/client";
 import { CHECK_USER } from '../../utils/mutations';
+import Auth from '../../utils/auth';
 
 const LoginButton = () => {
-  const [ checkUser, { error }] = useMutation(CHECK_USER);
+  const [checkUser] = useMutation(CHECK_USER);
   const { user, loginWithRedirect, isAuthenticated } = useAuth0();
   const mountRef = useRef(0);
   if (user != null){
@@ -20,6 +21,7 @@ const LoginButton = () => {
         variables: {authID, username}
       })
       console.log(data);
+      Auth.login(data.checkUser.token);
     }catch(err){
       console.log(err)
     }
