@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import style from "../../pages/Tasks/Tasks.module.css";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CheckboxComponent from './Checkbox';
 
 const TasksList = ({ tasks = [] }) => {
@@ -10,8 +10,20 @@ const TasksList = ({ tasks = [] }) => {
 
   const [filter, setFilter] = useState('all');
 
+  // const [isComplete, setIsComplete] = useState(task.isComplete);
+  
+  // const toggleComplete = (value) => {
+  //   setIsComplete(value);
+  // };
+
+  // useEffect(() => {
+	// 	// send updated isComplete value to graphQL server when it changes
+	// 	// call mutation here to update task's isComplete field
+	// 	// Example: useMutation(UPDATE_TASK_COMPLETION ({ variables: { taskId: task.id, isComplete } }));
+	// }, [isComplete]);
+
   return (
-    <div className={style.tasks-list}>
+    <div className={style.tasksList}>
       <div className='task-filter'>
         <select
           onChange={(e) => setFilter(e.target.value) } 
@@ -26,13 +38,12 @@ const TasksList = ({ tasks = [] }) => {
         </select>
       </div>
       {tasks.map((task) => (
-        <div className="card-text" key={task.id}>
-          {/* figure out how to link to modal instead of page */}
-          <Link to={`/tasks/${task.id}`}> 
+        <div className="card-text" key={task._id}>
+          <Link to={`/tasks/${task._id}`}> 
             <h2 className="liItem">{task.title}</h2>
-            {/* should we include descriptions? */}
-            <p>{task.description}</p>
+            <p>{task.completionDate}</p>
           </Link>
+          {/* <CheckboxComponent isComplete={isComplete} toggleComplete={toggleComplete} /> */}
         </div>
       ))}
     </div>

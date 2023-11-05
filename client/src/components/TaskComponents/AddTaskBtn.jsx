@@ -5,14 +5,16 @@ import { useMutation } from '@apollo/client'
 import { ADD_TASK } from '../../utils/mutations'
 
 import style from '../../pages/Tasks/Tasks.module.css'
+// import { Goal } from '../../../../server/models'
 
-const AddTaskBtn = ({ createTask }) => {
+const AddTaskBtn = ({ createTask, goals }) => {
   const [showModal, setShowModal] = useState(false)
   const [taskData, setTaskData] = useState({
     title: '',
     description: '',
     completionDate: '',
-    priority: 'Low',
+		priority: 'Low',
+		goal: '',
   })
   // const [createSingleTask, {err}] = useMutation(ADD_TASK);
 	// TEST
@@ -35,6 +37,8 @@ const AddTaskBtn = ({ createTask }) => {
 		});
 		setShowModal(false);
 	};
+
+	const [goalData, setGoalData] = useState('N/A');
 
 	return (
 		<>
@@ -102,7 +106,21 @@ const AddTaskBtn = ({ createTask }) => {
 									<option value="Medium">Medium</option>
 									<option value="High">High</option>
 								</select>
-							</label>
+								</label>
+								{/* <label className={style.addTaskModalTxt}>
+									Add to Goal:
+									<select
+										name="goal"
+										value={goalData}
+										onChange={(e) => setGoalData(e.target.value)}
+										className={style.addTaskModalInput}
+										required
+									>
+										{goals.map((goal) => (
+											<option value={goal._id}>{goal.title}</option>
+										))}
+									</select>
+								</label> */}
 						</div>
 						<div className={style.submitButtonContainer}>
 							<button type="submit" className={style.submitButton}>
