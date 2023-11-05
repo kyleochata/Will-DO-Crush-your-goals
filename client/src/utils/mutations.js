@@ -9,6 +9,7 @@ mutation Mutation($authID: String!, $username: String!) {
     user {
       _id
       userName
+      authID
     }
   }
 }

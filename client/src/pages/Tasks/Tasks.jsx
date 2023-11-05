@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 
 import TasksList from '../../components/TaskComponents/TasksList.jsx';
@@ -22,14 +22,25 @@ function Tasks() {
             console.error("Error creating task:", error);
         });
 };
+const auth_ID = Auth.getProfile().authenticatedPerson.authID;
+console.log(auth_ID)
   // might need to use auth0_id instead of userId
-  const { userId } = useParams();
+  // const { authId } = useParams();
   const { loading, data } = useQuery(QUERY_USER, {
-    variables: { userId: userId }
+    variables: { authID: auth_ID }
   });
 
-  const user = data?.user || {};
-  console.log(data);
+  // const user = data?.user || {};
+  // console.log(data);
+
+  if (!data) {
+    console.log('no user found')
+  }
+
+  else {
+    console.log(data);
+  }
+
   
   if (loading) {
     return <div>Loading...</div>;
@@ -41,7 +52,7 @@ function Tasks() {
       <AddTaskBtn createTask={createTask} />
       power list here
       {/* task list card */}
-      <TasksList tasks={user.tasks} />
+      <TasksList />
       {/* single task modal */}
       <SingleTask />
 		</div>
