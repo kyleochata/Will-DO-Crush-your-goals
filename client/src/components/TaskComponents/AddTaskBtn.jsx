@@ -14,6 +14,7 @@ const AddTaskBtn = ({ createTask }) => {
     completionDate: '',
     priority: ''
   });
+	// const [createSingleTask, {err}] = useMutation(ADD_TASK); 
 
   const handleInputChange = (event) => {
     setTaskData({
@@ -70,9 +71,9 @@ const AddTaskBtn = ({ createTask }) => {
 							onChange={handleInputChange}
 							className={style.addTaskModalInput}
 						>
-							<option value="low">Low</option>
-							<option value="medium">Medium</option>
-							<option value="high">High</option>
+							<option value="Low">Low</option>
+							<option value="Medium">Medium</option>
+							<option value="High">High</option>
 						</select>
           </label>
           <label></label>
