@@ -20,8 +20,8 @@ const resolvers = {
 		},
 
 		// Queries to locate a single instance
-		user: async (_, { userId }) => {
-			return User.findById({ authID: userId }).populate('tasks').populate('goals').populate('measurables');
+		user: async (_, { authID }) => {
+			return User.findOne({ authID: authID }).populate('tasks').populate('goals').populate('measurables');
 		},
 		goal: async (_, { goalId }) => {
 			return Goal.findById(goalId).populate('user').populate('tasks').populate('measurables');
@@ -37,11 +37,13 @@ const resolvers = {
 	Mutation: {
 		// User-related mutations
 		addUser: async (_, { authID, username }) => {
+			// DONT THINK THIS IS NEEDED
 			const user = await User.create({ authID, username });
 			const token = signToken(user);
 			return { token, user };
 		},
 		login: async (_, { authID }) => {
+			// DONT THINK THIS IS NEEDED
 			const user = await User.findOne({ authID });
 
 			if (!user) {
@@ -55,10 +57,8 @@ const resolvers = {
 
 		// Task-related mutations
 		addTask: async (_, { title, description, completionDate, priority, goalId, measurableId }, context) => {
-			const user = User.find({authID:context.user.authID})
 			if (!context.user) {
 				throw AuthenticationError;
-
 			}
 			const user = await User.findOne({ authID: context.user.authID });
 
@@ -70,7 +70,6 @@ const resolvers = {
 				user
 			};
 
-			console.log(taskData)
 			if (goalId) {
 				taskData.goal = goalId;
 			}
@@ -102,8 +101,6 @@ const resolvers = {
 				await Measurable.findByIdAndUpdate(measurableId, { $push: { tasks: task._id } });
 			}
 
-			console.log("end of the line");
-			console.log(task);
 			return task;
 		},
 
@@ -113,17 +110,18 @@ const resolvers = {
 			if (!context.user) {
 				throw AuthenticationError;
 			}
+			const user = await User.findOne({ authID: context.user.authID });
 
 			const goal = await Goal.create({
 				title,
 				description,
 				why,
 				completionDate,
-				user: context.user._id,
+				user
 			});
 
 			// Update user's goals
-			await User.findByIdAndUpdate(context.user._id, { $push: { goals: goal._id } });
+			await User.findOneAndUpdate({ authID: context.user.authID }, { $push: { goals: goal._id } });
 
 			// Associate measurables with goal
 			if (measurableIds) {
@@ -142,28 +140,29 @@ const resolvers = {
 			if (!context.user) {
 				throw AuthenticationError;
 			}
+			const user = await User.findOne({ authID: context.user.authID });
 
 			const measurable = await Measurable.create({
 				title,
 				goal: goalId,
-				user: context.user._id,
+				user
 			});
 
 			// Update goal's measurables
 			await Goal.findByIdAndUpdate(goalId, { $push: { measurables: measurable._id } });
 
 			// Update user's measurables
-			await User.findByIdAndUpdate(context.user._id, { $push: { measurables: measurable._id } });
+			await User.findOneAndUpdate({ authID: context.user.authID }, { $push: { measurables: measurable._id } });
 
 			return measurable;
 		},
 
 		editUser: async (_, { userId, firstName, lastName, userName, email }, context) => {
 			// Authentication check if needed
-			// ... 
+			// DONT THINK THIS IS NEEDED
 
-			const updatedUser = await User.findByIdAndUpdate(
-				userId,
+			const updatedUser = await User.findOneAndUpdate(
+				{ authID: context.user.authID },
 				{ firstName, lastName, userName, email },
 				{ new: true }
 			);
@@ -175,6 +174,7 @@ const resolvers = {
 			if (!context.user) {
 				throw AuthenticationError;
 			}
+			const user = await User.findOne({ authID: context.user.authID });
 
 			const goal = await Goal.findById(goalId);
 
@@ -182,7 +182,7 @@ const resolvers = {
 				throw new Error('Goal not found');
 			}
 
-			if (goal.user.toString() !== context.user._id.toString()) {
+			if (goal.user.toString() !== user._id.toString()) {
 				throw AuthenticationError;
 			}
 
@@ -199,6 +199,7 @@ const resolvers = {
 			if (!context.user) {
 				throw AuthenticationError;
 			}
+			const user = await User.findOne({ authID: context.user.authID });
 
 			const task = await Task.findById(taskId);
 
@@ -206,7 +207,7 @@ const resolvers = {
 				throw new Error('Task not found');
 			}
 
-			if (task.user.toString() !== context.user._id.toString()) {
+			if (task.user.toString() !== user._id.toString()) {
 				throw AuthenticationError;
 			}
 
@@ -223,6 +224,7 @@ const resolvers = {
 			if (!context.user) {
 				throw AuthenticationError;
 			}
+			const user = await User.findOne({ authID: context.user.authID });
 
 			const measurable = await Measurable.findById(measurableId);
 
@@ -230,7 +232,7 @@ const resolvers = {
 				throw new Error('Measurable not found');
 			}
 
-			if (measurable.user.toString() !== context.user._id.toString()) {
+			if (measurable.user.toString() !== user._id.toString()) {
 				throw AuthenticationError;
 			}
 
@@ -247,6 +249,7 @@ const resolvers = {
 			if (!context.user) {
 				throw AuthenticationError;
 			}
+			const user = await User.findOne({ authID: context.user.authID });
 
 			const goal = await Goal.findById(goalId);
 
@@ -254,7 +257,7 @@ const resolvers = {
 				throw new Error('Goal not found');
 			}
 
-			if (goal.user.toString() !== context.user._id.toString()) {
+			if (goal.user.toString() !== user._id.toString()) {
 				throw AuthenticationError;
 			}
 
@@ -267,6 +270,7 @@ const resolvers = {
 			if (!context.user) {
 				throw AuthenticationError;
 			}
+			const user = await User.findOne({ authID: context.user.authID });
 
 			const task = await Task.findById(taskId);
 
@@ -274,7 +278,7 @@ const resolvers = {
 				throw new Error('Task not found');
 			}
 
-			if (task.user.toString() !== context.user._id.toString()) {
+			if (task.user.toString() !== user._id.toString()) {
 				throw AuthenticationError;
 			}
 
@@ -287,6 +291,7 @@ const resolvers = {
 			if (!context.user) {
 				throw AuthenticationError;
 			}
+			const user = await User.findOne({ authID: context.user.authID });
 
 			const measurable = await Measurable.findById(measurableId);
 
@@ -294,7 +299,7 @@ const resolvers = {
 				throw new Error('Measurable not found');
 			}
 
-			if (measurable.user.toString() !== context.user._id.toString()) {
+			if (measurable.user.toString() !== user._id.toString()) {
 				throw AuthenticationError;
 			}
 
