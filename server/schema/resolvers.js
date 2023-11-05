@@ -20,8 +20,8 @@ const resolvers = {
 		},
 
 		// Queries to locate a single instance
-		user: async (_, { userId }) => {
-			return User.findById({authID:userId}).populate('tasks').populate('goals').populate('measurables');
+		user: async (_, { authID }) => {
+			return User.findOne({authID}).populate('tasks').populate('goals').populate('measurables');
 		},
 		goal: async (_, { goalId }) => {
 			return Goal.findById(goalId).populate('user').populate('tasks').populate('measurables');
@@ -298,7 +298,7 @@ const resolvers = {
 		checkUser: async(_, { authID, username }) => {
 			try{
 				const userResult = await User.find({authID});
-				if(userResult != null){
+				if(userResult.length > 0){
 					console.log("this is console logged");
 					const token = signToken({authID, _id: userResult._id});
 					return { token, user:userResult[0] };
