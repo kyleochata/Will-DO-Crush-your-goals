@@ -21,7 +21,7 @@ const resolvers = {
 
 		// Queries to locate a single instance
 		user: async (_, { userId }) => {
-			return User.findById({authID:userId}).populate('tasks').populate('goals').populate('measurables');
+			return User.findById({ authID: userId }).populate('tasks').populate('goals').populate('measurables');
 		},
 		goal: async (_, { goalId }) => {
 			return Goal.findById(goalId).populate('user').populate('tasks').populate('measurables');
@@ -58,16 +58,19 @@ const resolvers = {
 			console.log(context.user);
 			if (!context.user) {
 				throw AuthenticationError;
+
 			}
+			const user = await User.findOne({ authID: context.user.authID });
 
 			const taskData = {
 				title,
 				description,
 				completionDate,
 				priority,
-				user: context.user._id,
+				user
 			};
 
+			console.log(taskData)
 			if (goalId) {
 				taskData.goal = goalId;
 			}
@@ -87,7 +90,7 @@ const resolvers = {
 			const task = await Task.create(taskData);
 
 			// Update user's tasks
-			await User.findByIdAndUpdate(context.user._id, { $push: { tasks: task._id } });
+			await User.findOneAndUpdate({ authID: context.user.authID }, { $push: { tasks: task._id } });
 
 			// Update goal's tasks
 			if (goalId) {
@@ -166,7 +169,7 @@ const resolvers = {
 		},
 
 		// Edit a single goal
-		editGoal: async (_, { goalId, title, description, why, completionDate, completed }, context) => { 
+		editGoal: async (_, { goalId, title, description, why, completionDate, completed }, context) => {
 			if (!context.user) {
 				throw AuthenticationError;
 			}
@@ -183,7 +186,7 @@ const resolvers = {
 
 			const updatedGoal = await Goal.findByIdAndUpdate(
 				goalId,
-				{ title, description,why, completionDate, completed},
+				{ title, description, why, completionDate, completed },
 				{ new: true }
 			);
 			return updatedGoal;
@@ -296,18 +299,18 @@ const resolvers = {
 			const deletedMeasurable = await Measurable.findByIdAndDelete(measurableId);
 			return deletedMeasurable;
 		},
-		checkUser: async(_, { authID, username }) => {
-			try{
-				const userResult = await User.find({authID});
-				if( userResult.length > 0){
-					const token = signToken({authID, _id: userResult._id});
-					return { token, user:userResult[0] };
-				}else{
+		checkUser: async (_, { authID, username }) => {
+			try {
+				const userResult = await User.find({ authID });
+				if (userResult.length > 0) {
+					const token = signToken({ authID, _id: userResult._id });
+					return { token, user: userResult[0] };
+				} else {
 					const user = await User.create({ authID, userName: username });
-					const token = signToken({authID, _id: user._id});
+					const token = signToken({ authID, _id: user._id });
 					return { token, user };
 				}
-			}catch(err){
+			} catch (err) {
 				console.log(err);
 			}
 		}

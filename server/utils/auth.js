@@ -17,9 +17,11 @@ module.exports = {
 
 		if (req.headers.authorization) {
 			token = token.split(" ").pop().trim();
+			console.log('req.headers.authorization')
 		}
 
 		if (!token) {
+			console.log('!token on auth.js server')
 			return req;
 		}
 
