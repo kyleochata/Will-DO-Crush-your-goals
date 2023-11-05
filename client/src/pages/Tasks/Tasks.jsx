@@ -20,22 +20,19 @@ function Tasks() {
         console.error('Error creating task:', error)
       })
   }
+
   // might need to use auth0_id instead of userId
-  // const { userId } = useParams()
   const auth_ID = Auth.getProfile().authenticatedPerson.authID
+  console.log('query plz')
   console.log(auth_ID)
   const { data } = useQuery(QUERY_USER, {
     variables: { authID: auth_ID },
   })
 
-  const user = data?.user || {}
   console.log(data)
 
-  // if (loading) {
-  //   return <div>Loading...</div>
-  // }
-  // console.log(data)
-  console.log(auth_ID)
+  const user = data?.user || {}
+  console.log(user)
   return (
     <div className={style.mainTask}>
       <section className="cards">
