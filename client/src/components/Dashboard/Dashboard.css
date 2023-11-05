@@ -1,14 +1,16 @@
 
 .cards{
+    width: 100vw;
     display: flex;
     justify-content: center;
     padding: 0 1rem;
     gap: 2rem;
     width: 90vw;
+    max-width: 72rem;
 }
 
 .oneCard {
-    width: 45%;
+    flex: 1;
     padding: 1rem;
     border-radius: .5rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -16,6 +18,7 @@
 }
 
 .cardTitle{
+    padding-bottom: 1rem;
     text-align: center;
     margin: 0 auto;
     color: #276891;

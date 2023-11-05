@@ -1,7 +1,11 @@
-.tasks-list {
+.mainTask{
+  width: 100vw;
+    margin: 0 auto;
     display: flex;
-    flex-wrap: wrap;
+    justify-content: center;
 }
+
+
 
 .addTaskModal {
   width: 90vw; 
@@ -182,4 +186,15 @@ textarea{
 
   }
 
+}
+
+/* StartTaskList */
+.noTasks{
+  font-size: 2rem;
+  text-align: center;
+}
+
+.tasks-list {
+  display: flex;
+  flex-wrap: wrap;
 }
