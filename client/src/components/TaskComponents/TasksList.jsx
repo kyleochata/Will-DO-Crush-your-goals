@@ -53,35 +53,36 @@ const TasksList = ({ tasks = [] }) => {
   
 
   return (
-    <div className="tasksList">
-      <div className="task-filter">
-        <p className="filterText">Filter:</p>
-        <select onChange={(e) => setFilter(e.target.value)} value={filter}>
-          <option value="all">All</option>
-          <option value="active">Open</option>
-          <option value="completed">Completed</option>
-          <option value="low">Low Priority</option>
-          <option value="medium">Medium Priority</option>
-          <option value="high">High Priority</option>
-        </select>
-      </div>
-      <div className="cardFlex">
-      {sortedTasks.map((task) => (  
-        <div className="cardText" key={task._id}>
-          <Link to={`/tasks/${task._id}`}> 
-          <div className="liItem">
-            <h2 className="taskListTitle">{task.title}</h2>
-            <pre className="regularText" >{task.description}</pre>
-            <p className="regularText">{format_date(task.completionDate)}</p>
-            </div>
-          </Link>
-
-        </div>
-        
-      ))}
-      </div>
-    </div>
-  )
+		<div className="tasksList">
+			<div className="task-filter">
+				<p className="filterText">Filter:</p>
+				<select onChange={(e) => setFilter(e.target.value)} value={filter}>
+					<option value="all">All</option>
+					<option value="active">Open</option>
+					<option value="completed">Completed</option>
+					<option value="low">Low Priority</option>
+					<option value="medium">Medium Priority</option>
+					<option value="high">High Priority</option>
+				</select>
+			</div>
+			<div className="cardFlex">
+				{sortedTasks.map((task) => (
+					<div className="cardText" key={task._id}>
+						<Link to={`/tasks/${task._id}`}>
+							<div className="liItem">
+								<h2 className="taskListTitle">{task.title}</h2>
+								<pre className="regularText">{task.description}</pre>
+								<p className="regularText">
+									{format_date(task.completionDate)}
+								</p>
+							</div>
+						</Link>
+						<CheckboxComponent task={task} name={task._id} />
+					</div>
+				))}
+			</div>
+		</div>
+	);
 }
 
 export default TasksList
