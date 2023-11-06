@@ -1,78 +1,45 @@
-import { useParams, Link } from "react-router-dom";
-import { useQuery, useMutation } from "@apollo/client";
-import TasksList from "../../components/TaskComponents/TasksList.jsx";
+import { useParams, Link } from 'react-router-dom'
+import { useQuery, useMutation } from '@apollo/client'
+import TasksList from '../../components/TaskComponents/TasksList.jsx'
 // import PowerList from '../../components/TaskComponents/PowerList';
-import SingleTask from "../../components/TaskComponents/SingleTaskModal.jsx";
-import AddTaskBtn from "../../components/TaskComponents/AddTaskBtn.jsx";
-import { ADD_TASK } from "../../utils/mutations";
-import Auth from "../../utils/auth";
-import style from "./Tasks.module.css";
-import { QUERY_USER } from "../../utils/queries";
+import SingleTask from '../../components/TaskComponents/SingleTaskModal.jsx'
+import AddTaskBtn from '../../components/TaskComponents/AddTaskBtn.jsx'
+import { ADD_TASK } from '../../utils/mutations'
+import Auth from '../../utils/auth'
+import style from './Tasks.module.css'
+import { QUERY_USER } from '../../utils/queries'
 // import { useState, useEffect } from "react";
 
 function Tasks() {
-  const [addTask] = useMutation(ADD_TASK);
+  const [addTask] = useMutation(ADD_TASK)
   const createTask = (taskData) => {
     addTask({ variables: taskData })
       .then((response) => {
-        console.log("Task created:", response.data.addTask);
+        console.log('Task created:', response.data.addTask)
       })
       .catch((error) => {
-        console.error("Error creating task:", error);
-      });
-  };
+        console.error('Error creating task:', error)
+      })
+  }
 
   // might need to use auth0_id instead of userId
-  const auth_ID = Auth.getProfile().authenticatedPerson.authID;
-  console.log("query plz");
-  console.log(auth_ID);
-    const { data } = useQuery(QUERY_USER, {
-    variables: { authID: auth_ID }
-  });
+  const auth_ID = Auth.getProfile().authenticatedPerson.authID
+  console.log('query plz')
+  console.log(auth_ID)
+  const { data } = useQuery(QUERY_USER, {
+    variables: { authID: auth_ID },
+  })
 
   console.log(auth_ID)
-	const user = data?.user || {};
-  console.log(data);
-  console.log(user);
+  const user = data?.user || {}
+  console.log(data)
+  console.log(user)
 
 	return (
 		<div className={style.mainTask}>
 			<section className="cards">
 				<article className="oneCard">
 					<h2 className="cardTitle">ALL TASKS</h2>
-					<ul className="cardText">
-						<li className="liItem">
-							The list of Tasks for this user would go here ;hds af;h
-							ds;fhdsa;jfhsda ;jfhdskajh fgkjdsahfj;d hs fsdafs dafg dsgafdsf
-						</li>
-					</ul>
-					<ul className="cardText">
-						<li className="liItem">
-							The list of Tasks for this user would go hereds
-							afdsagfdagfadgfdagfadf dsfdsagd
-						</li>
-					</ul>
-					<ul className="cardText">
-						<li className="liItem">
-							The list of Tasks for this user would go hereag fdagadsffda
-							sfgdsafdsf
-						</li>
-					</ul>
-					<ul className="cardText">
-						<li className="liItem">
-							The list of Tasks for this user would go here asdfdasfdsa fds
-						</li>
-					</ul>
-					<ul className="cardText">
-						<li className="liItem">
-							The list of Tasks for this user would go here
-						</li>
-					</ul>
-					<ul className="cardText">
-						<li className="liItem">
-							The list of Tasks for this user would go here
-						</li>
-					</ul>
 					{/* task list card */}
 					<TasksList tasks={user.tasks} />
 					<div className="dashButtonContainer">
@@ -84,9 +51,9 @@ function Tasks() {
 				</article>
 			</section>
 
-			{/* single task modal commenting out SingleTask as it seemed to be causing some issues and wasn't fully built out to be a modal*/}
-			<SingleTask />
-		</div>
-	);
+      {/* single task modal commenting out SingleTask as it seemed to be causing some issues and wasn't fully built out to be a modal*/}
+      <SingleTask />
+    </div>
+  )
 }
-export default Tasks;
+export default Tasks
