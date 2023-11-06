@@ -116,7 +116,7 @@ const AddTaskBtn = ({ createTask, goals }) => {
 								<label className={style.addTaskModalTxt}>
 									Add to Goal:
 									<select
-										name="goal"
+										name="goalId"
 										value={taskData.goal} // Make sure this reflects the 'goal' in taskData
 										onChange={handleInputChange} // Use the same change handler which updates taskData
 										className={style.addTaskModalInput}
@@ -127,6 +127,20 @@ const AddTaskBtn = ({ createTask, goals }) => {
 										))}
 									</select>
 								</label>
+								{/* <label className={style.addTaskModalTxt}>
+									Add to Measurable:
+									<select
+										name="measurableId"
+										value={taskData.measurable} // Make sure this reflects the 'goal' in taskData
+										onChange={handleInputChange} // Use the same change handler which updates taskData
+										className={style.addTaskModalInput}
+									>
+										<option value="">None</option>
+										{goals.map((goal) => (
+											<option value={goal._id}>{goal.title}</option>
+										))}
+									</select>
+								</label> */}
 							</div>
 							<div className={style.submitButtonContainer}>
 								<button type="submit" className={style.submitButton}>
@@ -143,6 +157,7 @@ const AddTaskBtn = ({ createTask, goals }) => {
 
 AddTaskBtn.defaultProps = {
 	goals: [],
+	measurables:[],
 };
 
 
