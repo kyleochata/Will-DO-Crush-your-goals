@@ -1,30 +1,17 @@
+
 import { from, useMutation } from "@apollo/client";
-import { DELETE_GOAL, EDIT_GOAL } from "../../utils/mutations";
+import { DELETE_TASK, EDIT_TASK } from "../../utils/mutations";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import format_date from "../../utils/helpers";
-import EditGoalBtn from '../../components/Goals-Component/EditGoalBtn'
-import "../Dashboard/Dashboard.css";
+import "../../components/Dashboard/Dashboard.css";
 import style from "../../pages/Tasks/Tasks.module.css"
 
 const format_date2 = (timestamp) => {
   //month is index 0-11. must add 1 to get correct month
   let timeStamp = new Date(parseInt(timestamp));
   let monthNum = timeStamp.getMonth();
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   let currentMonth = months[monthNum];
   let day = timeStamp.getDate();
   let year = timeStamp.getFullYear();
@@ -32,88 +19,84 @@ const format_date2 = (timestamp) => {
   return `${currentMonth} ${day}, ${year}`;
 };
 
-const SingleGoal = ({ filteredGoals }) => {
-  const [deleteGoal] = useMutation(DELETE_GOAL);
+const SingleTask = ({ filteredTask }) => {
+  const [deleteTask] = useMutation(DELETE_TASK);
   // const [goalState, setGoalState] = useState(true);
-  const { goalId } = useParams();
-  const goal = filteredGoals[0];
-  console.log(goalId);
-  console.log(goal.completionDate);
-  const [editGoal, setEditGoal] = useState(false);
-  console.log(filteredGoals);
+  const { TaskId } = useParams();
+  const Task = filteredTask[0];
+  const [editTask, setEditTask] = useState(false);
   const handleDelClick = async () => {
     try {
-      await deleteGoal({
-        variables: { goalId: goalId },
+      await deleteTask({
+        variables: { TaskId: TaskId },
       });
-      window.location.replace("/goals");
+      window.location.replace("/tasks");
     } catch (err) {
       console.log("catching error");
       throw err;
     }
   };
 
-  const [goalData, setGoalData] = useState(goal);
+  const [taskData, setTaskData] = useState(tasks);
 
   const handleInputChange = (event) => {
-    setGoalData({
-      ...goalData,
+    setTaskData({
+      ...taskData,
       [event.target.name]: event.target.value,
     });
-    console.log(goalData);
+    console.log(taskData);
   };
 
-  const [changeGoal] = useMutation(EDIT_GOAL);
-  const updatedGoal = (goalData) => {
-    changeGoal({ variables: goalData })
+  const [changeTask] = useMutation(EDIT_TASK);
+  const updatedTask = (taskData) => {
+    changeTask({ variables: taskData })
       .then((response) => {
-        console.log("Goal updated:", response.data.changeGoal);
+        console.log("Task updated:", response.data.changeTask);
       })
       .catch((error) => {
-        console.error("Error updating goal:", error);
+        console.error("Error updating task:", error);
       });
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    updatedGoal(goalData);
-    setEditGoal(!editGoal);
+    updatedTask(taskData);
+    setEditTask(!editTask);
   };
 
-  const editGoalClick = () => {
-    // const [goalData, setGoalData] = useState({});
-    setEditGoal(!editGoal);
+  const editTaskClick = () => {
+    // const [taskData, setTaskData] = useState({});
+    setEditTask(!editTask);
   };
 
   return (
     <div>
-      {!editGoal && (
+      {!editTask && (
         <div className="singlePageMain">
           <div className="cards">
             <article className="oneCard">
               <div className="cardText textAlign">
-                <h2 className="singlePageTitle">{goalData.title}</h2>
+                <h2 className="singlePageTitle">{taskData.title}</h2>
                 <div className="dashButtonContainer">
-                  <EditGoalBtn editGoal={editGoal} />
-                  <button onClick={editGoalClick} className="dashButton">Edit Goal</button>
+                  <button onClick={editTaskClick} className="dashButton">Edit Task</button>
                   <button className="dashButton" >Complete</button>
                   <button onClick={handleDelClick} className="dashButton">Delete</button>
                 </div>
                 <div className="goalDashSpacing"></div>
                 <div className="liItem">
                   <h3 className="subHeader">Description</h3>
-                <p className="singlePageText">  {goalData.description}</p>
+                <p className="singlePageText">  {taskData.description}</p>
                 </div>
                 <div className="liItem">
                 <h3 className="subHeader">Your Why</h3>
-                <p className="regularText"> {goalData.why}</p>
+                <p className="regularText"> {taskData.why}</p>
                 </div>
                 <div className="liItem">
                 <h3 className="subHeader">Measurables</h3>
-                <p className="regularText"> {goalData.measurables}</p>
+                <p className="regularText"> {taskData.measurables}</p>
                 </div>
                 <div className="liItem">
                 <h3 className="subHeader">Target Date</h3>
-                <p className="regularText">{format_date2(goalData.completionDate)}</p>
+                <p className="regularText">{format_date2(taskData.completionDate)}</p>
                 </div>
                 <div className="liItem">
                 <h3 className="subHeader">Linked Tasks</h3>
@@ -128,9 +111,9 @@ const SingleGoal = ({ filteredGoals }) => {
           </div>
         </div>
       )}
-      {editGoal && (
+      {editTask && (
         <div className={style.editContent}>
-        <div className={style.editTitle}>EDIT GOAL</div>
+        <div className={style.editTitle}>EDIT TASK</div>
         <div className={style.formContainer}>
           <form onSubmit={handleSubmit} className={style.addTaskForm}>
             <div className={style.formInputs}>
@@ -212,4 +195,4 @@ const SingleGoal = ({ filteredGoals }) => {
   );
 };
 
-export default SingleGoal;
+export default SingleTask;

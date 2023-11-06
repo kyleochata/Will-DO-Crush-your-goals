@@ -24,6 +24,9 @@ const TasksList = ({ tasks = [] }) => {
     
   }
 
+  const sortedTasks = [...tasks].sort((taskA, taskB) => taskA.completionDate - taskB.completionDate);
+
+
   // const [isComplete, setIsComplete] = useState(task.isComplete);
   
   // const toggleComplete = (value) => {
@@ -35,6 +38,8 @@ const TasksList = ({ tasks = [] }) => {
 	// 	// call mutation here to update task's isComplete field
 	// 	// Example: useMutation(UPDATE_TASK_COMPLETION ({ variables: { taskId: task.id, isComplete } }));
 	// }, [isComplete]);
+
+  
 
   return (
     <div className="tasksList">
@@ -53,7 +58,7 @@ const TasksList = ({ tasks = [] }) => {
         </select>
       </div>
       <div className="cardFlex">
-      {tasks.map((task) => (  
+      {sortedTasks.map((task) => (  
         <div className="cardText" key={task._id}>
           <Link to={`/tasks/${task._id}`}> 
           <div className="liItem">

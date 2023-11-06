@@ -3,7 +3,6 @@ import { DELETE_GOAL, EDIT_GOAL } from "../../utils/mutations";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import format_date from "../../utils/helpers";
-import EditGoalBtn from '../../components/Goals-Component/EditGoalBtn'
 import "../Dashboard/Dashboard.css";
 import style from "../../pages/Tasks/Tasks.module.css"
 
