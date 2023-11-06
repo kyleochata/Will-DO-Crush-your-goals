@@ -12,6 +12,7 @@ export const QUERY_USER = gql`
 				_id
 				title
 				description
+        why
 				completionDate
 				createdAt
 				completed
@@ -104,8 +105,7 @@ export const QUERY_GOAL = gql`
       completed
       user {
         _id
-        firstName
-        lastName
+        userName
       }
       tasks {
         _id
