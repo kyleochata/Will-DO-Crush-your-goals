@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import '../Dashboard/Dashboard.css'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import CheckboxComponent from './Checkbox'
 
 const TasksList = ({ tasks = [] }) => {
@@ -36,21 +36,6 @@ const TasksList = ({ tasks = [] }) => {
   }
 
   const sortedTasks = [...tasks].sort((taskA, taskB) => taskA.completionDate - taskB.completionDate);
-
-
-  // const [isComplete, setIsComplete] = useState(task.isComplete);
-
-  // const toggleComplete = (value) => {
-  //   setIsComplete(value);
-  // };
-
-  // useEffect(() => {
-	// 	// send updated isComplete value to graphQL server when it changes
-	// 	// call mutation here to update task's isComplete field
-	// 	// Example: useMutation(UPDATE_TASK_COMPLETION ({ variables: { taskId: task.id, isComplete } }));
-	// }, [isComplete]);
-
-  
 
   return (
 		<div className="tasksList">
