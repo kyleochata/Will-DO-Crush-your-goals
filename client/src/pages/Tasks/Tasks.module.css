@@ -188,16 +188,7 @@ textarea{
 
 }
 
-/* StartTaskList */
-.noTasks{
-  font-size: 2rem;
-  text-align: center;
-}
 
-.tasks-list {
-  display: flex;
-  flex-wrap: wrap;
-}
 
 /* start goal creation modal unique styles */
 .goalDesc{

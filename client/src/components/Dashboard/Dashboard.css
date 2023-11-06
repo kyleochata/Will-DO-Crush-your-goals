@@ -18,11 +18,19 @@
 }
 
 .cardTitle{
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
     text-align: center;
     margin: 0 auto;
     color: #276891;
 
+}
+
+.dashText{
+    color: rgb(98, 98, 98);
+    margin: 0 auto 0.5rem;
+    text-align: center;
+    font-weight: 500;
+    font-size: .75rem;
 }
 
 .cardText{
@@ -85,3 +93,52 @@
         width: 70vw;
     }
 }
+
+/* start task list dashboard styles */
+
+select{
+    padding: 0.25rem;
+    font-size: 1rem;
+}
+
+.task-filter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+}
+
+.filterText{ 
+    margin-right: .75rem;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.noTasks{
+    font-size: 2rem;
+    text-align: center;
+  }
+  
+  .tasks-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .taskListTitle{
+    margin: 0 auto;
+    color: black;
+  }
+  
+  .regularText{
+    color: black;
+    
+  }
+
+  .task-filter{
+    margin-bottom: 1rem;
+  
+  }
+
+  .goalDashSpacing{
+    height: 1rem;
+  }
