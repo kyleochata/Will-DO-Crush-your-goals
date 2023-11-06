@@ -9,23 +9,23 @@ import "../../components/Dashboard/Dashboard.css"
 
 console.log('before createGoal func')
 function Goals() {
-  const [addGoal] = useMutation(ADD_GOAL)
+    const [addGoal] = useMutation(ADD_GOAL)
 
-  const createGoal = (goalData) => {
-    addGoal({ variables: goalData })
-      .then((response) => {
-        console.log('Goal created:', response.data.addGoal)
-      })
-      .catch((error) => {
-        console.error('Error creating goal:', error)
-      })
-  }
-  console.log('after createGoal func')
-  const auth_ID = Auth.getProfile().authenticatedPerson.authID
-  console.log(auth_ID)
-  const { loading, data } = useQuery(QUERY_USER, {
-    variables: { authID: auth_ID },
-  })
+    const createGoal = (goalData) => {
+        addGoal({ variables: goalData })
+            .then((response) => {
+                console.log('Goal created:', response.data.addGoal)
+            })
+            .catch((error) => {
+                console.error('Error creating goal:', error)
+            })
+    }
+    console.log('after createGoal func')
+    const auth_ID = Auth.getProfile().authenticatedPerson.authID
+    console.log(auth_ID)
+    const { loading, data } = useQuery(QUERY_USER, {
+        variables: { authID: auth_ID },
+    })
 
   //   const user = data?.user || []
   //   console.log(user)
