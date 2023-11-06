@@ -1,17 +1,16 @@
 import { Link } from 'react-router-dom';
-import style from "../Dashboard/Dashboard.css";
+import "../Dashboard/Dashboard.css";
 import { useState, useEffect } from 'react';
 
 const GoalsListDash = ({ goals = [] }) => {
   if (!goals.length) {
-    return <h3 className={style.noTasks}>NO GOALS YET</h3>;
+    return <h3 className="noTasks">NO GOALS YET</h3>;
   }
 
   const [filter, setFilter] = useState('all');
 
   const format_date = (timestamp) => {
     let timeStamp = new Date(parseInt(timestamp));
-    console.log("date", timestamp)
     let monthNum = timeStamp.getMonth();
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let currentMonth = months[monthNum];
@@ -43,8 +42,8 @@ const GoalsListDash = ({ goals = [] }) => {
   return (
     <div className="tasksList">
       {next5Goals.map((goal) => (
-        <div className="card-text" key={goal._id}>
-          <Link to={`/tasks/${goal._id}`}> 
+        <div className="cardText" key={goal._id}>
+          <Link to={`/goals/${goal._id}`}> 
             <div className="liItem">
             <h2 className="taskListTitle">{goal.title}</h2>
             <p className="regularText">Target Date: {format_date(goal.completionDate)}</p>

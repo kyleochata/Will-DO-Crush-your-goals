@@ -35,6 +35,27 @@
   align-items: center;
 }
 
+.editContent{
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.editTitle{
+  width: 75%;
+  max-width: 560px;
+  min-width: 280px;
+  background-color: #276891;
+  font-size: clamp(1rem, 8vw, 2rem);
+  text-align: center;
+  padding: 0.5rem 0;
+  font-weight: 700;
+  color: white;
+  border-radius: 1rem;
+}
+
 .modalTitle{
   width: 75%;
   max-width: 560px;
