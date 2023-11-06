@@ -47,7 +47,7 @@ export const QUERY_ALL_USERS = gql`
 
 export const QUERY_TASK = gql`
   query getTask($taskId: ID!) {
-    task(taskId: "65491e1f9a14e9f087001b10") {
+    task(taskId: $taskId) {
       _id
       title
       description
