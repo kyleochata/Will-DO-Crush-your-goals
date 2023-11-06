@@ -123,7 +123,7 @@ const AddTaskBtn = ({ createTask, goals }) => {
 									>
 										<option value="">None</option> {/* This is the new empty option */}
 										{goals.map((goal) => (
-											<option value={goal._id}>{goal.title}</option>
+											<option value={goal._id} key={goal._id}>{goal.title}</option>
 										))}
 									</select>
 								</label>
