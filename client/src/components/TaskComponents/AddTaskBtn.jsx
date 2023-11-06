@@ -127,7 +127,7 @@ const AddTaskBtn = ({ createTask, goals }) => {
 										))}
 									</select>
 								</label>
-								<label className={style.addTaskModalTxt}>
+								{/* <label className={style.addTaskModalTxt}>
 									Add to Measurable:
 									<select
 										name="measurableId"
@@ -135,12 +135,12 @@ const AddTaskBtn = ({ createTask, goals }) => {
 										onChange={handleInputChange} // Use the same change handler which updates taskData
 										className={style.addTaskModalInput}
 									>
-										<option value="">None</option> {/* need new logic to get query goal */}
+										<option value="">None</option>
 										{goals.map((goal) => (
 											<option value={goal._id}>{goal.title}</option>
 										))}
 									</select>
-								</label>
+								</label> */}
 							</div>
 							<div className={style.submitButtonContainer}>
 								<button type="submit" className={style.submitButton}>
