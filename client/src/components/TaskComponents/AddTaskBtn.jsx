@@ -116,13 +116,26 @@ const AddTaskBtn = ({ createTask, goals }) => {
 								<label className={style.addTaskModalTxt}>
 									Add to Goal:
 									<select
-										name="goal"
+										name="goalId"
 										value={taskData.goal} // Make sure this reflects the 'goal' in taskData
 										onChange={handleInputChange} // Use the same change handler which updates taskData
 										className={style.addTaskModalInput}
-										required
 									>
 										<option value="">None</option> {/* This is the new empty option */}
+										{goals.map((goal) => (
+											<option value={goal._id}>{goal.title}</option>
+										))}
+									</select>
+								</label>
+								<label className={style.addTaskModalTxt}>
+									Add to Measurable:
+									<select
+										name="measurableId"
+										value={taskData.measurable} // Make sure this reflects the 'goal' in taskData
+										onChange={handleInputChange} // Use the same change handler which updates taskData
+										className={style.addTaskModalInput}
+									>
+										<option value="">None</option> {/* need new logic to get query goal */}
 										{goals.map((goal) => (
 											<option value={goal._id}>{goal.title}</option>
 										))}
@@ -144,6 +157,7 @@ const AddTaskBtn = ({ createTask, goals }) => {
 
 AddTaskBtn.defaultProps = {
 	goals: [],
+	measurables:[],
 };
 
 
