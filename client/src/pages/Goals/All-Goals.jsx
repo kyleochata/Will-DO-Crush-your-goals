@@ -4,8 +4,8 @@ import { QUERY_USER } from '../../utils/queries'
 import GoalsList from '../../components/Goals-Component/GoalsList'
 import AddGoalBtn from '../../components/Goals-Component/AddGoalBtn'
 import { ADD_GOAL } from '../../utils/mutations'
-import style from '../Tasks/Tasks.module.css'
 import Auth from '../../utils/auth'
+import "../../components/Dashboard/Dashboard.css"
 
 console.log('before createGoal func')
 function Goals() {
@@ -27,30 +27,29 @@ function Goals() {
         variables: { authID: auth_ID },
     })
 
-    //   const user = data?.user || []
-    //   console.log(user)
-    //   console.log(data)
-    const user = data?.user || {}
-    console.log(user)
-    if (loading) {
-        return <div>Loading...</div>
-    }
-    console.log('before return jsx')
-    return (
-        <div className={style.mainTask}>
-            <section className="cards">
-                <article className="oneCard">
-                    <h2 className="cardTitle">ALL GOALS</h2>
-
-                    {/* goal list card */}
-                    <GoalsList goals={user.goals} />
-                    <div className="dashButtonContainer">
-                        <AddGoalBtn createGoal={createGoal} />
-                    </div>
-                </article>
-            </section>
-        </div>
-    )
+  //   const user = data?.user || []
+  //   console.log(user)
+  //   console.log(data)
+  const user = data?.user || {}
+  console.log(user)
+  if (loading) {
+    return <div>Loading...</div>
+  }
+  console.log('before return jsx')
+  return (
+    <div className="mainTask">
+      <section className="cards">
+        <article className="oneCard">
+          <h2 className="cardTitle">ALL GOALS</h2>
+          <div className="dashButtonContainer">
+            <AddGoalBtn createGoal={createGoal} />
+          </div>
+          <div className="goalDashSpacing"></div>
+          <GoalsList goals={user.goals} />
+        </article>
+      </section>
+    </div>
+  )
 }
 console.log('after return jsx')
 export default Goals

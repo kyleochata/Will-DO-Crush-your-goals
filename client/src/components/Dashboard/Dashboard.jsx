@@ -1,11 +1,27 @@
 import "./Dashboard.css";
 import { Link } from "react-router-dom";
-import { useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { ADD_TASK, ADD_GOAL } from "../../utils/mutations";
 import AddTaskBtn from "../TaskComponents/AddTaskBtn";
 import AddGoalBtn from "../Goals-Component/AddGoalBtn";
+import Auth from '../../utils/auth'
+import TasksListDash from '../../components/TaskComponents/TaskListDash.jsx'
+import GoalListDash from '../../components/Goals-Component/GoalListDash.jsx'
+import { QUERY_USER } from '../../utils/queries'
 
 export default () => {
+
+    const auth_ID = Auth.getProfile().authenticatedPerson.authID
+    console.log('query plz')
+    console.log(auth_ID)
+    const { data } = useQuery(QUERY_USER, {
+      variables: { authID: auth_ID },
+    })
+    console.log(auth_ID)
+    const user = data?.user || {}
+    console.log(data)
+    console.log(user)
+
     const [addTask] = useMutation(ADD_TASK);
     const [addGoal] = useMutation(ADD_GOAL);
 
@@ -32,59 +48,29 @@ export default () => {
         <section class="cards">
             <article className="oneCard">
                 <h2 className="cardTitle">TASKS</h2>
-                <ul className="cardText">
-                    <li className="liItem">
-                        The list of Tasks for this user would go here ;hds af;h ds;fhdsa;jfhsda ;jfhdskajh fgkjdsahfj;d hs fsdafs dafg dsgafdsf
-                    </li>
-                </ul>
-                <ul className="cardText">
-                    <li className="liItem">
-                        The list of Tasks for this user would go hereds afdsagfdagfadgfdagfadf dsfdsagd
-                    </li>
-                </ul>
-                <ul className="cardText">
-                    <li className="liItem">
-                        The list of Tasks for this user would go hereag fdagadsffda sfgdsafdsf
-                    </li>
-                </ul>
-                <ul className="cardText">
-                    <li className="liItem">
-                        The list of Tasks for this user would go here asdfdasfdsa fds
-                    </li>
-                </ul>
-                <ul className="cardText">
-                    <li className="liItem">
-                        The list of Tasks for this user would go here
-                    </li>
-                </ul>
-                <ul className="cardText">
-                    <li className="liItem">
-                        The list of Tasks for this user would go here
-                    </li>
-                </ul>
+                <p className="dashText">Your next 5 Tasks<br></br>In order<br></br>By most recent target dates</p>
                 <div className="dashButtonContainer">
                     <Link to="/tasks">
                         <button className="dashButton">View All</button>
                     </Link>
                     <AddTaskBtn createTask={createTask} />
                 </div>
+                <div className="goalDashSpacing"></div>
+                <TasksListDash tasks={user.tasks} />
+                
             </article>
             <article className="oneCard">
                 <h2 className="cardTitle">GOALS</h2>
-                <ul className="cardText">
-                    <li className="liItem">
-                        The list of Goals for this user would go here
-                    </li>
-                    <li className="liItem">
-                        The list of Goals for this user would go here
-                    </li>
-                </ul>
+                <p className="dashText">Your next 5 Goals<br></br>In order<br></br>By most recent target dates</p>
                 <div className="dashButtonContainer">
                     <Link to="/goals">
                         <button className="dashButton">View All</button>
                     </Link>
                     <AddGoalBtn createGoal={createGoal} />
-                </div>
+                </div> 
+                <div className="goalDashSpacing"></div>
+                <GoalListDash goals={user.goals} />
+                
             </article>
         </section>
     );
