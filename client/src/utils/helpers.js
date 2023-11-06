@@ -4,11 +4,15 @@ const format_date = (timestamp) => {
   console.log("date", timestamp)
   let monthNum = timeStamp.getMonth();
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  let currentMonth = months[monthNum];
+  // let currentMonth = months[monthNum];
+  monthNum = monthNum + 1;
+  if (monthNum <= 9) {
+    monthNum = `0${monthNum}`;
+  }
   let day = timeStamp.getDate();
   let year = timeStamp.getFullYear();
 
-  return `${year}-${monthNum + 1}-${day}`;
+  return `${year}-${monthNum}-${day}`;
 }
 
 export default format_date;

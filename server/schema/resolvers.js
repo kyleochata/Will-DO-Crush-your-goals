@@ -28,6 +28,9 @@ const resolvers = {
 			console.log(goalId);
 			return Goal.findById(goalId).populate('user').populate('tasks').populate('measurables');
 		},
+		// goal: async (_, { goalId }) => {
+		// 	console.log('goal query server log')
+		// },
 		task: async (_, { taskId }) => {
 			return Task.findById(taskId).populate('user').populate('goal').populate('measurable');
 		},
