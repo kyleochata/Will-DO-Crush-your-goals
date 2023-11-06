@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
-import Modal from "react-modal";
 
 import Auth from "../../utils/auth";
 import { QUERY_USER } from "../../utils/queries";
@@ -46,7 +45,6 @@ const OneTask = () => {
 				{/* add functionality to edit task and delete task buttons */}
 				<button>Edit Task</button>
 				<button onClick={handleDeleteTask}>Delete Task</button>
-				<button onClick={() => setModalIsOpen(false)}>Close</button>
 		</div>
 	);
 };

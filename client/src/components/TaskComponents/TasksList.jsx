@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import style from "../../pages/Tasks/Tasks.module.css";
 import { useState, useEffect } from 'react';
-import CheckboxComponent from './Checkbox';
+// import CheckboxComponent from './Checkbox';
 
 const TasksList = ({ tasks = [] }) => {
   if (!tasks.length) {
