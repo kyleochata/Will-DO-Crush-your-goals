@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
-import style from "../../pages/Tasks/Tasks.module.css";
-import { useMutation } from "@apollo/client";
-import { ADD_GOAL } from "../../utils/mutations";
+import React, { useState } from 'react'
+import Modal from 'react-modal'
+import style from '../../pages/Tasks/Tasks.module.css'
+import { useMutation } from '@apollo/client'
+import { ADD_GOAL } from '../../utils/mutations'
 
 const AddGoalBtn = ({ createGoal }) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false)
   const [goalData, setGoalData] = useState({
     title: "",
     description: "",
@@ -33,6 +33,7 @@ const AddGoalBtn = ({ createGoal }) => {
       completionDate: "",
     });
     setShowModal(false);
+    window.location.reload();
   };
 
   return (
@@ -54,7 +55,7 @@ const AddGoalBtn = ({ createGoal }) => {
         <div className={style.modalContent}>
           <div className={style.modalTitle}>ADD GOAL</div>
           <div className={style.formContainer}>
-          <form className={style.addTaskForm}>
+          <form onSubmit={handleSubmit} className={style.addTaskForm}>
             <div className={style.formInputs}>
               <label className={style.addTaskModalTxt}>
                 Title:
@@ -119,7 +120,6 @@ const AddGoalBtn = ({ createGoal }) => {
               </div>
               <div className={style.submitButtonContainer}>
               <button
-                onSubmit={handleSubmit}
                 className={style.submitButton}
                 type="submit"
               >
@@ -134,4 +134,4 @@ const AddGoalBtn = ({ createGoal }) => {
   );
 };
 
-export default AddGoalBtn;
+export default AddGoalBtn
