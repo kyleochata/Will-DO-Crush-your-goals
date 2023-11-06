@@ -21,6 +21,7 @@ const resolvers = {
 
 		// Queries to locate a single instance
 		user: async (_, { authID }) => {
+			// console.log({ serverUser: authID })
 			return User.findOne({ authID: authID }).populate('tasks').populate('goals').populate('measurables');
 		},
 		goal: async (_, { goalId }) => {
@@ -309,10 +310,10 @@ const resolvers = {
 
 		// update task completion
 		updateTaskCompletion: async (_, { taskId, completed }, context) => {
-			if(!context.user) {
+			if (!context.user) {
 				throw AuthenticationError;
 			}
-			
+
 			const task = await Task.findById(taskId);
 
 			if (!task) {
@@ -324,10 +325,10 @@ const resolvers = {
 			}
 
 			const updatedTask = await Task.findByIdAndUpdate(completed, { completed }, { new: true });
-			
+
 			return updatedTask;
 		},
-		
+
 		checkUser: async (_, { authID, username }) => {
 			try {
 				const userResult = await User.find({ authID });
