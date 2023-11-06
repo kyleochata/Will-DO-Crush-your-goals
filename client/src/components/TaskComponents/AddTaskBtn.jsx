@@ -5,7 +5,6 @@ import { useMutation } from '@apollo/client'
 import { ADD_TASK } from '../../utils/mutations'
 
 import style from '../../pages/Tasks/Tasks.module.css'
-// import { Goal } from '../../../../server/models'
 
 const AddTaskBtn = ({ createTask, goals }) => {
   const [showModal, setShowModal] = useState(false)
@@ -36,6 +35,7 @@ const AddTaskBtn = ({ createTask, goals }) => {
 			priority: "Low",
 		});
 		setShowModal(false);
+		window.location.reload();
 	};
 
 	const [goalData, setGoalData] = useState('N/A');
