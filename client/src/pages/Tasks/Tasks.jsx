@@ -35,51 +35,21 @@ function Tasks() {
   console.log(data)
   console.log(user)
 
-  return (
-    <div className={style.mainTask}>
-      <section className="cards">
-        <article className="oneCard">
-          <h2 className="cardTitle">ALL TASKS</h2>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Tasks for this user would go here ;hds af;h
-              ds;fhdsa;jfhsda ;jfhdskajh fgkjdsahfj;d hs fsdafs dafg dsgafdsf
-            </li>
-          </ul>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Tasks for this user would go hereds
-              afdsagfdagfadgfdagfadf dsfdsagd
-            </li>
-          </ul>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Tasks for this user would go hereag fdagadsffda
-              sfgdsafdsf
-            </li>
-          </ul>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Tasks for this user would go here asdfdasfdsa fds
-            </li>
-          </ul>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Tasks for this user would go here
-            </li>
-          </ul>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Tasks for this user would go here
-            </li>
-          </ul>
-          {/* task list card */}
-          <TasksList tasks={user.tasks} />
-          <div className="dashButtonContainer">
-            <AddTaskBtn createTask={createTask} goals={user.goals} />
-          </div>
-        </article>
-      </section>
+	return (
+		<div className={style.mainTask}>
+			<section className="cards">
+				<article className="oneCard">
+					<h2 className="cardTitle">ALL TASKS</h2>
+					{/* task list card */}
+					<TasksList tasks={user.tasks} />
+					<div className="dashButtonContainer">
+            <AddTaskBtn
+              createTask={createTask}
+							goals={user.goals}
+            />
+					</div>
+				</article>
+			</section>
 
       {/* single task modal commenting out SingleTask as it seemed to be causing some issues and wasn't fully built out to be a modal*/}
       <SingleTask />

@@ -41,39 +41,7 @@ function Goals() {
       <section className="cards">
         <article className="oneCard">
           <h2 className="cardTitle">ALL GOALS</h2>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Goals for this user would go here ;hds af;h
-              ds;fhdsa;jfhsda ;jfhdskajh fgkjdsahfj;d hs fsdafs dafg dsgafdsf
-            </li>
-          </ul>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Goals for this user would go hereds
-              afdsagfdagfadgfdagfadf dsfdsagd
-            </li>
-          </ul>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Goals for this user would go hereag fdagadsffda
-              sfgdsafdsf
-            </li>
-          </ul>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Goals for this user would go here asdfdasfdsa fds
-            </li>
-          </ul>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Goals for this user would go here
-            </li>
-          </ul>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Goals for this user would go here
-            </li>
-          </ul>
+        
           {/* goal list card */}
           <GoalsList goals={user.goals} />
           <div className="dashButtonContainer">
