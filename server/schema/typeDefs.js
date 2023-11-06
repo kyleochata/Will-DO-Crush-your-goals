@@ -67,7 +67,7 @@ const typeDefs = `
     addMeasurable(title: String!, goalId: ID!): Measurable
     editUser(userId: ID!, firstName: String, lastName: String, userName: String, email: String): User
     editGoal(goalId: ID!, title: String, description: String, why: String, completionDate: String, completed: Boolean): Goal
-    editTask(taskId: ID!, title: String, description: String, completionDate: String, priority: String, completed: Boolean): Task
+    editTask(taskId: ID!, title: String, description: String, completionDate: String, priority: String, completed: Boolean, goal:ID): Task
     editMeasurable(measurableId: ID!, title: String): Measurable
     deleteUser(userId: ID!): User
     deleteGoal(goalId: ID!): Goal

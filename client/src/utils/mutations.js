@@ -127,14 +127,17 @@ export const EDIT_GOAL = gql`
 `;
 
 export const EDIT_TASK = gql`
-  mutation editTask($taskId: ID!, $title: String, $description: String, $completionDate: String, $priority: String, $completed: Boolean) {
-    editTask(taskId: $taskId, title: $title, description: $description, completionDate: $completionDate, priority: $priority, completed: $completed) {
+  mutation editTask($taskId: ID!, $title: String, $description: String, $completionDate: String, $priority: String, $completed: Boolean,$goal:ID) {
+    editTask(taskId: $taskId, title: $title, description: $description, completionDate: $completionDate, priority: $priority, completed: $completed,goal:$goal) {
       _id
       title
       description
       completionDate
       priority
       completed
+      goal{
+        _id
+      }
     }
   }
 `;

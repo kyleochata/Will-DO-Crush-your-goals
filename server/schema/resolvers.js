@@ -32,7 +32,7 @@ const resolvers = {
 		// 	console.log('goal query server log')
 		// },
 		task: async (_, { taskId }) => {
-			return Task.findById(taskId).populate('user').populate('goal').populate('measurable');
+			return Task.findById(taskId).populate([{path:'user'},{path:'goal'},{path:'measurable'}]);
 		},
 		measurable: async (_, { measurableId }) => {
 			return Measurable.findById(measurableId).populate('user').populate('goal').populate('tasks');
@@ -200,27 +200,37 @@ const resolvers = {
 		},
 
 		// Edit a single task
-		editTask: async (_, { taskId, title, description, completionDate, priority, completed }, context) => {
-			if (!context.user) {
-				throw AuthenticationError;
-			}
-			const user = await User.findOne({ authID: context.user.authID });
+		editTask: async (_, { taskId, title, description, completionDate, priority, completed,goal }, context) => {
+			// if (!context.user) {
+			// 	throw AuthenticationError;
+			// }
+			// const user = await User.findOne({ authID: context.user.authID });
 
 			const task = await Task.findById(taskId);
+
+			
+			console.log("server console");
+			console.log(goal);
+
+			if (goal === "")
+			{
+				goal = null
+			}
+
 
 			if (!task) {
 				throw new Error('Task not found');
 			}
 
-			if (task.user.toString() !== user._id.toString()) {
-				throw AuthenticationError;
-			}
+			// if (task.user.toString() !== user._id.toString()) {
+			// 	throw AuthenticationError;
+			// }
 
 			const updatedTask = await Task.findByIdAndUpdate(
 				taskId,
-				{ title, description, completionDate, priority, completed },
+				{ title, description, completionDate, priority, completed, goal },
 				{ new: true }
-			);
+			).populate("goal");
 			return updatedTask;
 		},
 
