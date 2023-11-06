@@ -16,14 +16,6 @@ export const QUERY_USER = gql`
 				completionDate
 				createdAt
 				completed
-				tasks {
-					_id
-					title
-					description
-					completionDate
-					priority
-					completed
-				}
 			}
 			tasks {
 				_id
@@ -33,6 +25,10 @@ export const QUERY_USER = gql`
 				priority
 				completed
 			}
+      measurables{
+        _id
+        title
+      }
 		}
 	}
 `;
