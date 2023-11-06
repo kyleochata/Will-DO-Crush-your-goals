@@ -56,8 +56,8 @@ export const QUERY_TASK = gql`
       completed
       user {
         _id
-        firstName
-        lastName
+        authID
+        userName
       }
       goal {
         _id
@@ -66,6 +66,10 @@ export const QUERY_TASK = gql`
         completionDate
         createdAt
         completed
+      }
+      measurable{
+        _id
+        title
       }
     }
   }
@@ -161,8 +165,8 @@ export const QUERY_MEASURABLE = gql`
       }
       user {
         _id
-        firstName
-        lastName
+        authID
+        userName
       }
       tasks {
         _id
