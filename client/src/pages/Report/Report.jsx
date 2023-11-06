@@ -43,19 +43,18 @@ const Report = () => {
   const [goalPercent, setGoalPercent] = useState(0) //goal percent
   const [taskPercent, setTaskPercent] = useState(0) //task percent
   const [wildCardPercent, setWildCardPercent] = useState(0) //wildcard percent
-  const [getGoal, { error }] = useMutation(QUERY_ALL_GOALS) //get goalS from db
 
-  useEffect(() => {
-    const getGoals = async () => {
-      try {
-        const { data } = await getGoal()
-        console.log(data)
-      } catch (err) {
-        console.log('no goals found', err)
-      }
-    }
-    getGoals()
-  }, [])
+  // useEffect(() => {
+  //   const getGoals = async () => {
+  //     try {
+  //       const { data } = await getGoal()
+  //       console.log(data)
+  //     } catch (err) {
+  //       console.log('no goals found', err)
+  //     }
+  //   }
+  //   getGoals()
+  // }, [])
 
   return (
     <div className={style.reportMain}>
