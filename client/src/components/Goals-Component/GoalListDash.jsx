@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 const GoalsListDash = ({ goals = [] }) => {
   if (!goals.length) {
-    return <h3 className={style.noTasks}>NO GOALS YET</h3>;
+    return <h3 className="noTasks">NO GOALS YET</h3>;
   }
 
   const [filter, setFilter] = useState('all');

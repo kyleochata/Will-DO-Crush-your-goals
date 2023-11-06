@@ -45,7 +45,7 @@ export default () => {
     };
 
     return (
-        <section class="cards">
+        <section className="cards">
             <article className="oneCard">
                 <h2 className="cardTitle">TASKS</h2>
                 <p className="dashText">Your next 5 Tasks<br></br>In order<br></br>By most recent target dates</p>
