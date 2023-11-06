@@ -42,18 +42,30 @@
 
 
 import { from, useMutation, useQuery } from '@apollo/client';
-import { QUERY_TASK } from '../../utils/queries';
+import { QUERY_USER , QUERY_TASK} from '../../utils/queries';
 import { DELETE_TASK, EDIT_TASK } from '../../utils/mutations';
-import { useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import format_date from '../../utils/helpers';
+import Auth from '../../utils/auth';
+
 
 const SingleTask = ({ filteredTask }) => {
-	const [deleteTask] = useMutation(DELETE_TASK);
+	const auth_ID = Auth.getProfile().authenticatedPerson.authID
+	const selectRef = useRef()
+	const { data } = useQuery(QUERY_USER, {
+		variables: { authID: auth_ID },
+	})
+	const user = data?.user || {}
+	const goals = user.goals;
 	// const [queryTask] = useQuery(QUERY_TASK);
 	// const [goalState, setGoalState] = useState(true);
 	const { taskId } = useParams();
-	const task = filteredTask[0];
+	const { loading, data:{task} } = useQuery(QUERY_TASK, {
+		variables: { taskId: taskId },
+	  })
+	console.log('where is this')
+	console.log(task);
 	const [editTask, seteditTask] = useState(false);
 	const handleDelClick = async () => {
 		try {
@@ -67,7 +79,10 @@ const SingleTask = ({ filteredTask }) => {
 		}
 	}
 
-	const [taskData, settaskData] = useState(task);
+	const [taskData, settaskData] = useState(task || {});
+	console.log('where is this')
+	console.log(taskData);
+	console.log(taskData?.goal?.title);
 
 	// console.log(format_date(taskData.completionDate));
 
@@ -94,15 +109,16 @@ const SingleTask = ({ filteredTask }) => {
 	};
 
 
-	const [changeTask] = useMutation(EDIT_TASK);
+	const [changeTask] = useMutation(EDIT_TASK,{refetchQueries:["user",QUERY_USER,"task",QUERY_TASK]});
 	const updatedTask = (taskData) => {
-		changeTask({ variables: taskData })
-			.then((response) => {
-				console.log('Task updated:', response.data.changeTask)
-			})
-			.catch((error) => {
-				console.error('Error updating task:', error)
-			})
+		return changeTask({ variables: taskData })
+			// .then((response) => {
+			// 	console.log('Task updated:', response.data.changeTask)
+			// 	// window.location.reload();
+			// })
+			// .catch((error) => {
+			// 	console.error('Error updating task:', error)
+			// })
 	}
 	// const handleSubmit = async (event) => {
 	// 	event.preventDefault();
@@ -112,10 +128,16 @@ const SingleTask = ({ filteredTask }) => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		
+
 		try {
 			taskData.taskId = taskData._id;
-			await updatedTask(taskData);
+			taskData.goal = selectRef.current.value;
+			console.log("selectrefval");
+			console.log(selectRef.current.value);
+			console.log(taskData);
+			// await updatedTask({...taskData,goal:selectRef.current.value});
+			const bbc = await updatedTask(taskData);
+			window.location.reload();
 			seteditTask(false); // I changed this to false to close the edit form on submit
 			// You might want to refetch task data here if needed
 		} catch (error) {
@@ -127,8 +149,9 @@ const SingleTask = ({ filteredTask }) => {
 
 	const editTaskClick = () => {
 		// const [taskData, settaskData] = useState({});
+		handleSubmit();
 		seteditTask(!editTask);
-		
+
 	}
 
 	return (
@@ -136,12 +159,13 @@ const SingleTask = ({ filteredTask }) => {
 			{!editTask && (
 				<div>
 					<div>
-						<h2>{taskData.title}</h2>
-						<p>{format_date(taskData.completionDate)}</p>
-						<p>{taskData.description}</p>
+						<h2>title: {taskData.title}</h2>
+						<p>due date: {format_date(taskData.completionDate)}</p>
+						<p>description: {taskData.description}</p>
+						<p>goal: {console.log(taskData)}</p>
 					</div>
 					<div>
-						<section>{taskData.priority}</section>
+						<section>priority: {taskData.priority}</section>
 						{/* Complete button  <Link to={`/goals/${goal._id}`}> FIND WAY to switch completed BOOLEAN to true for that goal id. FIND WAY to edit goal - Maybe reuse AddGoalBtn or create a new modal similar to add goal but add update goal btn. Need data to be shown and assigned to user. */}
 						<button
 							onClick={editTaskClick}
@@ -209,6 +233,21 @@ const SingleTask = ({ filteredTask }) => {
 							<option value="Medium">Medium</option>
 							<option value="High">High</option>
 						</select>
+					</label>
+					<br></br>
+					<label>
+						Add to Goal:
+						<br></br>
+						<select
+							name="goal"
+							ref={selectRef}
+						>
+							<option value="">None</option>
+							{goals.map((goal) => (
+								<option key={goal._id} value={goal._id}>{goal.title}</option>
+							))}
+						</select>
+
 					</label>
 
 
