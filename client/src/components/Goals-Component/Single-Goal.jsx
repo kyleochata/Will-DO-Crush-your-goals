@@ -59,7 +59,7 @@ const SingleGoal = ({ goalInfo }) => {
     if (!goalData.measurables) {
       setGoalData((prevGoalData) => ({
         ...prevGoalData,
-        measurables: [],
+        measurables: "",
       }))
     }
   }, [goalData, setGoalData])
