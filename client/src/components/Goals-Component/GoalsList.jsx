@@ -15,18 +15,7 @@ const GoalsList = ({ goals = [] }) => {
     let timeStamp = new Date(parseInt(timestamp));
     let monthNum = timeStamp.getMonth();
     const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
+      "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",
     ];
     let currentMonth = months[monthNum];
     let day = timeStamp.getDate();

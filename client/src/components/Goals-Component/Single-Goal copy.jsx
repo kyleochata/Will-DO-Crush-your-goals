@@ -93,6 +93,7 @@ const SingleGoal = ({ filteredGoals }) => {
               <div className="cardText textAlign">
                 <h2 className="singlePageTitle">{goalData.title}</h2>
                 <div className="dashButtonContainer">
+                  <EditGoalBtn editGoal={editGoal} />
                   <button onClick={editGoalClick} className="dashButton">Edit Goal</button>
                   <button className="dashButton" >Complete</button>
                   <button onClick={handleDelClick} className="dashButton">Delete</button>

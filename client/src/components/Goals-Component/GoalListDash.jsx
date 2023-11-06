@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import style from "../Dashboard/Dashboard.css";
+import "../Dashboard/Dashboard.css";
 import { useState, useEffect } from 'react';
 
 const GoalsListDash = ({ goals = [] }) => {
@@ -43,7 +43,7 @@ const GoalsListDash = ({ goals = [] }) => {
   return (
     <div className="tasksList">
       {next5Goals.map((goal) => (
-        <div className="card-text" key={goal._id}>
+        <div className="cardText" key={goal._id}>
           <Link to={`/tasks/${goal._id}`}> 
             <div className="liItem">
             <h2 className="taskListTitle">{goal.title}</h2>

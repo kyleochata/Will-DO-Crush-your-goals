@@ -41,9 +41,10 @@
     flex-direction: column;
     max-width: 95%;
     min-width: 45%;
-
-
+    flex: 1;
 }
+
+
 
 .liItem {
     padding: .3rem;
@@ -134,10 +135,14 @@ select {
 
 .taskListTitle {
     margin: 0 auto;
-    color: black;
+    color: #276891;
+    border-bottom: 1px solid black;
+    width:50%;
+    max-width: 15rem;
 }
 
 .regularText {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     color: black;
 
 }
@@ -153,9 +158,10 @@ select {
 
 .cardFlex {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     flex-wrap: wrap;
+    gap:1rem;
 }
 
 @media screen and (max-width: 750px) {
@@ -166,4 +172,37 @@ select {
     .cardText {
         width: 95%;
     }
+}
+
+.singlePageMain{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.textAlign{
+    text-align: center;
+}
+
+.singlePageTitle{
+    font-size: 2rem;
+    padding-bottom: 0.5rem;
+    text-align: center;
+    margin: 0 auto;
+    color: #276891;
+}
+
+.subHeader{
+    border-bottom: 1px solid black;
+    width:50%;
+    max-width: 15rem;
+    font-size: 1.25rem;
+    margin: 0 auto;
+    padding-top: 0.5rem;
+}
+.singlePageText{
+    font-size: 1.25rem;
 }

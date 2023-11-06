@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import style from "../Dashboard/Dashboard.css";
+import "../Dashboard/Dashboard.css";
 import { useState, useEffect } from 'react';
 import CheckboxComponent from './Checkbox';
 
@@ -44,7 +44,7 @@ const TasksListDash = ({ tasks = [] }) => {
   return (
     <div className="tasksList">
       {next5Tasks.map((task) => (
-        <div className="card-text" key={task._id}>
+        <div className="cardText" key={task._id}>
           <Link to={`/tasks/${task._id}`}> 
             <div className="liItem">
             <h2 className="taskListTitle">{task.title}</h2>
