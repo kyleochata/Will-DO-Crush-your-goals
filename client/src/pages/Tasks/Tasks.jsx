@@ -2,7 +2,7 @@ import { useParams, Link } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/client'
 import TasksList from '../../components/TaskComponents/TasksList.jsx'
 // import PowerList from '../../components/TaskComponents/PowerList';
-// import SingleTask from "../../components/TaskComponents/SingleTaskModal.jsx";
+import SingleTask from '../../components/TaskComponents/SingleTaskModal.jsx'
 import AddTaskBtn from '../../components/TaskComponents/AddTaskBtn.jsx'
 import { ADD_TASK } from '../../utils/mutations'
 import Auth from '../../utils/auth'
@@ -82,7 +82,7 @@ function Tasks() {
       </section>
 
       {/* single task modal commenting out SingleTask as it seemed to be causing some issues and wasn't fully built out to be a modal*/}
-      {/* <SingleTask /> */}
+      <SingleTask />
     </div>
   )
 }
