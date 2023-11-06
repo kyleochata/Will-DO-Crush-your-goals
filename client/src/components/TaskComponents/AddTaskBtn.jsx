@@ -120,7 +120,6 @@ const AddTaskBtn = ({ createTask, goals }) => {
 										value={taskData.goal} // Make sure this reflects the 'goal' in taskData
 										onChange={handleInputChange} // Use the same change handler which updates taskData
 										className={style.addTaskModalInput}
-										required
 									>
 										<option value="">None</option> {/* This is the new empty option */}
 										{goals.map((goal) => (
