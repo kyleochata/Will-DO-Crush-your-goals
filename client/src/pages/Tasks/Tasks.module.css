@@ -29,11 +29,31 @@
   position: absolute;
   top: 70px;
   margin: auto;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.editContent{
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.editTitle{
+  width: 75%;
+  max-width: 560px;
+  min-width: 280px;
+  background-color: #276891;
+  font-size: clamp(1rem, 8vw, 2rem);
+  text-align: center;
+  padding: 0.5rem 0;
+  font-weight: 700;
+  color: white;
+  border-radius: 1rem;
 }
 
 .modalTitle{
@@ -52,6 +72,7 @@
 .formContainer{
   padding: 2rem 0;
   position: relative;
+  max-width: 90%
 
 }
 
@@ -188,13 +209,11 @@ textarea{
 
 }
 
-/* StartTaskList */
-.noTasks{
-  font-size: 2rem;
-  text-align: center;
-}
 
-.tasks-list {
-  display: flex;
-  flex-wrap: wrap;
+
+/* start goal creation modal unique styles */
+.goalDesc{
+  font-size: 0.75rem;
+  font-weight: 425;
+  color: rgb(34, 34, 34);
 }

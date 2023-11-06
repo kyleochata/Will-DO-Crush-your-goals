@@ -6,9 +6,8 @@ import SingleTask from '../../components/TaskComponents/SingleTaskModal.jsx'
 import AddTaskBtn from '../../components/TaskComponents/AddTaskBtn.jsx'
 import { ADD_TASK } from '../../utils/mutations'
 import Auth from '../../utils/auth'
-import style from './Tasks.module.css'
 import { QUERY_USER } from '../../utils/queries'
-// import { useState, useEffect } from "react";
+
 
 function Tasks() {
   const [addTask] = useMutation(ADD_TASK)
@@ -24,7 +23,6 @@ function Tasks() {
 
   // might need to use auth0_id instead of userId
   const auth_ID = Auth.getProfile().authenticatedPerson.authID
-  console.log('query plz')
   console.log(auth_ID)
   const { data } = useQuery(QUERY_USER, {
     variables: { authID: auth_ID },
@@ -35,54 +33,20 @@ function Tasks() {
   console.log(data)
   console.log(user)
 
-  return (
-    <div className={style.mainTask}>
-      <section className="cards">
-        <article className="oneCard">
-          <h2 className="cardTitle">ALL TASKS</h2>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Tasks for this user would go here ;hds af;h
-              ds;fhdsa;jfhsda ;jfhdskajh fgkjdsahfj;d hs fsdafs dafg dsgafdsf
-            </li>
-          </ul>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Tasks for this user would go hereds
-              afdsagfdagfadgfdagfadf dsfdsagd
-            </li>
-          </ul>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Tasks for this user would go hereag fdagadsffda
-              sfgdsafdsf
-            </li>
-          </ul>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Tasks for this user would go here asdfdasfdsa fds
-            </li>
-          </ul>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Tasks for this user would go here
-            </li>
-          </ul>
-          <ul className="cardText">
-            <li className="liItem">
-              The list of Tasks for this user would go here
-            </li>
-          </ul>
-          {/* task list card */}
-          <TasksList tasks={user.tasks} />
+	return (
+		<div className="mainTask">
+			<section className="cards">
+				<article className="oneCard">
+					<h2 className="cardTitle">ALL TASKS</h2>
           <div className="dashButtonContainer">
-            <AddTaskBtn createTask={createTask} goals={user.goals} />
-          </div>
-        </article>
-      </section>
-
-      {/* single task modal commenting out SingleTask as it seemed to be causing some issues and wasn't fully built out to be a modal*/}
-      <SingleTask />
+            <AddTaskBtn
+              createTask={createTask}
+							goals={user.goals}
+            />
+					</div>
+					<TasksList tasks={user.tasks} />
+				</article>
+			</section>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal'
 import { useMutation } from '@apollo/client'
 
@@ -7,22 +7,29 @@ import { ADD_TASK } from '../../utils/mutations'
 import style from '../../pages/Tasks/Tasks.module.css'
 
 const AddTaskBtn = ({ createTask, goals }) => {
-  const [showModal, setShowModal] = useState(false)
-  const [taskData, setTaskData] = useState({
-    title: '',
-    description: '',
-    completionDate: '',
+	const [showModal, setShowModal] = useState(false)
+	const [taskData, setTaskData] = useState({
+		title: '',
+		description: '',
+		completionDate: '',
 		priority: 'Low',
 		goal: '',
-  })
-  // const [createSingleTask, {err}] = useMutation(ADD_TASK);
+	})
+	// const [createSingleTask, {err}] = useMutation(ADD_TASK);
 	// TEST
-  const handleInputChange = (event) => {
-    setTaskData({
-      ...taskData,
-      [event.target.name]: event.target.value,
-    })
-  }
+	const handleInputChange = (event) => {
+		const { name, value } = event.target;
+
+		setTaskData((prevState) => {
+			console.log('Old state:', prevState);
+			console.log('New value for', name, ':', value);
+
+			return {
+				...prevState,
+				[name]: value,
+			};
+		});
+	};
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -38,7 +45,6 @@ const AddTaskBtn = ({ createTask, goals }) => {
 		window.location.reload();
 	};
 
-	const [goalData, setGoalData] = useState('N/A');
 
 	return (
 		<>
@@ -56,13 +62,13 @@ const AddTaskBtn = ({ createTask, goals }) => {
 				</button>
 				<div className={style.modalContent}>
 					<div className={style.modalTitle}>ADD TASK</div>
-				<div className={style.formContainer}>
-					<form onSubmit={handleSubmit} className={style.addTaskForm}>
-						<div className={style.formInputs}>
+					<div className={style.formContainer}>
+						<form onSubmit={handleSubmit} className={style.addTaskForm}>
+							<div className={style.formInputs}>
 								<label className={style.addTaskModalTxt}>
 									Title:
 									<input
-										placeholder="Your Tasks Title"
+										placeholder="Your Task Title"
 										type="text"
 										name="title"
 										value={taskData.title}
@@ -71,68 +77,74 @@ const AddTaskBtn = ({ createTask, goals }) => {
 										required
 									/>
 								</label>
-							<label className={style.addTaskModalTxt}>
-								Description:
-								<textarea
-									placeholder="Details About Your Task"
-									name="description"
-									value={taskData.description}
-									onChange={handleInputChange}
-									className={style.addTaskModalInput}
-									required
-								/>
-							</label>
-							<label className={style.addTaskModalTxt}>
-								Due Date:
-								<input
-									type="date"
-									name="completionDate"
-									value={taskData.completionDate}
-									onChange={handleInputChange}
-									className={style.addTaskModalInput}
-									required
-								/>
-							</label>
-							<label className={style.addTaskModalTxt}>
-								Priority:
-								<select
-									name="priority"
-									value={taskData.priority}
-									onChange={handleInputChange}
-									className={style.addTaskModalInput}
-									required
-								>
-									<option value="Low">Low</option>
-									<option value="Medium">Medium</option>
-									<option value="High">High</option>
-								</select>
+								<label className={style.addTaskModalTxt}>
+									Description:
+									<textarea
+										placeholder="Details About Your Task"
+										name="description"
+										value={taskData.description}
+										onChange={handleInputChange}
+										className={style.addTaskModalInput}
+										required
+									/>
 								</label>
-								{/* <label className={style.addTaskModalTxt}>
-									Add to Goal:
+								<label className={style.addTaskModalTxt}>
+									Due Date:
+									<input
+										type="date"
+										name="completionDate"
+										value={taskData.completionDate}
+										onChange={handleInputChange}
+										className={style.addTaskModalInput}
+										required
+									/>
+								</label>
+								<label className={style.addTaskModalTxt}>
+									Priority:
 									<select
-										name="goal"
-										value={goalData}
-										onChange={(e) => setGoalData(e.target.value)}
+										name="priority"
+										value={taskData.priority}
+										onChange={handleInputChange}
 										className={style.addTaskModalInput}
 										required
 									>
+										<option value="Low">Low</option>
+										<option value="Medium">Medium</option>
+										<option value="High">High</option>
+									</select>
+								</label>
+								<label className={style.addTaskModalTxt}>
+									Add to Goal:
+									<select
+										name="goal"
+										value={taskData.goal} // Make sure this reflects the 'goal' in taskData
+										onChange={handleInputChange} // Use the same change handler which updates taskData
+										className={style.addTaskModalInput}
+										required
+									>
+										<option value="">None</option> {/* This is the new empty option */}
 										{goals.map((goal) => (
 											<option value={goal._id}>{goal.title}</option>
 										))}
 									</select>
-								</label> */}
-						</div>
-						<div className={style.submitButtonContainer}>
-							<button type="submit" className={style.submitButton}>
-								Create Task
-							</button>
-						</div>
-					</form>
-				</div>
+								</label>
+							</div>
+							<div className={style.submitButtonContainer}>
+								<button type="submit" className={style.submitButton}>
+									Create Task
+								</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</Modal>
 		</>
 	);
 };
+
+AddTaskBtn.defaultProps = {
+	goals: [],
+};
+
 
 export default AddTaskBtn

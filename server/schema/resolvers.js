@@ -25,9 +25,8 @@ const resolvers = {
 			return User.findOne({ authID: authID }).populate('tasks').populate('goals').populate('measurables');
 		},
 		goal: async (_, { goalId }) => {
-			console.log('goalId query server log')
-			const goal = await Goal.findOne({ _id: goalId }).populate('user').populate('tasks').populate('measurables');
-			return goal;
+			console.log(goalId);
+			return Goal.findById(goalId).populate('user').populate('tasks').populate('measurables');
 		},
 		// goal: async (_, { goalId }) => {
 		// 	console.log('goal query server log')
@@ -255,10 +254,11 @@ const resolvers = {
 			if (!context.user) {
 				throw AuthenticationError;
 			}
+			console.log("Pass 1st IF")
 			const user = await User.findOne({ authID: context.user.authID });
-
+			console.log(user);
 			const goal = await Goal.findById(goalId);
-
+			console.log(goal);
 			if (!goal) {
 				throw new Error('Goal not found');
 			}
