@@ -86,8 +86,7 @@ export const QUERY_ALL_TASKS = gql`
       completed
       user {
         _id
-        firstName
-        lastName
+        userName
       }
     }
   }
@@ -198,5 +197,5 @@ export const QUERY_ALL_MEASURABLE = gql`
   }
 `;
 
-  
+
 

@@ -24,16 +24,18 @@ const GoalsList = ({ goals = [] }) => {
     return `${currentMonth} ${day}, ${year}`;
   };
 
+  const sortedGoals = [...goals].sort((goalA, goalB) => goalA.completionDate - goalB.completionDate);
+
+
   return (
     <div className="tasksList">
       <div className="cardFlex">
-        {goals.map((goal) => (
+        {sortedGoals.map((goal) => (
           <div className="cardText" key={goal._id}>
               <Link to={`/goals/${goal._id}`}>
               <div className="liItem">
                 <h2 className="taskListTitle">{goal.title}</h2>
                 <p className="regularText">{goal.description}</p>
-
                 <p className="regularText">{format_date(goal.completionDate)}</p>
                 </div>
             </Link>

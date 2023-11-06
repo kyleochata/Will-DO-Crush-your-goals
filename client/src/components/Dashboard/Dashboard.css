@@ -44,10 +44,8 @@
     flex: 1;
 }
 
-
-
 .liItem {
-    padding: .3rem;
+    padding: .5rem;
     text-align: center;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     margin-bottom: 1rem;
@@ -59,6 +57,8 @@
     align-items: flex-end;
     justify-content: center;
 }
+
+
 
 .dashButton {
     background-color: #276891;
@@ -128,22 +128,22 @@ select {
     text-align: center;
 }
 
-.tasks-list {
-    display: flex;
-    flex-wrap: wrap;
+.tasksList {
+    overflow-wrap: break-word;
 }
 
 .taskListTitle {
     margin: 0 auto;
     color: #276891;
     border-bottom: 1px solid black;
-    width:50%;
-    max-width: 15rem;
+    width:95%;
 }
 
 .regularText {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     color: black;
+    white-space: pre-wrap;
+word-wrap: break-word;
 
 }
 
