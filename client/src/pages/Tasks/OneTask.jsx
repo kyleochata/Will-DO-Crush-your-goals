@@ -1,52 +1,37 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useQuery, useMutation } from "@apollo/client";
-
-import Auth from "../../utils/auth";
-import { QUERY_USER } from "../../utils/queries";
-import { DELETE_TASK } from "../../utils/mutations";
-
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+// Create
+import { useState } from 'react';
+import { QUERY_USER } from '../../utils/queries';
+import Auth from '../../utils/auth';
+import SingleTask from '../../components/TaskComponents/SingleTaskModal';
 
 const OneTask = () => {
-	const { taskId } = useParams();
-	const auth_ID = Auth.getProfile().authenticatedPerson.authID;
-	// console.log(auth_ID);
-	const { data } = useQuery(QUERY_USER, {
-		variables: { authID: auth_ID }
-	});
-	// console.log(data);
-	const user = data?.user?.tasks || [];
-	// console.log(user);
-	const taskInfo = user.filter((task) => task._id === taskId);
-// console.log(taskInfo)
-	const task = taskInfo[0];
-	// console.log(task);
-	const [deleteTask] = useMutation(DELETE_TASK);
+  const { taskId } = useParams();
+  const auth_ID = Auth.getProfile().authenticatedPerson.authID
+  const { loading, data } = useQuery(QUERY_USER, {
+    variables: { authID: auth_ID }
+  });
+  // set user.goals to diff variable
+  // create 3rd variable to whatever goals was to .filter anon function goal => goalId = goal_id
+  const tasks = data?.user?.tasks || [];
+  console.log(tasks)
+  const filteredTask = tasks.filter((item) => item._id === taskId);
+  console.log(filteredTask);
 
-	const handleDeleteTask = async () => {
-		try {
-			await deleteTask({
-				variables: { taskId: taskId },
-			});
-			window.location.replace('/tasks');
-		} catch (err) {
-			console.error(err);
-		}
-	};
-	
-	return (
-		<div>
-				<h2>{task.title}</h2>
-				{/* add functionality to complete button */}
-				<button>Mark as Completed</button>
-				<p>{task.description}</p>
-				<p>{task.completionDate}</p>
-				<p>{task.priority}</p>
-				{/* add functionality to edit task and delete task buttons */}
-				<button>Edit Task</button>
-				<button onClick={handleDeleteTask}>Delete Task</button>
-		</div>
-	);
-};
+  // const [goalState, setGoalState] = useState(goal);
+  // console.log({goalState: goalState});
+  if (loading) {
+    return <div>Loading...</div>
+  }
+  return (
+      <div className="single-task">
+        <SingleTask
+        filteredTask={filteredTask}
+        
+        />
+      </div>
+  )
+}
 
 export default OneTask;

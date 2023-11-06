@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
-import "../Dashboard/Dashboard.css"
+import "../Dashboard/Dashboard.css";
 import { useState, useEffect } from 'react';
-// import CheckboxComponent from './Checkbox';
+import CheckboxComponent from './Checkbox';
 
-
-const TasksList = ({ tasks = [] }) => {
+const TasksListDash = ({ tasks = [] }) => {
   if (!tasks.length) {
     return <h3 className="noTasks">NO TASKS YET</h3>;
   }
@@ -24,6 +23,11 @@ const TasksList = ({ tasks = [] }) => {
     
   }
 
+  const tasksCopy = [...tasks];
+  tasksCopy.sort((a, b) => a.completionDate - b.completionDate);
+  const next5Tasks = tasksCopy.slice(0, 5);
+
+
   // const [isComplete, setIsComplete] = useState(task.isComplete);
   
   // const toggleComplete = (value) => {
@@ -38,37 +42,18 @@ const TasksList = ({ tasks = [] }) => {
 
   return (
     <div className="tasksList">
-      <div className='task-filter'>
-        <p className="filterText">Filter:</p>
-        <select
-          onChange={(e) => setFilter(e.target.value) } 
-          value={filter}
-        >
-          <option value='all'>All</option>
-          <option value='active'>Open</option>
-          <option value='completed'>Completed</option>
-          <option value='low'>Low Priority</option>
-          <option value='medium'>Medium Priority</option>
-          <option value='high'>High Priority</option>
-        </select>
-      </div>
-      <div className="cardFlex">
-      {tasks.map((task) => (  
+      {next5Tasks.map((task) => (
         <div className="cardText" key={task._id}>
           <Link to={`/tasks/${task._id}`}> 
-          <div className="liItem">
+            <div className="liItem">
             <h2 className="taskListTitle">{task.title}</h2>
-            <pre><p className="regularText">{task.description}</p></pre>
-            <p className="regularText">{format_date(task.completionDate)}</p>
+            <p className="regularText">Target Date: {format_date(task.completionDate)}</p>
             </div>
           </Link>
-
         </div>
-        
       ))}
-      </div>
     </div>
   );
 };
 
-export default TasksList;
+export default TasksListDash;

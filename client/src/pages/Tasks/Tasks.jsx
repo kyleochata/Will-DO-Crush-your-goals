@@ -3,8 +3,8 @@ import TasksList from '../../components/TaskComponents/TasksList.jsx'
 import AddTaskBtn from '../../components/TaskComponents/AddTaskBtn.jsx'
 import { ADD_TASK } from '../../utils/mutations'
 import Auth from '../../utils/auth'
-import style from './Tasks.module.css'
 import { QUERY_USER } from '../../utils/queries'
+
 
 function Tasks() {
   const [addTask] = useMutation(ADD_TASK)
@@ -19,7 +19,6 @@ function Tasks() {
   }
 
   const auth_ID = Auth.getProfile().authenticatedPerson.authID
-  console.log('query plz')
   console.log(auth_ID)
   const { data } = useQuery(QUERY_USER, {
     variables: { authID: auth_ID },
@@ -31,18 +30,17 @@ function Tasks() {
   console.log(user)
 
 	return (
-		<div className={style.mainTask}>
+		<div className="mainTask">
 			<section className="cards">
 				<article className="oneCard">
 					<h2 className="cardTitle">ALL TASKS</h2>
-					{/* task list card */}
-					<TasksList tasks={user.tasks} />
-					<div className="dashButtonContainer">
+          <div className="dashButtonContainer">
             <AddTaskBtn
               createTask={createTask}
 							goals={user.goals}
             />
 					</div>
+					<TasksList tasks={user.tasks} />
 				</article>
 			</section>
     </div>

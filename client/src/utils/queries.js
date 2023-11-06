@@ -12,17 +12,10 @@ export const QUERY_USER = gql`
 				_id
 				title
 				description
+        why
 				completionDate
 				createdAt
 				completed
-				tasks {
-					_id
-					title
-					description
-					completionDate
-					priority
-					completed
-				}
 			}
 			tasks {
 				_id
@@ -32,6 +25,10 @@ export const QUERY_USER = gql`
 				priority
 				completed
 			}
+      measurables{
+        _id
+        title
+      }
 		}
 	}
 `;
@@ -104,8 +101,7 @@ export const QUERY_GOAL = gql`
       completed
       user {
         _id
-        firstName
-        lastName
+        userName
       }
       tasks {
         _id

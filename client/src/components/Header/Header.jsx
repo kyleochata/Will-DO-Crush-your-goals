@@ -14,16 +14,23 @@ export default () => {
     const shouldDisplayBurgerMenu = isAuthenticated;
 
 
-    const routeToTitle ={
-        '/': 'DASHBOARD',
-        '/goals': 'GOALS',
-        '/tasks': 'TASKS',
-        // '/calendar': 'CALENDAR',
-        '/report': 'REPORTS',
-        '/profile': 'PROFILE',
-    };
+    let title = '';
 
-    const title = routeToTitle[location.pathname] || '';
+  if (location.pathname.startsWith('/goals/')) {
+    title = 'GOAL DETAIL';
+  } else if (location.pathname.startsWith('/tasks/')) {
+    title = 'TASK DETAIL';
+  } else {
+    // Define titles for other routes
+    const routeToTitle = {
+      '/': 'DASHBOARD',
+      '/goals': 'GOALS',
+      '/tasks': 'TASKS',
+      '/report': 'REPORTS',
+      '/profile': 'PROFILE',
+    };
+    title = routeToTitle[location.pathname] || '';
+  }
 
     return (
         <div className="header">
