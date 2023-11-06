@@ -8,66 +8,64 @@ import style from "../../pages/Tasks/Tasks.module.css"
 
 const format_date2 = (timestamp) => {
   //month is index 0-11. must add 1 to get correct month
-  let timeStamp = new Date(parseInt(timestamp));
-  let monthNum = timeStamp.getMonth();
+  let timeStamp = new Date(parseInt(timestamp))
+  let monthNum = timeStamp.getMonth()
   const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  let currentMonth = months[monthNum];
-  let day = timeStamp.getDate();
-  let year = timeStamp.getFullYear();
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ]
+  let currentMonth = months[monthNum]
+  let day = timeStamp.getDate()
+  let year = timeStamp.getFullYear()
 
-  return `${currentMonth} ${day}, ${year}`;
-};
+  return `${currentMonth} ${day} ${year}`
+}
 
-const SingleGoal = ({ filteredGoals }) => {
-  const [deleteGoal] = useMutation(DELETE_GOAL);
+const SingleGoal = ({ goalInfo }) => {
+  const [deleteGoal] = useMutation(DELETE_GOAL)
   // const [goalState, setGoalState] = useState(true);
-  const { goalId } = useParams();
-  const goal = filteredGoals[0];
-  console.log(goalId);
-  console.log(goal.completionDate);
-  const [editGoal, setEditGoal] = useState(false);
-  console.log(filteredGoals);
-  const [addMeasurable] = useMutation(ADD_MEASURABLE);
+  const { goalId } = useParams()
+  const goal = goalInfo
+  console.log(goalId)
+  console.log(goal.completionDate)
+  const [editGoal, setEditGoal] = useState(false)
+  console.log(goalInfo)
+  const [addMeasurable] = useMutation(ADD_MEASURABLE)
   const handleDelClick = async () => {
     try {
       await deleteGoal({
         variables: { goalId: goalId },
-      });
-      window.location.replace("/goals");
+      })
+      window.location.replace('/goals')
     } catch (err) {
-      console.log("catching error");
-      throw err;
+      console.log('catching error')
+      throw err
     }
-  };
+  }
 
-  const [goalData, setGoalData] = useState(goal);
-
+  const [goalData, setGoalData] = useState(goal)
 
   useEffect(() => {
     if (!goalData.measurables) {
       setGoalData((prevGoalData) => ({
         ...prevGoalData,
-        measurables: []
-      }));
+        measurables: [],
+      }))
     }
-  }, [goalData, setGoalData]);
+  }, [goalData, setGoalData])
 
-  console.log("here");
-  console.log(goalData);
-
+  console.log('here')
+  console.log(goalData)
 
   // const handleInputChange = (event) => {
   //   setGoalData({
@@ -88,16 +86,14 @@ const SingleGoal = ({ filteredGoals }) => {
       [name]: Date.parse(value), 
     }));
     } else {
-      setGoalData(prevState => ({
+      setGoalData((prevState) => ({
         ...prevState,
         [name]: value,
-      }));
+      }))
     }
-  };
+  }
 
-
-
-  const [changeGoal] = useMutation(EDIT_GOAL);
+  const [changeGoal] = useMutation(EDIT_GOAL)
   const updatedGoal = (goalData) => {
     const goalDataWithDateString = {
       ...goalData,
@@ -106,44 +102,43 @@ const SingleGoal = ({ filteredGoals }) => {
     
     changeGoal({ variables: goalDataWithDateString })
       .then((response) => {
-        console.log("Goal updated:", response.data.changeGoal);
+        console.log('Goal updated:', response.data.changeGoal)
       })
       .catch((error) => {
-        console.error("Error updating goal:", error);
-      });
-  };
+        console.error('Error updating goal:', error)
+      })
+  }
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    goalData.goalId = goalData._id;
-    updatedGoal(goalData);
-    setEditGoal(!editGoal);
-  };
+    event.preventDefault()
+    goalData.goalId = goalData._id
+    updatedGoal(goalData)
+    setEditGoal(!editGoal)
+  }
 
   //asdasdasdsadab
 
-
   const addMeasurableClick = async (event) => {
-    event.preventDefault();
-    const measurableToAdd = prompt("Enter new measurable:"); // Simple prompt for demo, consider a better UI for production
+    event.preventDefault()
+    const measurableToAdd = prompt('Enter new measurable:') // Simple prompt for demo, consider a better UI for production
     if (measurableToAdd) {
       try {
         const { data } = await addMeasurable({
           variables: {
             goalId: goalData._id,
-            title: measurableToAdd
-          }
-        });
+            title: measurableToAdd,
+          },
+        })
         if (data) {
-          setGoalData(prevState => ({
+          setGoalData((prevState) => ({
             ...prevState,
             measureables: [...prevState.measureables, measurableToAdd],
-          }));
+          }))
         }
       } catch (err) {
-        console.error("Error adding measurable", err);
+        console.error('Error adding measurable', err)
       }
     }
-  };
+  }
 
   const editGoalClick = () => {
     // const [goalData, setGoalData] = useState({});
@@ -163,32 +158,40 @@ const SingleGoal = ({ filteredGoals }) => {
               <div className="cardText textAlign">
                 <h2 className="singlePageTitle">{goalData.title}</h2>
                 <div className="dashButtonContainer">
-                  <button onClick={editGoalClick} className="dashButton">Edit Goal</button>
-                  <button className="dashButton" >Complete</button>
-                  <button onClick={handleDelClick} className="dashButton">Delete</button>
+                  <button onClick={editGoalClick} className="dashButton">
+                    Edit Goal
+                  </button>
+                  <button className="dashButton">Complete</button>
+                  <button onClick={handleDelClick} className="dashButton">
+                    Delete
+                  </button>
                 </div>
                 <div className="goalDashSpacing"></div>
                 <div className="liItem">
                   <h3 className="subHeader">Description</h3>
-                <p className="singlePageText">  {goalData.description}</p>
+                  <p className="singlePageText"> {goalData.description}</p>
                 </div>
                 <div className="liItem">
-                <h3 className="subHeader">Your Why</h3>
-                <p className="regularText"> {goalData.why}</p>
+                  <h3 className="subHeader">Your Why</h3>
+                  <p className="regularText"> {goalData.why}</p>
                 </div>
                 <div className="liItem">
-                <h3 className="subHeader">Measurables</h3>
-                <p className="regularText"> {goalData.measurables}</p>
+                  <h3 className="subHeader">Measurables</h3>
+                  <p className="regularText"> {goalData.measurables}</p>
                 </div>
                 <div className="liItem">
-                <h3 className="subHeader">Target Date</h3>
-                <p className="regularText">{format_date2(goalData.completionDate)}</p>
+                  <h3 className="subHeader">Target Date</h3>
+                  <p className="regularText">
+                    {format_date2(goalData.completionDate)}
+                  </p>
                 </div>
                 <div className="liItem">
-                <h3 className="subHeader">Linked Tasks</h3>
-                <p className="regularText">Map over the associated tasks here once we have that logic built out</p>
+                  <h3 className="subHeader">Linked Tasks</h3>
+                  <p className="regularText">
+                    Map over the associated tasks here once we have that logic
+                    built out
+                  </p>
                 </div>
-                
               </div>
             </article>
           </div>
@@ -295,4 +298,4 @@ const SingleGoal = ({ filteredGoals }) => {
 // 	measureables: [],
 // };
 
-export default SingleGoal;
+export default SingleGoal
