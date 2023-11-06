@@ -35,6 +35,9 @@ const TasksList = ({ tasks = [] }) => {
     return `${currentMonth} ${day}, ${year}`
   }
 
+  const sortedTasks = [...tasks].sort((taskA, taskB) => taskA.completionDate - taskB.completionDate);
+
+
   // const [isComplete, setIsComplete] = useState(task.isComplete);
 
   // const toggleComplete = (value) => {
@@ -42,10 +45,12 @@ const TasksList = ({ tasks = [] }) => {
   // };
 
   // useEffect(() => {
-  // 	// send updated isComplete value to graphQL server when it changes
-  // 	// call mutation here to update task's isComplete field
-  // 	// Example: useMutation(UPDATE_TASK_COMPLETION ({ variables: { taskId: task.id, isComplete } }));
-  // }, [isComplete]);
+	// 	// send updated isComplete value to graphQL server when it changes
+	// 	// call mutation here to update task's isComplete field
+	// 	// Example: useMutation(UPDATE_TASK_COMPLETION ({ variables: { taskId: task.id, isComplete } }));
+	// }, [isComplete]);
+
+  
 
   return (
     <div className="tasksList">
@@ -61,21 +66,19 @@ const TasksList = ({ tasks = [] }) => {
         </select>
       </div>
       <div className="cardFlex">
-        {tasks.map((task) => (
-          <div className="cardText" key={task._id}>
-            <Link to={`/tasks/${task._id}`}>
-              <div className="liItem">
-                <h2 className="taskListTitle">{task.title}</h2>
-                <pre>
-                  <p className="regularText">{task.description}</p>
-                </pre>
-                <p className="regularText">
-                  {format_date(task.completionDate)}
-                </p>
-              </div>
-            </Link>
-          </div>
-        ))}
+      {sortedTasks.map((task) => (  
+        <div className="cardText" key={task._id}>
+          <Link to={`/tasks/${task._id}`}> 
+          <div className="liItem">
+            <h2 className="taskListTitle">{task.title}</h2>
+            <pre className="regularText" >{task.description}</pre>
+            <p className="regularText">{format_date(task.completionDate)}</p>
+            </div>
+          </Link>
+
+        </div>
+        
+      ))}
       </div>
     </div>
   )

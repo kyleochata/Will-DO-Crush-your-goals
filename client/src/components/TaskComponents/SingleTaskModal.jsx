@@ -40,14 +40,41 @@
 
 // export default SingleTask;
 
-
-import { from, useMutation, useQuery } from '@apollo/client';
-import { QUERY_USER , QUERY_TASK} from '../../utils/queries';
-import { DELETE_TASK, EDIT_TASK } from '../../utils/mutations';
-import { useRef, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import format_date from '../../utils/helpers';
+import { from, useMutation, useQuery } from "@apollo/client";
+import { QUERY_USER , QUERY_TASK} from "../../utils/queries";
+import { DELETE_TASK, EDIT_TASK } from "../../utils/mutations";
+import { useRef, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import format_date from "../../utils/helpers";
+import "../Dashboard/Dashboard.css";
+import style from "../../pages/Tasks/Tasks.module.css"
 import Auth from '../../utils/auth';
+
+const format_date2 = (timestamp) => {
+	//month is index 0-11. must add 1 to get correct month
+	let timeStamp = new Date(parseInt(timestamp));
+	let monthNum = timeStamp.getMonth();
+	const months = [
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"May",
+		"Jun",
+		"Jul",
+		"Aug",
+		"Sep",
+		"Oct",
+		"Nov",
+		"Dec",
+	];
+	let currentMonth = months[monthNum];
+	let day = timeStamp.getDate();
+	let year = timeStamp.getFullYear();
+
+	return `${currentMonth} ${day}, ${year}`;
+};
+
 
 
 const SingleTask = ({ filteredTask }) => {
@@ -70,14 +97,14 @@ const SingleTask = ({ filteredTask }) => {
 	const handleDelClick = async () => {
 		try {
 			await deleteTask({
-				variables: { taskId: taskId }
+				variables: { taskId: taskId },
 			});
-			window.location.replace('/tasks');
+			window.location.replace("/tasks");
 		} catch (err) {
-			console.log("catching error")
+			console.log("catching error");
 			throw err;
 		}
-	}
+	};
 
 	const [taskData, settaskData] = useState(task || {});
 	console.log('where is this')
@@ -98,8 +125,8 @@ const SingleTask = ({ filteredTask }) => {
 		const { name, value } = event.target;
 
 		settaskData((prevState) => {
-			console.log('Old state:', prevState);
-			console.log('New value for', name, ':', value);
+			console.log("Old state:", prevState);
+			console.log("New value for", name, ":", value);
 
 			return {
 				...prevState,
@@ -108,18 +135,21 @@ const SingleTask = ({ filteredTask }) => {
 		});
 	};
 
-
 	const [changeTask] = useMutation(EDIT_TASK,{refetchQueries:["user",QUERY_USER,"task",QUERY_TASK]});
 	const updatedTask = (taskData) => {
-		return changeTask({ variables: taskData })
-			// .then((response) => {
-			// 	console.log('Task updated:', response.data.changeTask)
-			// 	// window.location.reload();
-			// })
-			// .catch((error) => {
-			// 	console.error('Error updating task:', error)
-			// })
-	}
+		const taskDataWithDateString = {
+			...taskData,
+			completionDate: format_date(taskData.completionDate),
+		  };
+
+		changeTask({ variables: taskDataWithDateString })
+			.then((response) => {
+				console.log("Task updated:", response.data.changeTask);
+			})
+			.catch((error) => {
+				console.error("Error updating task:", error);
+			});
+	};
 	// const handleSubmit = async (event) => {
 	// 	event.preventDefault();
 	// 	updatedTask(taskData);
@@ -128,6 +158,7 @@ const SingleTask = ({ filteredTask }) => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
+
 
 		try {
 			taskData.taskId = taskData._id;
@@ -141,101 +172,113 @@ const SingleTask = ({ filteredTask }) => {
 			seteditTask(false); // I changed this to false to close the edit form on submit
 			// You might want to refetch task data here if needed
 		} catch (error) {
-			console.error('Error updating task:', error);
+			console.error("Error updating task:", error);
 			// Update UI to show error message
 		}
 	};
-
 
 	const editTaskClick = () => {
 		// const [taskData, settaskData] = useState({});
 		handleSubmit();
 		seteditTask(!editTask);
+	};
 
-	}
+	const cancelEdit = () => {
+		seteditTask(false);
+	  };
 
 	return (
 		<div>
 			{!editTask && (
-				<div>
-					<div>
-						<h2>title: {taskData.title}</h2>
-						<p>due date: {format_date(taskData.completionDate)}</p>
-						<p>description: {taskData.description}</p>
-						<p>goal: {console.log(taskData)}</p>
-					</div>
-					<div>
-						<section>priority: {taskData.priority}</section>
-						{/* Complete button  <Link to={`/goals/${goal._id}`}> FIND WAY to switch completed BOOLEAN to true for that goal id. FIND WAY to edit goal - Maybe reuse AddGoalBtn or create a new modal similar to add goal but add update goal btn. Need data to be shown and assigned to user. */}
-						<button
-							onClick={editTaskClick}
-						>Edit Task</button>
-						<button>Complete</button>
-						<button
-							onClick={handleDelClick}
-						>Delete</button>
+				<div className="singlePageMain">
+					<div className="cards">
+						<article className="oneCard">
+							<div className="cardText textAlign">
+								<h2 className="singlePageTitle">{taskData.title}</h2>
+								<div className="dashButtonContainer">
+									<button onClick={editTaskClick} className="dashButton">
+										Edit Task
+									</button>
+									<button className="dashButton">
+										Complete
+									</button>
+									<button onClick={handleDelClick} className="dashButton">
+										Delete
+									</button>
+								</div>
+								<div className="goalDashSpacing"></div>
+								<div className="liItem">
+									<h3 className="subHeader">Description</h3>
+									<p className="singlePageText"> {taskData.description}</p>
+								</div>
+								<div className="liItem">
+									<h3 className="subHeader">Priority</h3>
+									<p className="singlePageText"> {taskData.priority}</p>
+								</div>
+								<div className="liItem">
+									<h3 className="subHeader">Target Date</h3>
+									<p className="singlePageText"> {format_date2(taskData.completionDate)}</p>
+								</div>
+							</div>
+						</article>
 					</div>
 				</div>
 			)}
-			{editTask && (<form
-				onSubmit={handleSubmit}
-			>
-				<div>
-					<label>
-						Title:
-						<div>A broad overview of your task. "Learn to develop web applications"</div>
-						<input
-							placeholder="Your Task Title"
-							type="text"
-							name="title"
-							value={taskData.title}
-							onChange={handleInputChange}
-							required
-						/>
-					</label>
-					<br></br>
-					<label>
-						Description:
-						<div>Be specific with your task. "Become a full stack developer specializing in JS" </div>
-						<textarea
-							placeholder="Give some specifics about your goal here"
-							name="description"
-							value={taskData.description}
-							onChange={handleInputChange}
-							required
-						/>
-					</label>
-					<br></br>
-					<label>
-						Due Date:
-						{/* <div>Making your goals time-bound provides a sense of urgency and a clear deadline, motivating you to take action and track your progress </div> */}
-						<div></div>
-						<input
-							type="date"
-							name="completionDate"
-							value={format_date(taskData.completionDate)}
-							onChange={handleInputChange}
-							required
-						/>
-					</label>
-					<br></br>
-					<label>
-						Priority:
-						{/* <div>How important is this task? Choose Low, Medium, or High.</div> */}
-						<div></div>
-						<select
-							name="priority"
-							value={taskData.priority}
-							onChange={handleInputChange}
-							required
-						>
-							<option value="Low">Low</option>
-							<option value="Medium">Medium</option>
-							<option value="High">High</option>
-						</select>
-					</label>
-					<br></br>
-					<label>
+			{editTask && (
+				<div className={style.editContent}>
+				<div className={style.editTitle}>EDIT GOAL</div>
+				<div className={style.formContainer}>
+				<form onSubmit={handleSubmit} className={style.addTaskForm}>
+					<div className={style.formInputs}>
+						<label className={style.addTaskModalTxt}>
+							Title:
+							<input
+								placeholder="Your Task Title"
+								type="text"
+								name="title"
+								value={taskData.title}
+								onChange={handleInputChange}
+								className={style.addTaskModalInput}
+								required
+							/>
+						</label>
+						<label className={style.addTaskModalTxt}>
+							Description:
+							<textarea
+								placeholder="Give some specifics about your goal here"
+								name="description"
+								value={taskData.description}
+								onChange={handleInputChange}
+								className={style.addTaskModalInput}
+								required
+							/>
+						</label>
+						<label className={style.addTaskModalTxt}>
+							Target Date:
+							<input
+								type="date"
+								name="completionDate"
+								value={format_date(taskData.completionDate)}
+								onChange={handleInputChange}
+								className={style.addTaskModalInput}
+								required
+							/>
+						</label>
+						<label className={style.addTaskModalTxt}>
+							Priority:
+							<select
+								name="priority"
+								value={taskData.priority}
+								onChange={handleInputChange}
+								className={style.addTaskModalInput}
+								required
+							>
+								<option value="Low">Low</option>
+								<option value="Medium">Medium</option>
+								<option value="High">High</option>
+							</select>
+						</label>
+						<label>
 						Add to Goal:
 						<br></br>
 						<select
@@ -249,29 +292,22 @@ const SingleTask = ({ filteredTask }) => {
 						</select>
 
 					</label>
-
-
-					{/* <label>
-						Due Date:
-						<div>Making your goals time-bound provides a sense of urgency and a clear deadline, motivating you to take action and track your progress </div>
-						<input
-							type="date"
-							name="completionStatus"
-							value={format_date(taskData.completed)}
-							onChange={handleInputChange}
-							required
-						/>
-					</label> */}
+					</div>
+					<div className={style.editButtonContainer}>
+						<button className={style.editSubmitButton} type="submit" >Update Task</button>
+						<button
+                className={style.editSubmitButton}
+                onClick={cancelEdit}
+              >
+                Cancel
+              </button>
+					</div>
+				</form>
 				</div>
-				<div>
-					<button type="submit"
-					>
-						Update Task
-					</button>
 				</div>
-			</form>)}
+			)}
 		</div>
-	)
-}
+	);
+};
 
 export default SingleTask;
