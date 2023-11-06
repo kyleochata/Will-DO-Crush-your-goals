@@ -4,10 +4,7 @@ const typeDefs = `
   type User {
     _id: ID
     authID: String!
-    firstName: String
-    lastName: String
     userName: String
-    email: String
     tasks: [Task]
     goals: [Goal]
     measurables: [Measurable]
@@ -53,7 +50,7 @@ const typeDefs = `
 
   type Query {
     users: [User]
-    user(userId: ID!): User
+    user(authID: String!): User
     tasks: [Task]
     task(taskId: ID!): Task
     goals: [Goal]
@@ -76,6 +73,7 @@ const typeDefs = `
     deleteGoal(goalId: ID!): Goal
     deleteTask(taskId: ID!): Task
     deleteMeasurable(measurableId: ID!): Measurable
+    updateTaskCompletion(taskId: ID!, completed: Boolean!): Task
     checkUser(authID: String!, username: String!): Auth
   }
 `;

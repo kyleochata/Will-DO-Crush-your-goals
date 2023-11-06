@@ -3,29 +3,37 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_USER = gql`
-  query getUser($userId: ID!) {
-    user(userId: $userId) {
-      _id
-      firstName
-      lastName
-      goals {
-        _id
-        title
-        description
-        completionDate
-        createdAt
-        completed
-        tasks {
-          _id
-          title
-          description
-          completionDate
-          priority
-          completed
-        }
-      }
-    }
-  }
+	query getUser($authID: String!) {
+		user(authID: $authID) {
+			_id
+			userName
+			authID
+			goals {
+				_id
+				title
+				description
+				completionDate
+				createdAt
+				completed
+				tasks {
+					_id
+					title
+					description
+					completionDate
+					priority
+					completed
+				}
+			}
+			tasks {
+				_id
+				title
+				description
+				completionDate
+				priority
+				completed
+			}
+		}
+	}
 `;
 
 export const QUERY_ALL_USERS = gql`

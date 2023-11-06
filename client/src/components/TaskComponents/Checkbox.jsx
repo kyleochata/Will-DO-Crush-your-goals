@@ -1,35 +1,25 @@
-import { useState, useEffect } from 'react';
+import React from "react";
 
-const CheckboxComponent = () => {
-  const [checked, setChecked] = useState(false);
+const CheckboxComponent = ({ isComplete, toggleComplete }) => {
+	const handleCheckbox = () => {
+		// Toggle the isComplete value and pass it to the callback function
+		toggleComplete(!isComplete);
+	};
 
-  const handleCheckbox = () => {
-    setChecked(!checked);
-  };
-
-  return (
-    <div>
-      <Checkbox
-        label=' Complete'
-        value={checked}
-        onChange={handleCheckbox}
-      />
-    </div>
-  );
+	return (
+		<div>
+			<Checkbox label="Complete" value={isComplete} onChange={handleCheckbox} />
+		</div>
+	);
 };
 
 const Checkbox = ({ label, value, onChange }) => {
-  return (
-    <label>
-      <input
-        type='checkbox'
-        checked={value}
-        onChange={onChange}
-      />
-      {label}
-    </label>
-  );
+	return (
+		<label>
+			<input type="checkbox" checked={value} onChange={onChange} />
+			{label}
+		</label>
+	);
 };
 
 export default CheckboxComponent;
-
