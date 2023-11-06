@@ -25,8 +25,13 @@ const resolvers = {
 			return User.findOne({ authID: authID }).populate('tasks').populate('goals').populate('measurables');
 		},
 		goal: async (_, { goalId }) => {
-			return Goal.findById(goalId).populate('user').populate('tasks').populate('measurables');
+			console.log('goalId query server log')
+			const goal = await Goal.findOne({ _id: goalId }).populate('user').populate('tasks').populate('measurables');
+			return goal;
 		},
+		// goal: async (_, { goalId }) => {
+		// 	console.log('goal query server log')
+		// },
 		task: async (_, { taskId }) => {
 			return Task.findById(taskId).populate('user').populate('goal').populate('measurable');
 		},
