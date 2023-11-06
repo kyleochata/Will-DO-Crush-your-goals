@@ -28,7 +28,7 @@ const GoalsList = ({ goals = [] }) => {
     <div className="tasksList">
       <div className="cardFlex">
         {goals.map((goal) => (
-          <div className="cardText">
+          <div className="cardText" key={goal._id}>
               <Link to={`/goals/${goal._id}`}>
               <div className="liItem">
                 <h2 className="taskListTitle">{goal.title}</h2>

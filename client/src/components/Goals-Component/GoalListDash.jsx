@@ -11,7 +11,6 @@ const GoalsListDash = ({ goals = [] }) => {
 
   const format_date = (timestamp) => {
     let timeStamp = new Date(parseInt(timestamp));
-    console.log("date", timestamp)
     let monthNum = timeStamp.getMonth();
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let currentMonth = months[monthNum];
@@ -44,7 +43,7 @@ const GoalsListDash = ({ goals = [] }) => {
     <div className="tasksList">
       {next5Goals.map((goal) => (
         <div className="cardText" key={goal._id}>
-          <Link to={`/tasks/${goal._id}`}> 
+          <Link to={`/goals/${goal._id}`}> 
             <div className="liItem">
             <h2 className="taskListTitle">{goal.title}</h2>
             <p className="regularText">Target Date: {format_date(goal.completionDate)}</p>
