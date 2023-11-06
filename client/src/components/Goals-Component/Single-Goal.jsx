@@ -78,16 +78,15 @@ const SingleGoal = ({ filteredGoals }) => {
   // };
 
   const handleInputChange = (event) => {
-    const { name, value, options } = event.target;
+    const { name, value } = event.target;
 
-    if (event.target.multiple) {
-      const selectedValues = Array.from(options)
-        .filter(option => option.selected)
-        .map(option => option.value);
-      setGoalData(prevState => ({
-        ...prevState,
-        [name]: selectedValues,
-      }));
+  if (name === 'completionDate') {
+    // When the input field is for completionDate, convert the value to a timestamp
+    setGoalData((prevState) => ({
+      ...prevState,
+      // Convert the date string to a timestamp
+      [name]: Date.parse(value), 
+    }));
     } else {
       setGoalData(prevState => ({
         ...prevState,
@@ -100,7 +99,12 @@ const SingleGoal = ({ filteredGoals }) => {
 
   const [changeGoal] = useMutation(EDIT_GOAL);
   const updatedGoal = (goalData) => {
-    changeGoal({ variables: goalData })
+    const goalDataWithDateString = {
+      ...goalData,
+      completionDate: format_date(goalData.completionDate),
+    };
+    
+    changeGoal({ variables: goalDataWithDateString })
       .then((response) => {
         console.log("Goal updated:", response.data.changeGoal);
       })
@@ -144,6 +148,10 @@ const SingleGoal = ({ filteredGoals }) => {
   const editGoalClick = () => {
     // const [goalData, setGoalData] = useState({});
     setEditGoal(!editGoal);
+  };
+
+  const cancelEdit = () => {
+    setEditGoal(false);
   };
 
   return (
@@ -261,12 +269,18 @@ const SingleGoal = ({ filteredGoals }) => {
               />
             </label>
             </div>
-            <div className={style.submitButtonContainer}>
+            <div className={style.editButtonContainer}>
               <button
-                className={style.submitButton}
+                className={style.editSubmitButton}
                 type="submit"
               >
                 Edit Goal
+              </button>
+              <button
+                className={style.editSubmitButton}
+                onClick={cancelEdit}
+              >
+                Cancel
               </button>
             </div>
           </form>

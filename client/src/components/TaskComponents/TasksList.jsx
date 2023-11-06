@@ -63,7 +63,7 @@ const TasksList = ({ tasks = [] }) => {
           <Link to={`/tasks/${task._id}`}> 
           <div className="liItem">
             <h2 className="taskListTitle">{task.title}</h2>
-            <pre><p className="regularText">{task.description}</p></pre>
+            <pre className="regularText" >{task.description}</pre>
             <p className="regularText">{format_date(task.completionDate)}</p>
             </div>
           </Link>

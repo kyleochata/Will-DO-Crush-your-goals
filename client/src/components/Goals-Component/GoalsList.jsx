@@ -36,7 +36,6 @@ const GoalsList = ({ goals = [] }) => {
               <div className="liItem">
                 <h2 className="taskListTitle">{goal.title}</h2>
                 <p className="regularText">{goal.description}</p>
-
                 <p className="regularText">{format_date(goal.completionDate)}</p>
                 </div>
             </Link>
