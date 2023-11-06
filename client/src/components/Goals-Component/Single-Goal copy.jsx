@@ -1,5 +1,5 @@
 import { from, useMutation } from "@apollo/client";
-import { DELETE_GOAL, EDIT_GOAL,ADD_MEASURABLE } from '../../utils/mutations';
+import { DELETE_GOAL, EDIT_GOAL } from "../../utils/mutations";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import format_date from "../../utils/helpers";
@@ -41,7 +41,6 @@ const SingleGoal = ({ filteredGoals }) => {
   console.log(goal.completionDate);
   const [editGoal, setEditGoal] = useState(false);
   console.log(filteredGoals);
-  const [addMeasurable] = useMutation(ADD_MEASURABLE);
   const handleDelClick = async () => {
     try {
       await deleteGoal({
@@ -56,48 +55,13 @@ const SingleGoal = ({ filteredGoals }) => {
 
   const [goalData, setGoalData] = useState(goal);
 
-
-  useEffect(() => {
-    if (!goalData.measurables) {
-      setGoalData((prevGoalData) => ({
-        ...prevGoalData,
-        measurables: []
-      }));
-    }
-  }, [goalData, setGoalData]);
-
-  console.log("here");
-  console.log(goalData);
-
-
-  // const handleInputChange = (event) => {
-  //   setGoalData({
-  //     ...goalData,
-  //     [event.target.name]: event.target.value,
-  //   });
-  //   console.log(goalData);
-  // };
-
   const handleInputChange = (event) => {
-    const { name, value, options } = event.target;
-
-    if (event.target.multiple) {
-      const selectedValues = Array.from(options)
-        .filter(option => option.selected)
-        .map(option => option.value);
-      setGoalData(prevState => ({
-        ...prevState,
-        [name]: selectedValues,
-      }));
-    } else {
-      setGoalData(prevState => ({
-        ...prevState,
-        [name]: value,
-      }));
-    }
+    setGoalData({
+      ...goalData,
+      [event.target.name]: event.target.value,
+    });
+    console.log(goalData);
   };
-
-
 
   const [changeGoal] = useMutation(EDIT_GOAL);
   const updatedGoal = (goalData) => {
@@ -111,33 +75,8 @@ const SingleGoal = ({ filteredGoals }) => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    goalData.goalId = goalData._id;
     updatedGoal(goalData);
     setEditGoal(!editGoal);
-  };
-
-
-  const addMeasurableClick = async (event) => {
-    event.preventDefault();
-    const measurableToAdd = prompt("Enter new measurable:"); // Simple prompt for demo, consider a better UI for production
-    if (measurableToAdd) {
-      try {
-        const { data } = await addMeasurable({
-          variables: {
-            goalId: goalData._id,
-            title: measurableToAdd
-          }
-        });
-        if (data) {
-          setGoalData(prevState => ({
-            ...prevState,
-            measureables: [...prevState.measureables, measurableToAdd],
-          }));
-        }
-      } catch (err) {
-        console.error("Error adding measurable", err);
-      }
-    }
   };
 
   const editGoalClick = () => {
@@ -154,6 +93,7 @@ const SingleGoal = ({ filteredGoals }) => {
               <div className="cardText textAlign">
                 <h2 className="singlePageTitle">{goalData.title}</h2>
                 <div className="dashButtonContainer">
+                  <EditGoalBtn editGoal={editGoal} />
                   <button onClick={editGoalClick} className="dashButton">Edit Goal</button>
                   <button className="dashButton" >Complete</button>
                   <button onClick={handleDelClick} className="dashButton">Delete</button>
@@ -185,10 +125,6 @@ const SingleGoal = ({ filteredGoals }) => {
           </div>
           <div>
             {/* Complete button  <Link to={`/goals/${goal._id}`}> FIND WAY to switch completed BOOLEAN to true for that goal id. FIND WAY to edit goal - Maybe reuse AddGoalBtn or create a new modal similar to add goal but add update goal btn. Need data to be shown and assigned to user. */}
-          </div>
-          <div>
-            <section>heres for you to add measurables</section>
-            <button onClick={addMeasurableClick}>Add Measurables</button>
           </div>
         </div>
       )}
@@ -273,11 +209,7 @@ const SingleGoal = ({ filteredGoals }) => {
       </div>
       )}
     </div>
-  )
-}
-
-// goalData.defaultProps = {
-// 	measureables: [],
-// };
+  );
+};
 
 export default SingleGoal;

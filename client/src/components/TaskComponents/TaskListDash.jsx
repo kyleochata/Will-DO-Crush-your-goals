@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import style from "../Dashboard/Dashboard.css";
+import "../Dashboard/Dashboard.css";
 import { useState, useEffect } from 'react';
 import CheckboxComponent from './Checkbox';
 
 const TasksListDash = ({ tasks = [] }) => {
   if (!tasks.length) {
-    return <h3 className={style.noTasks}>NO TASKS YET</h3>;
+    return <h3 className="noTasks">NO TASKS YET</h3>;
   }
 
   const [filter, setFilter] = useState('all');
@@ -13,7 +13,6 @@ const TasksListDash = ({ tasks = [] }) => {
   const format_date = (timestamp) => {
     //month is index 0-11. must add 1 to get correct month
     let timeStamp = new Date(parseInt(timestamp));
-    console.log("date", timestamp)
     let monthNum = timeStamp.getMonth();
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let currentMonth = months[monthNum];
@@ -44,7 +43,7 @@ const TasksListDash = ({ tasks = [] }) => {
   return (
     <div className="tasksList">
       {next5Tasks.map((task) => (
-        <div className="card-text" key={task._id}>
+        <div className="cardText" key={task._id}>
           <Link to={`/tasks/${task._id}`}> 
             <div className="liItem">
             <h2 className="taskListTitle">{task.title}</h2>

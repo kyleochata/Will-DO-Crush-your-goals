@@ -12,15 +12,11 @@ import { QUERY_USER } from '../../utils/queries'
 export default () => {
 
     const auth_ID = Auth.getProfile().authenticatedPerson.authID
-    console.log('query plz')
-    console.log(auth_ID)
     const { data } = useQuery(QUERY_USER, {
       variables: { authID: auth_ID },
     })
-    console.log(auth_ID)
     const user = data?.user || {}
-    console.log(data)
-    console.log(user)
+
 
     const [addTask] = useMutation(ADD_TASK);
     const [addGoal] = useMutation(ADD_GOAL);
@@ -45,7 +41,7 @@ export default () => {
     };
 
     return (
-        <section class="cards">
+        <section className="cards">
             <article className="oneCard">
                 <h2 className="cardTitle">TASKS</h2>
                 <p className="dashText">Your next 5 Tasks<br></br>In order<br></br>By most recent target dates</p>

@@ -3,10 +3,10 @@ import "../Dashboard/Dashboard.css"
 import { useState, useEffect } from 'react';
 import CheckboxComponent from './Checkbox';
 
+
 const TasksList = ({ tasks = [] }) => {
   if (!tasks.length) {
-    // return <h3 className={style.noTasks}>NO TASKS YET</h3>;
-    return <h3>NO TASKS YET</h3> //TODO: need to change this back
+    return <h3 className="noTasks">NO TASKS YET</h3>;
   }
 
   const [filter, setFilter] = useState('all');
@@ -14,7 +14,6 @@ const TasksList = ({ tasks = [] }) => {
   const format_date = (timestamp) => {
     //month is index 0-11. must add 1 to get correct month
     let timeStamp = new Date(parseInt(timestamp));
-    console.log("date", timestamp)
     let monthNum = timeStamp.getMonth();
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let currentMonth = months[monthNum];
@@ -59,7 +58,7 @@ const TasksList = ({ tasks = [] }) => {
           <Link to={`/tasks/${task._id}`}> 
           <div className="liItem">
             <h2 className="taskListTitle">{task.title}</h2>
-            <p className="regularText">{task.description}</p>
+            <pre><p className="regularText">{task.description}</p></pre>
             <p className="regularText">{format_date(task.completionDate)}</p>
             </div>
           </Link>

@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import Modal from 'react-modal'
 import style from '../../pages/Tasks/Tasks.module.css'
 import { useMutation } from '@apollo/client'
-import { ADD_GOAL } from '../../utils/mutations'
+import { EDIT_GOAL } from '../../utils/mutations'
 
-const AddGoalBtn = ({ createGoal }) => {
-  const [showModal, setShowModal] = useState(false)
+const EditGoalBtn = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [editGoal, setEditGoal] = useState(false);
+
   const [goalData, setGoalData] = useState({
     title: "",
     description: "",
@@ -19,27 +21,31 @@ const AddGoalBtn = ({ createGoal }) => {
       ...goalData,
       [event.target.name]: event.target.value,
     });
+    console.log(goalData);
+  };
+
+  const [changeGoal] = useMutation(EDIT_GOAL);
+
+  const updatedGoal = (goalData) => {
+    changeGoal({ variables: goalData })
+      .then((response) => {
+        console.log("Goal updated:", response.data.changeGoal);
+      })
+      .catch((error) => {
+        console.error("Error updating goal:", error);
+      });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    createGoal(goalData);
-    setGoalData({
-      // Reset the form fields to empty values
-      title: "",
-      description: "",
-      why: "",
-      measureables: "",
-      completionDate: "",
-    });
-    setShowModal(false);
-    window.location.reload();
+    updatedGoal(goalData);
+    setEditGoal(!editGoal);
   };
 
   return (
     <>
       <button onClick={() => setShowModal(true)} className="dashButton">
-        + Add Goal
+        Edit Goal Modal
       </button>
       <Modal
         className={style.addTaskModal}
@@ -53,10 +59,10 @@ const AddGoalBtn = ({ createGoal }) => {
           X
         </button>
         <div className={style.modalContent}>
-          <div className={style.modalTitle}>ADD GOAL</div>
+          <div className={style.modalTitle}>EDIT GOAL</div>
           <div className={style.formContainer}>
-          <form onSubmit={handleSubmit} className={style.addTaskForm}>
-            <div className={style.formInputs}>
+            <form onSubmit={handleSubmit} className={style.addTaskForm}>
+              <div className={style.formInputs}>
               <label className={style.addTaskModalTxt}>
                 Title:
                 <div className={style.goalDesc}>A broad overview of your goal. "Learn to develop web applications"</div>
@@ -120,19 +126,19 @@ const AddGoalBtn = ({ createGoal }) => {
               </label>
               </div>
               <div className={style.submitButtonContainer}>
-              <button
-                className={style.submitButton}
-                type="submit"
-              >
-                Create Goal
-              </button>
+                <button
+                  className={style.submitButton}
+                  type="submit"
+                >
+                  Edit Goal
+                </button>
               </div>
-          </form>
+            </form>
           </div>
-          </div>
+        </div>
       </Modal>
     </>
   );
 };
 
-export default AddGoalBtn
+export default EditGoalBtn;
