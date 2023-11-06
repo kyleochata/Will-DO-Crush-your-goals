@@ -32,15 +32,15 @@ const format_date2 = (timestamp) => {
   return `${currentMonth} ${day} ${year}`
 }
 
-const SingleGoal = ({ filteredGoals }) => {
+const SingleGoal = ({ goalInfo }) => {
   const [deleteGoal] = useMutation(DELETE_GOAL)
   // const [goalState, setGoalState] = useState(true);
   const { goalId } = useParams()
-  const goal = filteredGoals[0]
+  const goal = goalInfo
   console.log(goalId)
   console.log(goal.completionDate)
   const [editGoal, setEditGoal] = useState(false)
-  console.log(filteredGoals)
+  console.log(goalInfo)
   const [addMeasurable] = useMutation(ADD_MEASURABLE)
   const handleDelClick = async () => {
     try {
@@ -78,13 +78,6 @@ const SingleGoal = ({ filteredGoals }) => {
 
   const handleInputChange = (event) => {
     const { name, value, options } = event.target
-    // if (name === 'completionDate') {
-    //   let date = new Date(value)
-    //   setGoalData((prevState) => ({
-    //     ...prevState,
-    //     [name]: date,
-    //   }))
-    // }
     if (event.target.multiple) {
       const selectedValues = Array.from(options)
         .filter((option) => option.selected)
@@ -266,8 +259,8 @@ const SingleGoal = ({ filteredGoals }) => {
                   </div>
                   <textarea
                     placeholder="What metrics will help you know your goal is complete?"
-                    name="measureables"
-                    value={goalData.measureables}
+                    name="measurables"
+                    value={goalData.measurables}
                     onChange={handleInputChange}
                     className={style.addTaskModalInput}
                     required
