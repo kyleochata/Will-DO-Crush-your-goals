@@ -53,7 +53,10 @@ export default () => {
                     <Link to="/tasks">
                         <button className="dashButton">View All</button>
                     </Link>
-                    <AddTaskBtn createTask={createTask} />
+                    <AddTaskBtn
+                    createTask={createTask}
+					goals={user.goals}
+            />
                 </div>
                 <div className="goalDashSpacing"></div>
                 <TasksListDash tasks={user.tasks} />

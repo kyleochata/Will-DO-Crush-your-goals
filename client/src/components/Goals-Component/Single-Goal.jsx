@@ -1,5 +1,5 @@
 import { from, useMutation } from '@apollo/client';
-import { DELETE_GOAL, EDIT_GOAL } from '../../utils/mutations';
+import { DELETE_GOAL, EDIT_GOAL,ADD_MEASURABLE } from '../../utils/mutations';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import format_date from '../../utils/helpers';
@@ -13,6 +13,7 @@ const SingleGoal = ({ filteredGoals }) => {
   console.log(goal.completionDate)
   const [editGoal, setEditGoal] = useState(false);
   console.log(filteredGoals);
+  const [addMeasurable] = useMutation(ADD_MEASURABLE);
   const handleDelClick = async () => {
     try {
       await deleteGoal({
@@ -27,13 +28,48 @@ const SingleGoal = ({ filteredGoals }) => {
 
   const [goalData, setGoalData] = useState(goal);
 
+
+  useEffect(() => {
+    if (!goalData.measurables) {
+      setGoalData((prevGoalData) => ({
+        ...prevGoalData,
+        measurables: []
+      }));
+    }
+  }, [goalData, setGoalData]);
+
+  console.log("here");
+  console.log(goalData);
+
+
+  // const handleInputChange = (event) => {
+  //   setGoalData({
+  //     ...goalData,
+  //     [event.target.name]: event.target.value,
+  //   });
+  //   console.log(goalData);
+  // };
+
   const handleInputChange = (event) => {
-    setGoalData({
-      ...goalData,
-      [event.target.name]: event.target.value,
-    });
-    console.log(goalData);
+    const { name, value, options } = event.target;
+
+    if (event.target.multiple) {
+      const selectedValues = Array.from(options)
+        .filter(option => option.selected)
+        .map(option => option.value);
+      setGoalData(prevState => ({
+        ...prevState,
+        [name]: selectedValues,
+      }));
+    } else {
+      setGoalData(prevState => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   };
+
+
 
   const [changeGoal] = useMutation(EDIT_GOAL);
   const updatedGoal = (goalData) => {
@@ -47,8 +83,33 @@ const SingleGoal = ({ filteredGoals }) => {
   }
   const handleSubmit = async (event) => {
     event.preventDefault();
+    goalData.goalId = goalData._id;
     updatedGoal(goalData);
     setEditGoal(!editGoal);
+  };
+
+
+  const addMeasurableClick = async (event) => {
+    event.preventDefault();
+    const measurableToAdd = prompt("Enter new measurable:"); // Simple prompt for demo, consider a better UI for production
+    if (measurableToAdd) {
+      try {
+        const { data } = await addMeasurable({
+          variables: {
+            goalId: goalData._id,
+            title: measurableToAdd
+          }
+        });
+        if (data) {
+          setGoalData(prevState => ({
+            ...prevState,
+            measureables: [...prevState.measureables, measurableToAdd],
+          }));
+        }
+      } catch (err) {
+        console.error("Error adding measurable", err);
+      }
+    }
   };
 
   const editGoalClick = () => {
@@ -80,6 +141,10 @@ const SingleGoal = ({ filteredGoals }) => {
             <section>{goalData.tasks}</section>
             <button>Edit Tasks</button>
           </div>
+          <div>
+            <section>heres for you to add measurables</section>
+            <button onClick={addMeasurableClick}>Add Measurables</button>
+          </div>
         </div>
       )}
       {editGoal && (<form
@@ -98,6 +163,7 @@ const SingleGoal = ({ filteredGoals }) => {
               required
             />
           </label>
+          <br></br>
           <label>
             Description:
             <div>Be specific with your goal. "Become a full stack developer specializing in JS" </div>
@@ -109,6 +175,7 @@ const SingleGoal = ({ filteredGoals }) => {
               required
             />
           </label>
+          <br></br>
           <label>
             Why:
             <div>Make it relevant. "Becoming a full-stack web developer aligns with my career aspirations and will open up job opportunities in a field that I'm passionate about."  </div>
@@ -120,16 +187,27 @@ const SingleGoal = ({ filteredGoals }) => {
               required
             />
           </label>
+          <br></br>
           <label>
-            Measurables
-            <div>Give quantifiable examples of how you will know your goal is completed. "Complete a full stack web bootcamp, build a portfolio, contribute to at least 3 open source Githubs, build at least 5 MERN applications" </div>
-            <textarea
+            Measurables:
+            <div>Give quantifiable examples of how you will know your goal is completed.</div>
+            <select
               name="measureables"
               value={goalData.measureables}
               onChange={handleInputChange}
-              required
-            />
+              multiple
+            >
+              {goalData.measureables && Array.isArray(goalData.measureables) && (
+                goalData.measureables.map((measurable, index) => (
+                  <option key={index} value={measurable}>
+                    {measurable}
+                  </option>
+                ))
+              )}
+            </select>
+
           </label>
+          <br></br>
           <label>
             Due Date:
             <div>Making your goals time-bound provides a sense of urgency and a clear deadline, motivating you to take action and track your progress </div>
@@ -152,5 +230,9 @@ const SingleGoal = ({ filteredGoals }) => {
     </div>
   )
 }
+
+// goalData.defaultProps = {
+// 	measureables: [],
+// };
 
 export default SingleGoal;

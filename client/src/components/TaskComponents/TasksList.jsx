@@ -5,7 +5,8 @@ import CheckboxComponent from './Checkbox';
 
 const TasksList = ({ tasks = [] }) => {
   if (!tasks.length) {
-    return <h3 className={style.noTasks}>NO TASKS YET</h3>;
+    // return <h3 className={style.noTasks}>NO TASKS YET</h3>;
+    return <h3>NO TASKS YET</h3> //TODO: need to change this back
   }
 
   const [filter, setFilter] = useState('all');
