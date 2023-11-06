@@ -1,5 +1,4 @@
-
-.cards{
+.cards {
     width: 100vw;
     display: flex;
     justify-content: center;
@@ -17,7 +16,7 @@
 
 }
 
-.cardTitle{
+.cardTitle {
     padding-bottom: 0.5rem;
     text-align: center;
     margin: 0 auto;
@@ -25,7 +24,7 @@
 
 }
 
-.dashText{
+.dashText {
     color: rgb(98, 98, 98);
     margin: 0 auto 0.5rem;
     text-align: center;
@@ -33,50 +32,52 @@
     font-size: .75rem;
 }
 
-.cardText{
+.cardText {
     margin: 0 auto;
     font-weight: 500;
     padding: 0;
     list-style-type: none;
     display: flex;
     flex-direction: column;
-    
+    max-width: 95%;
+    min-width: 45%;
+
 
 }
 
-.liItem{
-    padding: .3rem ;
+.liItem {
+    padding: .3rem;
     text-align: center;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     margin-bottom: 1rem;
 }
 
-.dashButtonContainer{
+.dashButtonContainer {
     display: flex;
     gap: 1rem;
     align-items: flex-end;
-    justify-content: center;    
+    justify-content: center;
 }
 
-.dashButton{
+.dashButton {
     background-color: #276891;
     color: white;
     font-weight: 700;
 }
 
-.dashButton:hover{
+.dashButton:hover {
     background-color: #3d779c;
 }
 
-.dashButton:active{
+.dashButton:active {
     background-color: #225c7f;
     -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
-       -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
-            box-shadow: inset 0px 0px 5px #c1c1c1;
-  }
+    -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+    box-shadow: inset 0px 0px 5px #c1c1c1;
+}
 
-  @media screen and (max-width:900px) {
-    .cards{
+@media screen and (max-width:900px) {
+    .cards {
         flex-direction: column;
         align-items: center;
         padding: 0 1rem;
@@ -96,49 +97,73 @@
 
 /* start task list dashboard styles */
 
-select{
+select {
     padding: 0.25rem;
     font-size: 1rem;
 }
 
-.task-filter{
+.mainTask {
+    width: 100vw;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.task-filter {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: 5px;
 }
 
-.filterText{ 
+.filterText {
     margin-right: .75rem;
     font-size: 1rem;
     font-weight: 700;
 }
 
-.noTasks{
+.noTasks {
     font-size: 2rem;
     text-align: center;
-  }
-  
-  .tasks-list {
+}
+
+.tasks-list {
     display: flex;
     flex-wrap: wrap;
-  }
-  
-  .taskListTitle{
+}
+
+.taskListTitle {
     margin: 0 auto;
     color: black;
-  }
-  
-  .regularText{
+}
+
+.regularText {
     color: black;
-    
-  }
 
-  .task-filter{
+}
+
+.task-filter {
     margin-bottom: 1rem;
-  
-  }
 
-  .goalDashSpacing{
+}
+
+.goalDashSpacing {
     height: 1rem;
-  }
+}
+
+.cardFlex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 750px) {
+    .cardFlex {
+        flex-direction: column;
+    }
+
+    .cardText {
+        width: 95%;
+    }
+}

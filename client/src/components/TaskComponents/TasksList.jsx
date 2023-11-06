@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import style from "../../pages/Tasks/Tasks.module.css";
+import "../Dashboard/Dashboard.css"
 import { useState, useEffect } from 'react';
 import CheckboxComponent from './Checkbox';
 
@@ -9,6 +9,20 @@ const TasksList = ({ tasks = [] }) => {
   }
 
   const [filter, setFilter] = useState('all');
+
+  const format_date = (timestamp) => {
+    //month is index 0-11. must add 1 to get correct month
+    let timeStamp = new Date(parseInt(timestamp));
+    console.log("date", timestamp)
+    let monthNum = timeStamp.getMonth();
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let currentMonth = months[monthNum];
+    let day = timeStamp.getDate();
+    let year = timeStamp.getFullYear();
+  
+    return `${currentMonth} ${day}, ${year}`;
+    
+  }
 
   // const [isComplete, setIsComplete] = useState(task.isComplete);
   
@@ -23,8 +37,9 @@ const TasksList = ({ tasks = [] }) => {
 	// }, [isComplete]);
 
   return (
-    <div className={style.tasksList}>
+    <div className="tasksList">
       <div className='task-filter'>
+        <p className="filterText">Filter:</p>
         <select
           onChange={(e) => setFilter(e.target.value) } 
           value={filter}
@@ -37,15 +52,21 @@ const TasksList = ({ tasks = [] }) => {
           <option value='high'>High Priority</option>
         </select>
       </div>
-      {tasks.map((task) => (
-        <div className="card-text" key={task._id}>
+      <div className="cardFlex">
+      {tasks.map((task) => (  
+        <div className="cardText" key={task._id}>
           <Link to={`/tasks/${task._id}`}> 
-            <h2 className="liItem">{task.title}</h2>
-            <p>{task.completionDate}</p>
+          <div className="liItem">
+            <h2 className="taskListTitle">{task.title}</h2>
+            <p className="regularText">{task.description}</p>
+            <p className="regularText">{format_date(task.completionDate)}</p>
+            </div>
           </Link>
-          {/* <CheckboxComponent isComplete={isComplete} toggleComplete={toggleComplete} /> */}
+
         </div>
+        
       ))}
+      </div>
     </div>
   );
 };
