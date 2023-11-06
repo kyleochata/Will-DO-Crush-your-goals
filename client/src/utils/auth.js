@@ -6,11 +6,11 @@ class AuthService {
 		return jwtDecode(token);
 	}
 
-	loggedIn() {
-		const token = this.getToken();
-		// If there is a token and it's not expired, return `true`
-		return token && !this.isTokenExpired(token) ? true : false;
-	}
+  loggedIn() {
+    const token = this.getToken();
+    // If there is a token and it's not expired, return `true`
+    return token && !this.isTokenExpired(token) ? true : false;
+  }
 
 	isTokenExpired(token) {
 		// Decode the token to get its expiration time that was set by the server
@@ -24,19 +24,19 @@ class AuthService {
 		return false;
 	}
 
-	getToken() {
-		return localStorage.getItem("id_token");
-	}
+  getToken() {
+    return localStorage.getItem("id_token");
+  }
 
-	login(idToken) {
-		localStorage.setItem("id_token", idToken);
-		// window.location.assign("/");
-	}
+  login(idToken) {
+    localStorage.setItem("id_token", idToken);
+    // window.location.assign("/");
+  }
 
-	logout() {
-		localStorage.removeItem("id_token");
-		window.location.reload();
-	}
+  logout() {
+    localStorage.removeItem("id_token");
+    window.location.reload();
+  }
 }
 
 export default new AuthService();

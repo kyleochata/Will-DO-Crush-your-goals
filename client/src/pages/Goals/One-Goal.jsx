@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 // Create
 import { useState } from 'react';
-import { QUERY_USER } from '../../utils/queries';
+import { QUERY_USER,QUERY_GOAL } from '../../utils/queries';
 import Auth from '../../utils/auth';
 import SingleGoal from '../../components/Goals-Component/Single-Goal';
 
@@ -17,6 +17,7 @@ const OneGoal = () => {
   const goal = data?.user?.goals || [];
   console.log(goal)
   const filteredGoals = goal.filter((item) => item._id === goalId);
+  console.log("where is this");
   console.log(filteredGoals);
 
   // const [goalState, setGoalState] = useState(goal);

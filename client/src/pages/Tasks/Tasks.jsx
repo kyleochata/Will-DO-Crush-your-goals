@@ -23,7 +23,6 @@ function Tasks() {
 
   // might need to use auth0_id instead of userId
   const auth_ID = Auth.getProfile().authenticatedPerson.authID
-  console.log('query plz')
   console.log(auth_ID)
   const { data } = useQuery(QUERY_USER, {
     variables: { authID: auth_ID },
