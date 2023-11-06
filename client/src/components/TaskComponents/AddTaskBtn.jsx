@@ -58,7 +58,7 @@ const AddTaskBtn = ({ createTask }) => {
 								<label className={style.addTaskModalTxt}>
 									Title:
 									<input
-										placeholder="Your Tasks Title"
+										placeholder="Your Task Title"
 										type="text"
 										name="title"
 										value={taskData.title}

@@ -29,7 +29,6 @@
   position: absolute;
   top: 70px;
   margin: auto;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,6 +51,7 @@
 .formContainer{
   padding: 2rem 0;
   position: relative;
+  max-width: 90%
 
 }
 
@@ -197,4 +197,11 @@ textarea{
 .tasks-list {
   display: flex;
   flex-wrap: wrap;
+}
+
+/* start goal creation modal unique styles */
+.goalDesc{
+  font-size: 0.75rem;
+  font-weight: 425;
+  color: rgb(34, 34, 34);
 }
