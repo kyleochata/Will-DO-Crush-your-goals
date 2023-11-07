@@ -1,12 +1,13 @@
-import { from, useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_USER, QUERY_TASK } from "../../utils/queries";
 import { DELETE_TASK, EDIT_TASK } from "../../utils/mutations";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import format_date from "../../utils/helpers";
 import "../Dashboard/Dashboard.css";
 import style from "../../pages/Tasks/Tasks.module.css"
 import Auth from '../../utils/auth';
+import { Link } from "react-router-dom";
 
 const format_date2 = (timestamp) => {
 	//month is index 0-11. must add 1 to get correct month
@@ -22,7 +23,6 @@ const format_date2 = (timestamp) => {
 	return `${currentMonth} ${day}, ${year}`;
 };
 
-
 const SingleTask = ({ filteredTask }) => {
 	const auth_ID = Auth.getProfile().authenticatedPerson.authID
 	const selectRef = useRef()
@@ -34,7 +34,7 @@ const SingleTask = ({ filteredTask }) => {
 	// const [queryTask] = useQuery(QUERY_TASK);
 	// const [goalState, setGoalState] = useState(true);
 	const { taskId } = useParams();
-	const { loading, data: { task } } = useQuery(QUERY_TASK, {
+	const { data:{task} } = useQuery(QUERY_TASK, {
 		variables: { taskId: taskId },
 	})
 	console.log('where is this')
@@ -121,6 +121,27 @@ const SingleTask = ({ filteredTask }) => {
 		seteditTask(false);
 	};
 
+const [checked, setChecked] = useState(task.completed);
+const [buttonText, setButtonText] = useState(
+	task.completed ? "ReOpen" : "Complete"
+);
+
+const toggleCompletion = () => {
+	setChecked(!checked);
+	setButtonText(checked ? "Complete" : "ReOpen");
+};
+
+const [updateTaskCompletion] = useMutation(EDIT_TASK);
+
+useEffect(() => {
+	if (checked !== task.completed) {
+		updateTaskCompletion({
+			variables: { taskId: task._id, completed: checked },
+		});
+	}
+}, [checked, task.completed, task._id, updateTaskCompletion]);
+
+
 	return (
 		<div>
 			{!editTask && (
@@ -133,8 +154,8 @@ const SingleTask = ({ filteredTask }) => {
 									<button onClick={editTaskClick} className="dashButton">
 										Edit Task
 									</button>
-									<button className="dashButton">
-										Complete
+									<button onClick={toggleCompletion} className="dashButton">
+										{buttonText}
 									</button>
 									<button onClick={handleDelClick} className="dashButton">
 										Delete
@@ -151,8 +172,19 @@ const SingleTask = ({ filteredTask }) => {
 								</div>
 								<div className="liItem">
 									<h3 className="subHeader">Target Date</h3>
-									<p className="singlePageText"> {format_date2(taskData.completionDate)}</p>
+									<p className="singlePageText">
+										{" "}
+										{format_date2(taskData.completionDate)}
+									</p>
 								</div>
+								<div className="liItem">
+									<h3 className="subHeader">Goal</h3>
+									{!taskData.goal ? (<p>No Goal Assigned</p>) : (
+										<Link to={`/goals/${taskData.goal._id}`}>
+											<p className="singlePageText"> {taskData.goal.title}</p>
+										</Link>
+									)}
+									</div>
 							</div>
 						</article>
 					</div>
@@ -215,24 +247,21 @@ const SingleTask = ({ filteredTask }) => {
 								<label>
 									Add to Goal:
 									<br></br>
-									<select
-										name="goal"
-										ref={selectRef}
-									>
+									<select name="goal" ref={selectRef}>
 										<option value="">None</option>
 										{goals.map((goal) => (
-											<option key={goal._id} value={goal._id}>{goal.title}</option>
+											<option key={goal._id} value={goal._id}>
+												{goal.title}
+											</option>
 										))}
 									</select>
-
 								</label>
 							</div>
 							<div className={style.editButtonContainer}>
-								<button className={style.editSubmitButton} type="submit" >Update Task</button>
-								<button
-									className={style.editSubmitButton}
-									onClick={cancelEdit}
-								>
+								<button className={style.editSubmitButton} type="submit">
+									Update Task
+								</button>
+								<button className={style.editSubmitButton} onClick={cancelEdit}>
 									Cancel
 								</button>
 							</div>
