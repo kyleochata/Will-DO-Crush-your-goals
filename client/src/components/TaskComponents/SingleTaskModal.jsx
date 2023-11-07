@@ -242,13 +242,11 @@ useEffect(() => {
 									</select>
 								</label>
 								<label className={style.addTaskModalTxt}>
-								<label className={style.addTaskModalTxt}>
 									Add to Goal:
 									<select
 										name="goal"
 										className={style.addTaskModalInput}
 										ref={selectRef}
-										defaultValue={taskData.goal ? taskData.goal._id : "None"}
 									>
 										<option value="">None</option>
 										{goals.map((goal) => (
