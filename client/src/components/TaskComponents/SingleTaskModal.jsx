@@ -1,7 +1,7 @@
 import { from, useMutation, useQuery } from "@apollo/client";
 import { QUERY_USER, QUERY_TASK } from "../../utils/queries";
 import { DELETE_TASK, EDIT_TASK } from "../../utils/mutations";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import format_date from "../../utils/helpers";
 import "../Dashboard/Dashboard.css";
@@ -39,7 +39,11 @@ const SingleTask = ({ filteredTask }) => {
 	})
 	console.log('where is this')
 	console.log(task);
+
 	const [editTask, seteditTask] = useState(false);
+
+	const [deleteTask] = useMutation(DELETE_TASK);
+
 	const handleDelClick = async () => {
 		try {
 			await deleteTask({
