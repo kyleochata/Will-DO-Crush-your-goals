@@ -1,6 +1,5 @@
-
-import { useMutation, useQuery } from "@apollo/client";
-import { QUERY_USER , QUERY_TASK} from "../../utils/queries";
+import { from, useMutation, useQuery } from "@apollo/client";
+import { QUERY_USER, QUERY_TASK } from "../../utils/queries";
 import { DELETE_TASK, EDIT_TASK } from "../../utils/mutations";
 import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -14,18 +13,7 @@ const format_date2 = (timestamp) => {
 	let timeStamp = new Date(parseInt(timestamp));
 	let monthNum = timeStamp.getMonth();
 	const months = [
-		"Jan",
-		"Feb",
-		"Mar",
-		"Apr",
-		"May",
-		"Jun",
-		"Jul",
-		"Aug",
-		"Sep",
-		"Oct",
-		"Nov",
-		"Dec",
+		"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",
 	];
 	let currentMonth = months[monthNum];
 	let day = timeStamp.getDate();
@@ -33,7 +21,6 @@ const format_date2 = (timestamp) => {
 
 	return `${currentMonth} ${day}, ${year}`;
 };
-
 
 
 const SingleTask = ({ filteredTask }) => {
@@ -47,9 +34,9 @@ const SingleTask = ({ filteredTask }) => {
 	// const [queryTask] = useQuery(QUERY_TASK);
 	// const [goalState, setGoalState] = useState(true);
 	const { taskId } = useParams();
-	const { loading, data:{task} } = useQuery(QUERY_TASK, {
+	const { loading, data: { task } } = useQuery(QUERY_TASK, {
 		variables: { taskId: taskId },
-	  })
+	})
 	console.log('where is this')
 	console.log(task);
 
@@ -70,19 +57,8 @@ const SingleTask = ({ filteredTask }) => {
 	};
 
 	const [taskData, settaskData] = useState(task || {});
-	console.log('where is this')
 	console.log(taskData);
-	console.log(taskData?.goal?.title);
 
-	// console.log(format_date(taskData.completionDate));
-
-	// const handleInputChange = (event) => {
-	// 	settaskData({
-	// 		...taskData,
-	// 		[event.target.name]: event.target.value,
-	// 	});
-	// 	console.log(taskData);
-	// };
 
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
@@ -98,12 +74,12 @@ const SingleTask = ({ filteredTask }) => {
 		});
 	};
 
-	const [changeTask] = useMutation(EDIT_TASK,{refetchQueries:["user",QUERY_USER,"task",QUERY_TASK]});
+	const [changeTask] = useMutation(EDIT_TASK, { refetchQueries: ["user", QUERY_USER, "task", QUERY_TASK] });
 	const updatedTask = (taskData) => {
 		const taskDataWithDateString = {
 			...taskData,
 			completionDate: format_date(taskData.completionDate),
-		  };
+		};
 
 		changeTask({ variables: taskDataWithDateString })
 			.then((response) => {
@@ -113,11 +89,6 @@ const SingleTask = ({ filteredTask }) => {
 				console.error("Error updating task:", error);
 			});
 	};
-	// const handleSubmit = async (event) => {
-	// 	event.preventDefault();
-	// 	updatedTask(taskData);
-	// 	seteditTask(!editTask);
-	// };
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -148,7 +119,7 @@ const SingleTask = ({ filteredTask }) => {
 
 	const cancelEdit = () => {
 		seteditTask(false);
-	  };
+	};
 
 	return (
 		<div>
@@ -189,84 +160,84 @@ const SingleTask = ({ filteredTask }) => {
 			)}
 			{editTask && (
 				<div className={style.editContent}>
-				<div className={style.editTitle}>EDIT GOAL</div>
-				<div className={style.formContainer}>
-				<form onSubmit={handleSubmit} className={style.addTaskForm}>
-					<div className={style.formInputs}>
-						<label className={style.addTaskModalTxt}>
-							Title:
-							<input
-								placeholder="Your Task Title"
-								type="text"
-								name="title"
-								value={taskData.title}
-								onChange={handleInputChange}
-								className={style.addTaskModalInput}
-								required
-							/>
-						</label>
-						<label className={style.addTaskModalTxt}>
-							Description:
-							<textarea
-								placeholder="Give some specifics about your goal here"
-								name="description"
-								value={taskData.description}
-								onChange={handleInputChange}
-								className={style.addTaskModalInput}
-								required
-							/>
-						</label>
-						<label className={style.addTaskModalTxt}>
-							Target Date:
-							<input
-								type="date"
-								name="completionDate"
-								value={format_date(taskData.completionDate)}
-								onChange={handleInputChange}
-								className={style.addTaskModalInput}
-								required
-							/>
-						</label>
-						<label className={style.addTaskModalTxt}>
-							Priority:
-							<select
-								name="priority"
-								value={taskData.priority}
-								onChange={handleInputChange}
-								className={style.addTaskModalInput}
-								required
-							>
-								<option value="Low">Low</option>
-								<option value="Medium">Medium</option>
-								<option value="High">High</option>
-							</select>
-						</label>
-						<label>
-						Add to Goal:
-						<br></br>
-						<select
-							name="goal"
-							ref={selectRef}
-						>
-							<option value="">None</option>
-							{goals.map((goal) => (
-								<option key={goal._id} value={goal._id}>{goal.title}</option>
-							))}
-						</select>
+					<div className={style.editTitle}>EDIT GOAL</div>
+					<div className={style.formContainer}>
+						<form onSubmit={handleSubmit} className={style.addTaskForm}>
+							<div className={style.formInputs}>
+								<label className={style.addTaskModalTxt}>
+									Title:
+									<input
+										placeholder="Your Task Title"
+										type="text"
+										name="title"
+										value={taskData.title}
+										onChange={handleInputChange}
+										className={style.addTaskModalInput}
+										required
+									/>
+								</label>
+								<label className={style.addTaskModalTxt}>
+									Description:
+									<textarea
+										placeholder="Give some specifics about your goal here"
+										name="description"
+										value={taskData.description}
+										onChange={handleInputChange}
+										className={style.addTaskModalInput}
+										required
+									/>
+								</label>
+								<label className={style.addTaskModalTxt}>
+									Target Date:
+									<input
+										type="date"
+										name="completionDate"
+										value={format_date(taskData.completionDate)}
+										onChange={handleInputChange}
+										className={style.addTaskModalInput}
+										required
+									/>
+								</label>
+								<label className={style.addTaskModalTxt}>
+									Priority:
+									<select
+										name="priority"
+										value={taskData.priority}
+										onChange={handleInputChange}
+										className={style.addTaskModalInput}
+										required
+									>
+										<option value="Low">Low</option>
+										<option value="Medium">Medium</option>
+										<option value="High">High</option>
+									</select>
+								</label>
+								<label>
+									Add to Goal:
+									<br></br>
+									<select
+										name="goal"
+										ref={selectRef}
+									>
+										<option value="">None</option>
+										{goals.map((goal) => (
+											<option key={goal._id} value={goal._id}>{goal.title}</option>
+										))}
+									</select>
 
-					</label>
+								</label>
+							</div>
+							<div className={style.editButtonContainer}>
+								<button className={style.editSubmitButton} type="submit" >Update Task</button>
+								<button
+									className={style.editSubmitButton}
+									onClick={cancelEdit}
+								>
+									Cancel
+								</button>
+							</div>
+						</form>
 					</div>
-					<div className={style.editButtonContainer}>
-						<button className={style.editSubmitButton} type="submit" >Update Task</button>
-						<button
-                className={style.editSubmitButton}
-                onClick={cancelEdit}
-              >
-                Cancel
-              </button>
-					</div>
-				</form>
-				</div>
 				</div>
 			)}
 		</div>
