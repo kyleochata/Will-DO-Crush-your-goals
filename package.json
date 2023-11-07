@@ -1,5 +1,5 @@
 {
-  "name": "MERN task List",
+  "name": "mern-task-list",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
