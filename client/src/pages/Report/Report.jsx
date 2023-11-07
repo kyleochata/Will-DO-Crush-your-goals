@@ -176,7 +176,7 @@ const Report = () => {
   const secondData = useQuery(QUERY_USER, {
     variables: { authID: auth_ID },
   })
-  const [treeData, setTreeData] = useState(smartData)
+
 
   const handleSelectChange = (e) => {
     const selectedValue = e.target.value
@@ -196,6 +196,8 @@ const Report = () => {
   const userData = secondData?.data?.user || {}
   const totalTask = userData && userData.tasks ? userData.tasks : []; // Provide a default empty array if userData or userData.tasks is not available
   const totalTaskNum = totalTask?.length;
+
+  const [treeData, setTreeData] = useState(smartData)
 
   console.log({ totalTask: totalTask })
 
@@ -289,6 +291,8 @@ const Report = () => {
     userTreeData.children.push({ name: goals[i].title, children: child });
   }
 
+  
+
 
 
 
@@ -330,8 +334,8 @@ const Report = () => {
         <div className={style.SmartDiv}>Learn more about SMART Goals</div>
         <select onChange={handleSelectChange}>
           <option value="smartData">Definition</option>
-          <option value="testData">Goal Example</option>
           <option value="user">User</option>
+          <option value="testData">Goal Example</option>
         </select>
       </div>
       <DataTree treeData={treeData} style={style} />
