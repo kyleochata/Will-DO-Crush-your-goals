@@ -45,7 +45,7 @@ const EditGoalBtn = () => {
   return (
     <>
       <button onClick={() => setShowModal(true)} className="dashButton">
-        Edit Goal Modal
+        Edit Task Modal
       </button>
       <Modal
         className={style.addTaskModal}
@@ -59,7 +59,7 @@ const EditGoalBtn = () => {
           X
         </button>
         <div className={style.modalContent}>
-          <div className={style.modalTitle}>EDIT GOAL</div>
+          <div className={style.modalTitle}>EDIT TASK</div>
           <div className={style.formContainer}>
             <form onSubmit={handleSubmit} className={style.addTaskForm}>
               <div className={style.formInputs}>
@@ -130,7 +130,7 @@ const EditGoalBtn = () => {
                   className={style.submitButton}
                   type="submit"
                 >
-                  Edit Goal
+                  Edit Task
                 </button>
               </div>
             </form>
