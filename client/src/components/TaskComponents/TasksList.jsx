@@ -15,19 +15,7 @@ const TasksList = ({ tasks = [] }) => {
     //month is index 0-11. must add 1 to get correct month
     let timeStamp = new Date(parseInt(timestamp))
     let monthNum = timeStamp.getMonth()
-    const months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec',
     ]
     let currentMonth = months[monthNum]
     let day = timeStamp.getDate()

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "../Dashboard/Dashboard.css";
 import { useState, useEffect } from "react";
-import CheckboxComponent from '../TaskComponents/Checkbox'
+import CheckboxComponent from "./Checkbox";
 
 const GoalsList = ({ goals = [] }) => {
   if (!goals.length) {
@@ -68,7 +68,7 @@ const GoalsList = ({ goals = [] }) => {
                 <p className="regularText">{format_date(goal.completionDate)}</p>
                 </div>
             </Link>
-            {/* <CheckboxComponent task={task} name={task._id} /> */}
+            <CheckboxComponent goal={goal} name={goal._id} />
             </div>
         ))
         : <div className="noTasks">No Goals to Display</div>
