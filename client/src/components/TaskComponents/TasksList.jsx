@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import '../Dashboard/Dashboard.css'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import CheckboxComponent from './Checkbox'
 
 const TasksList = ({ tasks = [] }) => {
@@ -37,25 +37,7 @@ const TasksList = ({ tasks = [] }) => {
   }
 
   const [sortedTasks, setSortedTasks] = useState([...tasks].sort((taskA, taskB) => taskA.completionDate - taskB.completionDate))
-  // const sortedTasks = [...tasks].sort((taskA, taskB) => taskA.completionDate - taskB.completionDate);
 
-  
-
-  // useEffect(() => {
-  //   if (filter === "all"){
-  //     setSortedTasks ([...tasks].sort((taskA, taskB) => taskA.completionDate - taskB.completionDate))
-  //   } else if (filter === "active"){
-  //     const temp = [...tasks].sort((taskA, taskB) => taskA.completionDate - taskB.completionDate)
-  //     const filteredActive = temp.filter((task) => !task.completed)
-  //     setSortedTasks(filteredActive)
-  //   } else {
-  //     const temp = [...tasks].sort((taskA, taskB) => taskA.completionDate - taskB.completionDate)
-  //     const filteredComplete = temp.filter((task) => task.completed)
-  //     setSortedTasks(filteredComplete)
-  //   }
-  //   console.log(filter)
-  //   console.log(sortedTasks)
-  // },[filter])
 
   useEffect(() => {
     // Filter by status (e.g., active, completed, or all)
@@ -82,41 +64,6 @@ const TasksList = ({ tasks = [] }) => {
     console.log(filteredTasksByPriority)
   }, [filter, priority]);
   
-
-  // const [isComplete, setIsComplete] = useState(task.isComplete);
-
-  // const toggleComplete = (value) => {
-  //   setIsComplete(value);
-  // };
-
-  // useEffect(() => {
-	// 	// send updated isComplete value to graphQL server when it changes
-	// 	// call mutation here to update task's isComplete field
-	// 	// Example: useMutation(UPDATE_TASK_COMPLETION ({ variables: { taskId: task.id, isComplete } }));
-	// }, [isComplete]);
-
-  
-//   completed
-// : 
-// false
-// completionDate
-// : 
-// "-86400000"
-// description
-// : 
-// "I am testting the viablity of carriage returns and pre-wraps to make sure that things are displaying as expected in the fields\nhere is a new linedf\nhere is another new line\nand another new line"
-// priority
-// : 
-// "High"
-// title
-// : 
-// "A test of carriage returns and pre/wrap"
-// __typename
-// : 
-// "Task"
-// _id
-// : 
-// "654945a594db2a08687683e9"
 
   return (
 		<div className="tasksList">

@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/client";
 import { EDIT_TASK } from "../../utils/mutations";
 
 const CheckboxComponent = ({ task }) => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(task.completed);
 
   const handleCheckbox = () => {
     setChecked(!checked);
@@ -26,7 +26,7 @@ const CheckboxComponent = ({ task }) => {
 
   return (
     <div>
-      <Checkbox label="Complete" value={checked} onChange={handleCheckbox} />
+      <Checkbox label="Complete" value={task.completed} onChange={handleCheckbox} />
     </div>
   );
 };
