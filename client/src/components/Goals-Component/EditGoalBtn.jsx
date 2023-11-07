@@ -12,7 +12,6 @@ const EditGoalBtn = () => {
     title: "",
     description: "",
     why: "",
-    measureables: "",
     completionDate: "",
   });
 
@@ -100,18 +99,6 @@ const EditGoalBtn = () => {
                   required
                 />
                 </label>
-              <label className={style.addTaskModalTxt}>
-                Measurables
-                <div className={style.goalDesc}>Give quantifiable examples of how you will know your goal is completed. "Complete a full stack web bootcamp, build a portfolio, contribute to at least 3 open source Githubs, build at least 5 MERN applications" </div>
-                <textarea
-                placeholder="What metrics will help you know your goal is complete?"
-                  name="measureables"
-                  value={goalData.measureables}
-                  onChange={handleInputChange}
-                  className={style.addTaskModalInput}
-                  required
-                />
-              </label>
               <label className={style.addTaskModalTxt}>
                 Due Date:
                 <div className={style.goalDesc}>Making your goals time-bound provides a sense of urgency and a clear deadline, motivating you to take action and track your progress </div>
