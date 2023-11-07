@@ -142,6 +142,9 @@ export const QUERY_ALL_GOALS = gql`
         completionDate
         priority
         completed
+        user{
+          _id
+        }
       }
       measurables {
         _id

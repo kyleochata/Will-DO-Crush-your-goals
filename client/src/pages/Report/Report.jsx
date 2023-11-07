@@ -263,18 +263,30 @@ const Report = () => {
     // // set user.goals to diff variable
     // // create 3rd variable to whatever goals was to .filter anon function goal => goalId = goal_id
     // const goalInfo = data?.goal || {}
+    if (goals[i].user._id != userData._id) {
+      continue;
+    }
     const child = [];
     const tasks = goals[i]?.tasks || {};
     console.log(tasks.length);
     // console.log(goals[i].task[0]?.length);
-    console.log("there");
     if (tasks) {
       for (let j = 0; j < tasks.length; j++) {
-        child.push({name:goals[i].tasks[j].title})
+        console.log(tasks[j]);
+        if (!tasks[j].user) {
+          continue;
+        }
+        console.log(tasks[j].user._id);
+        console.log(userData._id);
+        if (tasks[j].user._id != userData._id)
+        {
+          continue;
+        }
+        child.push({ name: goals[i].tasks[j].title })
         console.log(goals[i].tasks[j]);
       }
     }
-    userTreeData.children.push({ name: goals[i].title,children:child });
+    userTreeData.children.push({ name: goals[i].title, children: child });
   }
 
 
