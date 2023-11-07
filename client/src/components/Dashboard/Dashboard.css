@@ -110,11 +110,18 @@ select {
     justify-content: center;
 }
 
+.filterContainer{
+    display: flex;
+    margin: 0.5rem ;
+    align-items: center;
+
+}
+
 .task-filter {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 5px;
+    gap: 1rem;
 }
 
 .filterText {
