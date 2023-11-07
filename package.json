@@ -1,28 +1,31 @@
 {
-  "name": "MERN task List",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server/server.js",
-  "scripts": {
-    "start": "node server --ignore client",
-    "develop": "concurrently \"cd server && npm run start\" \"cd client && npm run dev\"",
-    "dev": "concurrently \"cd server && npm run start\" \"cd client && npm run dev\"",
-    "install": "cd server && npm i && cd ../client && npm i",
-    "seed": "cd server && npm run seed",
-    "build": "cd client && npm run build"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^5.1.0"
-  },
-  "dependencies": {
-    "@apollo/server": "^4.9.5",
-    "@auth0/auth0-react": "^2.2.3",
-    "bcrypt": "^5.1.1",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.0.0"
-  }
+	"name": "mern-task-list",
+	"version": "1.0.0",
+	"description": "",
+	"main": "server/server.js",
+	"engines": {
+		"node": "18.17.1"
+	},
+	"scripts": {
+		"start": "node server --ignore client",
+		"develop": "concurrently \"cd server && npm run start\" \"cd client && npm run dev\"",
+		"dev": "concurrently \"cd server && npm run start\" \"cd client && npm run dev\"",
+		"install": "cd server && npm i && cd ../client && npm i",
+		"seed": "cd server && npm run seed",
+		"build": "cd client && npm run build"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"concurrently": "^5.1.0"
+	},
+	"dependencies": {
+		"@apollo/server": "^4.9.5",
+		"@auth0/auth0-react": "^2.2.3",
+		"bcrypt": "^5.1.1",
+		"express": "^4.18.2",
+		"jsonwebtoken": "^9.0.2",
+		"mongoose": "^8.0.0"
+	}
 }
