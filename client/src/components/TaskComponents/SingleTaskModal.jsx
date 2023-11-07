@@ -248,7 +248,7 @@ useEffect(() => {
 									Add to Goal:
 									<br></br>
 									<select name="goal" ref={selectRef}>
-										<option value="">None</option>
+										<option value="target">None</option>
 										{goals.map((goal) => (
 											<option key={goal._id} value={goal._id}>
 												{goal.title}
