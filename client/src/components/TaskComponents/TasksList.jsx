@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import '../Dashboard/Dashboard.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import CheckboxComponent from './Checkbox'
 
 const TasksList = ({ tasks = [] }) => {
@@ -92,16 +92,17 @@ const TasksList = ({ tasks = [] }) => {
           ?
 				sortedTasks.map((task) => (
 					<div className="cardText" key={task._id}>
-						<Link to={`/tasks/${task._id}`}>
+						
 							<div className="liItem">
+              <Link to={`/tasks/${task._id}`}>
 								<h2 className="taskListTitle">{task.title}</h2>
 								<pre className="regularText">{task.description}</pre>
 								<p className="regularText">
 									{format_date(task.completionDate)}
 								</p>
-							</div>
-						</Link>
-						<CheckboxComponent task={task} name={task._id} />
+                </Link>
+                <CheckboxComponent task={task} name={task._id} />
+							</div>	
 					</div>
 				))
       : <div className="noTasks">No Tasks to Display</div>
