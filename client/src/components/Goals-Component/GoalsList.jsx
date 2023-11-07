@@ -10,17 +10,20 @@ const GoalsList = ({ goals = [] }) => {
 
   const format_date = (timestamp) => {
     //month is index 0-11. must add 1 to get correct month
-    let timeStamp = new Date(parseInt(timestamp));
-    let monthNum = timeStamp.getMonth();
-    const months = [
-      "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
-    ];
-    let currentMonth = months[monthNum];
-    let day = timeStamp.getDate();
-    let year = timeStamp.getFullYear();
+    const date = new Date(parseInt(timestamp));
+  
+    // Adjust for the timezone offset to get the correct GMT date
+    const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
 
-    return `${currentMonth} ${day}, ${year}`;
-  };
+    let monthNum = utcDate.getMonth()
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec',
+    ]
+    let currentMonth = months[monthNum]
+    let day = utcDate.getDate()
+    let year = utcDate.getFullYear()
+
+    return `${currentMonth} ${day}, ${year}`
+  }
 
   const [filter, setFilter] = useState('active')
 
@@ -61,18 +64,22 @@ const GoalsList = ({ goals = [] }) => {
             ?
             sortedGoals.map((goal) => (
               <div className="cardText" key={goal._id}>
-                <Link to={`/goals/${goal._id}`}>
-                  <div className="liItem">
+                <div className="liItem">
                     <h2 className="taskListTitle">{goal.title}</h2>
-                    <p className="regularText">{goal.description}</p>
+                    <pre className="regularText">{goal.description}</pre>
                     <p className="regularText">{format_date(goal.completionDate)}</p>
-                  </div>
+
+                      <div className="dashButtonContainer">
+                      <Link to={`/goals/${goal._id}`}>
+                <button className="dashButton">Details</button>
                 </Link>
                 <CheckboxComponent
                   goal={goal}
                   name={goal._id}
                   
                   />
+                  </div>
+                  </div>
               </div>
             ))
             : <div className="noTasks">No Goals to Display</div>
