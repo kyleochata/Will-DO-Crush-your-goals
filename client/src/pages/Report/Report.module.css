@@ -1,11 +1,14 @@
 .reportMain {
   /* height: 100vh; */
-  max-width: 70rem;
+  /* max-width: 70rem; */
+  /* display: flex; */
   width: 95vw;
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
-  margin-top: 4rem;
+  margin-top: 1rem;
+  margin-left: 45px;
+  /* margin-right: 40px; */
   overflow: hidden;
 }
 svg {
@@ -19,8 +22,8 @@ svg {
   width: 90%;
 }
 .reportProgressContainer {
-  border: solid 1px black;
-  background: yellowgreen;
+  border: solid 1px rgb(255, 255, 255);
+  background: #ffffff;
   margin-bottom: 5px;
   display: flex;
   justify-content: space-evenly;
@@ -30,7 +33,7 @@ svg {
   width: 100%;
 }
 .reportProgress {
-  border: solid 1px black;
+  border: solid 1px rgb(255, 255, 255);
   height: 100%;
   width: 25%;
   display: flex;
@@ -49,7 +52,7 @@ svg {
 .svgWrapper {
   width: 100vw;
   height: 56vh;
-  background-color: aqua;
+  background-color: #ffffff;
   padding: 10px;
   overflow-x: auto;
   overflow: scroll;
