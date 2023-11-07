@@ -160,7 +160,7 @@ const SingleTask = ({ filteredTask }) => {
 									<button onClick={editTaskClick} className="dashButton">
 										Edit Task
 									</button>
-									<button className="dashButton" onClick={handleComplete}>
+									<button className="dashButton">
 										Complete
 									</button>
 									<button onClick={handleDelClick} className="dashButton">
