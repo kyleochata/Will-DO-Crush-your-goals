@@ -19,15 +19,11 @@ function Tasks() {
   }
 
   const auth_ID = Auth.getProfile().authenticatedPerson.authID
-  console.log(auth_ID)
   const { data } = useQuery(QUERY_USER, {
     variables: { authID: auth_ID },
   })
 
-  console.log(auth_ID)
   const user = data?.user || {}
-  console.log(data)
-  console.log(user)
 
 	return (
 		<div className="mainTask">

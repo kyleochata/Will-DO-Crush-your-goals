@@ -7,7 +7,6 @@ import { ADD_GOAL } from '../../utils/mutations'
 import Auth from '../../utils/auth'
 import "../../components/Dashboard/Dashboard.css"
 
-console.log('before createGoal func')
 function Goals() {
     const [addGoal] = useMutation(ADD_GOAL)
 
@@ -20,22 +19,16 @@ function Goals() {
                 console.error('Error creating goal:', error)
             })
     }
-    console.log('after createGoal func')
     const auth_ID = Auth.getProfile().authenticatedPerson.authID
-    console.log(auth_ID)
     const { loading, data } = useQuery(QUERY_USER, {
         variables: { authID: auth_ID },
     })
 
-  //   const user = data?.user || []
-  //   console.log(user)
-  //   console.log(data)
   const user = data?.user || {}
-  console.log(user)
   if (loading) {
     return <div>Loading...</div>
   }
-  console.log('before return jsx')
+
   return (
     <div className="mainTask">
       <section className="cards">
@@ -51,5 +44,4 @@ function Goals() {
     </div>
   )
 }
-console.log('after return jsx')
 export default Goals
