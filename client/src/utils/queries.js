@@ -134,8 +134,6 @@ export const QUERY_ALL_GOALS = gql`
       completed
       user {
         _id
-        firstName
-        lastName
       }
       tasks {
         _id

@@ -77,7 +77,7 @@ import style from './Report.module.css'
 import { useState } from 'react'
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import { useQuery } from '@apollo/client'
-import { QUERY_USER } from '../../utils/queries'
+import { QUERY_USER, QUERY_ALL_GOALS } from '../../utils/queries'
 
 import Auth from '../../utils/auth'
 
@@ -110,31 +110,58 @@ const smartData = {
   ],
 }
 
+// const testData = {
+//   name: 'S: Lose weight', //goal.title
+//   children: [
+//     {
+//       name: 'M: Eat 2 Healthy meals/day', //task.title
+//       children: [
+//         { name: 'A: Grocery shopping 1/week' },
+//         { name: 'A: Meal prep for 5 meals' },
+//         { name: 'A: Try a new recipe 2/week' },
+//       ],
+//     },
+//     {
+//       name: 'M: Exercise 3x/week', //task.title
+//       children: [
+//         { name: 'A: Get a gym membership' },
+//         { name: 'A: Play pickleball 1/week' },
+//         { name: 'A: Laundry 1/week' },
+//       ],
+//     },
+//     {
+//       name: 'M: Sleep 8 hours/night',
+//       children: [
+//         { name: 'A: Set a bedtime alarm' },
+//         { name: 'A: No screens 1 hour before bed' },
+//         { name: 'A: Hot shower before bed' },
+//       ],
+//     },
+//     {
+//       name: 'T: 6 months',
+//     },
+//   ],
+// }
+
 const testData = {
-  name: 'S: Lose weight',
+  name: 'S: Lose weight', //goal.title
   children: [
     {
-      name: 'M: Eat 2 Healthy meals/day',
+      name: 'M: Eat 2 Healthy meals/day', //task.title
       children: [
         { name: 'A: Grocery shopping 1/week' },
-        { name: 'A: Meal prep for 5 meals' },
-        { name: 'A: Try a new recipe 2/week' },
       ],
     },
     {
-      name: 'M: Exercise 3x/week',
+      name: 'M: Exercise 3x/week', //task.title
       children: [
         { name: 'A: Get a gym membership' },
-        { name: 'A: Play pickleball 1/week' },
-        { name: 'A: Laundry 1/week' },
       ],
     },
     {
       name: 'M: Sleep 8 hours/night',
       children: [
         { name: 'A: Set a bedtime alarm' },
-        { name: 'A: No screens 1 hour before bed' },
-        { name: 'A: Hot shower before bed' },
       ],
     },
     {
@@ -159,39 +186,103 @@ const Report = () => {
     } else if (selectedValue === 'testData') {
       setTreeData(testData)
       console.log({ testData: treeData })
+    } else if (selectedValue === 'user') {
+      setTreeData(userTreeData)
+      console.log({ userTreeData: treeData })
     }
   }
 
-  console.log(secondData)
+
   const userData = secondData?.data?.user || {}
-  console.log(userData)
-  const totalTask = userData.tasks
-  const totalTaskNum = totalTask.length
+  const totalTask = userData && userData.tasks ? userData.tasks : []; // Provide a default empty array if userData or userData.tasks is not available
+  const totalTaskNum = totalTask?.length;
+
   console.log({ totalTask: totalTask })
-  console.log(totalTaskNum)
 
   const completedTask = totalTask.filter((task) => task.completed === true)
-  console.log(completedTask)
   let completedNumTask = 0
   completedTask.length !== 0
     ? (completedNumTask = completedTask.length)
     : (completedNumTask = 0)
-  console.log({ completedNumTask: completedNumTask })
   const taskPercentCalc = (completedNumTask / totalTaskNum) * 100
   const taskPercent = Math.round(taskPercentCalc)
 
-  const totalGoal = userData.goals
+  const totalGoal = userData?.goals
 
-  console.log({ totalGoal: totalGoal })
-  const totalGoalNum = totalGoal.length
-  console.log({ totalGoalNum: totalGoalNum })
+  const totalGoalNum = totalGoal?.length
   const completedGoal =
-    totalGoal.filter((goal) => goal.completed === true) || []
+    totalGoal?.filter((goal) => goal.completed === true) || []
   let completedGoalNum = 0
   completedGoal.length !== 0
     ? (completedGoalNum = completedGoal.length)
     : (completedGoalNum = 0)
-  console.log({ completedGNum: completedGoalNum })
+
+  const testData = {
+    name: 'S: Lose weight', //goal.title
+    children: [
+      {
+        name: 'M: Eat 2 Healthy meals/day', //task.title
+        children: [
+          { name: 'A: Grocery shopping 1/week' },
+        ],
+      },
+      {
+        name: 'M: Exercise 3x/week', //task.title
+        children: [
+          { name: 'A: Get a gym membership' },
+        ],
+      },
+      {
+        name: 'M: Sleep 8 hours/night',
+        children: [
+          { name: 'A: Set a bedtime alarm' },
+        ],
+      },
+      {
+        name: 'T: 6 months',
+      },
+    ],
+  }
+  const { data } = useQuery(QUERY_ALL_GOALS);
+
+  const goals = data?.goals || {};
+  if (goals) {
+    console.log(goals[2])
+  }
+
+
+  const userTreeData = {};
+  userTreeData.name = userData.userName;
+  userTreeData.children = []
+  for (let i = 0; i < goals.length; i++) {
+    // const { data } = useQuery(QUERY_GOAL, {
+    //   variables: { goalId: totalGoal[i]._id },
+    // })
+    // // console.log(data)
+
+    // // set user.goals to diff variable
+    // // create 3rd variable to whatever goals was to .filter anon function goal => goalId = goal_id
+    // const goalInfo = data?.goal || {}
+    const child = [];
+    const tasks = goals[i]?.tasks || {};
+    console.log(tasks.length);
+    // console.log(goals[i].task[0]?.length);
+    console.log("there");
+    if (tasks) {
+      for (let j = 0; j < tasks.length; j++) {
+        child.push({name:goals[i].tasks[j].title})
+        console.log(goals[i].tasks[j]);
+      }
+    }
+    userTreeData.children.push({ name: goals[i].title,children:child });
+  }
+
+
+
+
+
+
+
   const goalPercentCalc = (completedGoalNum / totalGoalNum) * 100
   const goalPercent = Math.round(goalPercentCalc)
 
@@ -228,6 +319,7 @@ const Report = () => {
         <select onChange={handleSelectChange}>
           <option value="smartData">Definition</option>
           <option value="testData">Goal Example</option>
+          <option value="user">User</option>
         </select>
       </div>
       <DataTree treeData={treeData} style={style} />
