@@ -9,11 +9,11 @@ import Goals from './pages/Goals/All-Goals.jsx'
 import Tasks from './pages/Tasks/Tasks.jsx'
 import Calendar from './components/calendar/calendar.jsx'
 import OneGoal from './pages/Goals/One-Goal.jsx'
-import OneTask from './pages/Tasks/OneTask.jsx';
+import OneTask from './pages/Tasks/OneTask.jsx'
 import Home from './pages/Home/Home.jsx'
 import Report from './pages/Report/Report.jsx'
 import Profile from './pages/Profile/Profile.jsx'
-
+//end imports
 
 const domain = import.meta.env.VITE_REACT_APP_AUTH0_DOMAIN
 const clientId = import.meta.env.VITE_REACT_APP_AUTH0_CLIENT_ID
