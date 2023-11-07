@@ -61,18 +61,22 @@ const GoalsList = ({ goals = [] }) => {
             ?
             sortedGoals.map((goal) => (
               <div className="cardText" key={goal._id}>
-                <Link to={`/goals/${goal._id}`}>
-                  <div className="liItem">
+                <div className="liItem">
                     <h2 className="taskListTitle">{goal.title}</h2>
-                    <p className="regularText">{goal.description}</p>
+                    <pre className="regularText">{goal.description}</pre>
                     <p className="regularText">{format_date(goal.completionDate)}</p>
-                  </div>
+
+                      <div className="dashButtonContainer">
+                      <Link to={`/goals/${goal._id}`}>
+                <button className="dashButton">Details</button>
                 </Link>
                 <CheckboxComponent
                   goal={goal}
                   name={goal._id}
                   
                   />
+                  </div>
+                  </div>
               </div>
             ))
             : <div className="noTasks">No Goals to Display</div>

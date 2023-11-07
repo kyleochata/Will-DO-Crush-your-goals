@@ -25,10 +25,7 @@ const SingleGoal = ({ goalInfo }) => {
   // const [goalState, setGoalState] = useState(true);
   const { goalId } = useParams()
   const goal = goalInfo
-  console.log(goalId)
-  console.log(goal.completionDate)
   const [editGoal, setEditGoal] = useState(false)
-  console.log(goalInfo)
   const [addMeasurable] = useMutation(ADD_MEASURABLE)
   const handleDelClick = async () => {
     try {
@@ -52,9 +49,6 @@ const SingleGoal = ({ goalInfo }) => {
       }))
     }
   }, [goalData, setGoalData])
-
-  console.log('here')
-  console.log(goalData)
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;

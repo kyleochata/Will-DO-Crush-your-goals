@@ -21,9 +21,9 @@ const GoalsListDash = ({ goals = [] }) => {
     
   }
 
-    const goalsCopy = [...goals];
-    goalsCopy.sort((a, b) => a.completionDate - b.completionDate);
-    const next5Goals = goalsCopy.slice(0, 5);
+  const openGoals = goals.filter((goal) => !goal.completed);
+    openGoals.sort((a, b) => a.completionDate - b.completionDate);
+    const next5Goals = openGoals.slice(0, 5);
 
 
 
