@@ -27,7 +27,7 @@ const resolvers = {
 			return Goal.findById(goalId).populate('user').populate('tasks').populate('measurables');
 		},
 		task: async (_, { taskId }) => {
-			return Task.findById(taskId).populate([{path:'user'},{path:'goal'},{path:'measurable'}]);
+			return Task.findById(taskId).populate([{ path: 'user' }, { path: 'goal' }, { path: 'measurable' }]);
 		},
 		measurable: async (_, { measurableId }) => {
 			return Measurable.findById(measurableId).populate('user').populate('goal').populate('tasks');
@@ -194,37 +194,50 @@ const resolvers = {
 			return updatedGoal;
 		},
 
-		// Edit a single task
+		//Edit a single task
 		editTask: async (_, { taskId, title, description, completionDate, priority, completed,goal }, context) => {
 			if (!context.user) {
 				throw AuthenticationError;
 			}
 			const user = await User.findOne({ authID: context.user.authID });
-
 			const task = await Task.findById(taskId);
+			if (!task) {
+				throw new Error('Task not found');
+			}
+			if (task.user.toString() !== user._id.toString()) {
+				throw AuthenticationError;
+			}
+
 			if (goal === "")
 			{
 				goal = null
 			}
+
 			const updatedTask = await Task.findByIdAndUpdate(
 				taskId,
 				{ title, description, completionDate, priority, completed, goal },
 				{ new: true }
 			).populate("goal");
-			
 
-			
+
+			const originalGoalId = task.goal ? task.goal._id : null;
+			if (originalGoalId && (!goal || goal.toString() !== originalGoalId.toString())) {
+				await Goal.findByIdAndUpdate(
+					originalGoalId,
+					{ $pull: { tasks: taskId } } // Use $pull to remove the task from the original goal
+				);
+			}
 
 			if (goal) {
 				const goal1 = await Goal.findById(goal);
-				console.log(goal1);
 				if (!goal1) {
 					throw new Error("Goal not found");
 				}
 
-				if (goal.user.toString() !== user._id.toString()) {
+				if (goal1.user.toString() !== user._id.toString()) {
 					throw AuthenticationError;
 				}
+
 
 				const updatedGoal = await Goal.findByIdAndUpdate(
 					goal,
@@ -232,20 +245,10 @@ const resolvers = {
 					{ new: true }
 				);
 			}
-
-			console.log(task);
-
-			if (!task) {
-				throw new Error('Task not found');
-			}
-
-			if (task.user.toString() !== user._id.toString()) {
-				throw AuthenticationError;
-			}
-
 			
 			return updatedTask;
 		},
+
 
 		// Edit a single measurable
 		editMeasurable: async (_, { measurableId, title }, context) => {

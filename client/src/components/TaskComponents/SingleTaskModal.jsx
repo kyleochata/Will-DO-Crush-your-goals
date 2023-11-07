@@ -30,7 +30,6 @@ const format_date2 = (timestamp) => {
 	const formattedDate = `${months[monthNum]} ${day} ${year}`;
 
 	// Log and return the formatted date string
-	console.log(formattedDate);
 	return formattedDate;
 };
 
@@ -73,8 +72,6 @@ const SingleTask = ({ filteredTask }) => {
 
 
 	const [taskData, settaskData] = useState(task || {});
-	console.log(taskData);
-	console.log(taskData.completionDate);
 
 
 	const handleInputChange = (event) => {

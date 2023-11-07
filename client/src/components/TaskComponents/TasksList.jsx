@@ -51,11 +51,8 @@ const TasksList = ({ tasks = [] }) => {
     } else {
       filteredTasksByPriority = filteredTasksByStatus.filter((task) => task.priority === priority);
     }
-    console.log(priority)
     // Update the sortedTasks state with the final filtered results
     setSortedTasks([...filteredTasksByPriority].sort((taskA, taskB) => taskA.completionDate - taskB.completionDate));
-    console.log(filteredTasksByStatus);
-    console.log(filteredTasksByPriority)
   }, [filter, priority]);
   
 
