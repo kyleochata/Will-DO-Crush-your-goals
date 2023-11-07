@@ -102,14 +102,6 @@ Report Page
 <br><br>
 <hr>
 
-#### Gif showing the application in action:
-
-<img src="">NEED TO UPDATE
-
-<br><br>
-
-<p align="right">(<a href="#back_to_top">back to top</a>)</p>
-
 ## Contributing
 
 Everyone is welcome to send contributions up for review through github! All contributions will certainly be reviewed and committed if found valuable and error free!
