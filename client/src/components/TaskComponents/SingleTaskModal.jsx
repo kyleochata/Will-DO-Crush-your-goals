@@ -179,9 +179,11 @@ useEffect(() => {
 								</div>
 								<div className="liItem">
 									<h3 className="subHeader">Goal</h3>
-								<Link to={`/goals/${taskData.goal._id}`}>
-									<p className="singlePageText"> {taskData.goal.title}</p>
-								</Link>
+									{!taskData.goal ? (<p>No Goal Assigned</p>) : (
+										<Link to={`/goals/${taskData.goal._id}`}>
+											<p className="singlePageText"> {taskData.goal.title}</p>
+										</Link>
+									)}
 									</div>
 							</div>
 						</article>
