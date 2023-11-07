@@ -54,10 +54,12 @@ const AddTaskBtn = ({ createTask, goals }) => {
 			<Modal
 				isOpen={showModal}
 				onRequestClose={() => setShowModal(false)}
-				className={style.addTaskModal}>
+				className={style.addTaskModal}
+			>
 				<button
 					className={style.closeButton}
-					onClick={() => setShowModal(false)}>
+					onClick={() => setShowModal(false)}
+				>
 					X
 				</button>
 				<div className={style.modalContent}>
@@ -117,13 +119,17 @@ const AddTaskBtn = ({ createTask, goals }) => {
 									Add to Goal:
 									<select
 										name="goalId"
-										value={taskData.goal} // Make sure this reflects the 'goal' in taskData
+										// value={taskData.goal} // Make sure this reflects the 'goal' in taskData
 										onChange={handleInputChange} // Use the same change handler which updates taskData
 										className={style.addTaskModalInput}
+										defaultValue={taskData.goal ? taskData.goal._id : "None"}
 									>
-										<option value="">None</option> {/* This is the new empty option */}
+										<option value="">None</option>{" "}
+										{/* This is the new empty option */}
 										{goals.map((goal) => (
-											<option value={goal._id} key={goal._id}>{goal.title}</option>
+											<option value={goal._id} key={goal._id}>
+												{goal.title}
+											</option>
 										))}
 									</select>
 								</label>
