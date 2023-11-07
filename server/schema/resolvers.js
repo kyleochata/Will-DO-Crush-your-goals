@@ -202,6 +202,10 @@ const resolvers = {
 			const user = await User.findOne({ authID: context.user.authID });
 
 			const task = await Task.findById(taskId);
+			if (goal === "")
+			{
+				goal = null
+			}
 			const updatedTask = await Task.findByIdAndUpdate(
 				taskId,
 				{ title, description, completionDate, priority, completed, goal },
@@ -209,10 +213,7 @@ const resolvers = {
 			).populate("goal");
 			
 
-			if (goal === "")
-			{
-				goal = null
-			}
+			
 
 			if (goal) {
 				const goal1 = await Goal.findById(goal);
