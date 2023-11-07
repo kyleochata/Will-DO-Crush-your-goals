@@ -12,33 +12,24 @@ const TasksListDash = ({ tasks = [] }) => {
 
   const format_date = (timestamp) => {
     //month is index 0-11. must add 1 to get correct month
-    let timeStamp = new Date(parseInt(timestamp));
-    let monthNum = timeStamp.getMonth();
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    let currentMonth = months[monthNum];
-    let day = timeStamp.getDate();
-    let year = timeStamp.getFullYear();
+    const date = new Date(parseInt(timestamp));
   
-    return `${currentMonth} ${day}, ${year}`;
-    
+    // Adjust for the timezone offset to get the correct GMT date
+    const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+
+    let monthNum = utcDate.getMonth()
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec',
+    ]
+    let currentMonth = months[monthNum]
+    let day = utcDate.getDate()
+    let year = utcDate.getFullYear()
+
+    return `${currentMonth} ${day}, ${year}`
   }
 
-  const tasksCopy = [...tasks];
-  tasksCopy.sort((a, b) => a.completionDate - b.completionDate);
-  const next5Tasks = tasksCopy.slice(0, 5);
-
-
-  // const [isComplete, setIsComplete] = useState(task.isComplete);
-  
-  // const toggleComplete = (value) => {
-  //   setIsComplete(value);
-  // };
-
-  // useEffect(() => {
-	// 	// send updated isComplete value to graphQL server when it changes
-	// 	// call mutation here to update task's isComplete field
-	// 	// Example: useMutation(UPDATE_TASK_COMPLETION ({ variables: { taskId: task.id, isComplete } }));
-	// }, [isComplete]);
+  const openTasks = tasks.filter((task) => !task.completed);
+  openTasks.sort((a, b) => a.completionDate - b.completionDate);
+  const next5Tasks = openTasks.slice(0, 5);
 
   return (
     <div className="tasksList">
