@@ -28,22 +28,43 @@ svg {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  /* flex-wrap: wrap; */
   gap: 10px;
   height: 20vh;
   width: 100%;
 }
 .reportProgress {
-  border: solid 1px rgb(255, 255, 255);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   height: 100%;
-  width: 25%;
+  width: 33%;
+  min-width: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
   /* justify-content: center; */
 }
+.TreeContainer {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.TreeContainer > h2 {
+  font-size: 2rem;
+}
+.SmartDiv {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+}
 
 .reportProgress > h3 {
   margin: 0;
+  font-size: 1.5rem;
+  color: #0bafc1;
 }
 .circleContainer {
   height: 75%;
@@ -56,6 +77,9 @@ svg {
   padding: 10px;
   overflow-x: auto;
   overflow: scroll;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 /* .svgWrapper {
   width: 100%;
@@ -67,8 +91,19 @@ svg {
     margin-top: 7rem;
     z-index: 0;
   }
-  /* .svgWrapper {
-    width: 100vw;
+  /* .reportProgressContainer {
+    flex-direction: column;
     height: 100%;
+    width: 100%;
   } */
+}
+@media (max-width: 932px) {
+  .reportProgressContainer {
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+  .reportProgress {
+    width: 100%;
+  }
 }

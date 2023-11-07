@@ -217,6 +217,23 @@ const resolvers = {
 				goal = null
 			}
 
+			if (goal) {
+				const goal1 = await Goal.findById(goal);
+
+				if (!goal1) {
+					throw new Error("Goal not found");
+				}
+
+				// if (goal.user.toString() !== user._id.toString()) {
+				// 	throw AuthenticationError;
+				// }
+
+				const updatedGoal = await Goal.findByIdAndUpdate(
+					goal1,
+					{ $push: { tasks: task._id }},
+					{ new: true }
+				);
+			}
 
 			if (!task) {
 				throw new Error('Task not found');
