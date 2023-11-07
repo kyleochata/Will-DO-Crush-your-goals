@@ -34,8 +34,6 @@ const format_date2 = (timestamp) => {
 	return `${currentMonth} ${day}, ${year}`;
 };
 
-
-
 const SingleTask = ({ filteredTask }) => {
 	const auth_ID = Auth.getProfile().authenticatedPerson.authID
 	const selectRef = useRef()
@@ -47,9 +45,9 @@ const SingleTask = ({ filteredTask }) => {
 	// const [queryTask] = useQuery(QUERY_TASK);
 	// const [goalState, setGoalState] = useState(true);
 	const { taskId } = useParams();
-	const { loading, data:{task} } = useQuery(QUERY_TASK, {
+	const { data:{task} } = useQuery(QUERY_TASK, {
 		variables: { taskId: taskId },
-	  })
+	})
 	console.log('where is this')
 	console.log(task);
 
@@ -103,7 +101,7 @@ const SingleTask = ({ filteredTask }) => {
 		const taskDataWithDateString = {
 			...taskData,
 			completionDate: format_date(taskData.completionDate),
-		  };
+		};
 
 		changeTask({ variables: taskDataWithDateString })
 			.then((response) => {
@@ -148,7 +146,7 @@ const SingleTask = ({ filteredTask }) => {
 
 	const cancelEdit = () => {
 		seteditTask(false);
-	  };
+	};
 
 	return (
 		<div>
@@ -162,7 +160,7 @@ const SingleTask = ({ filteredTask }) => {
 									<button onClick={editTaskClick} className="dashButton">
 										Edit Task
 									</button>
-									<button className="dashButton">
+									<button className="dashButton" onClick={handleComplete}>
 										Complete
 									</button>
 									<button onClick={handleDelClick} className="dashButton">
