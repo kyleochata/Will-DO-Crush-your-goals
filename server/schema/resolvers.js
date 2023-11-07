@@ -111,7 +111,7 @@ const resolvers = {
 
 
 		// Goal-related mutations
-		addGoal: async (_, { title, description, why, measures, completionDate, measurableIds }, context) => {
+		addGoal: async (_, { title, description, why, completionDate, measurableIds }, context) => {
 			if (!context.user) {
 				throw AuthenticationError;
 			}
@@ -121,7 +121,6 @@ const resolvers = {
 				title,
 				description,
 				why,
-				measures,
 				completionDate,
 				user
 			});
@@ -176,7 +175,7 @@ const resolvers = {
 		},
 
 		// Edit a single goal
-		editGoal: async (_, { goalId, title, description, why, measures, completionDate, completed }, context) => {
+		editGoal: async (_, { goalId, title, description, why, completionDate, completed }, context) => {
 			if (!context.user) {
 				throw AuthenticationError;
 			}
@@ -194,7 +193,7 @@ const resolvers = {
 
 			const updatedGoal = await Goal.findByIdAndUpdate(
 				goalId,
-				{ title, description, why, measures, completionDate, completed },
+				{ title, description, why, completionDate, completed },
 				{ new: true }
 			);
 			return updatedGoal;
