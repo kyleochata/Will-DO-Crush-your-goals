@@ -10,18 +10,30 @@ import Auth from '../../utils/auth';
 import { Link } from "react-router-dom";
 
 const format_date2 = (timestamp) => {
-	//month is index 0-11. must add 1 to get correct month
-	let timeStamp = new Date(parseInt(timestamp));
-	let monthNum = timeStamp.getMonth();
-	const months = [
-		"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",
-	];
-	let currentMonth = months[monthNum];
-	let day = timeStamp.getDate();
-	let year = timeStamp.getFullYear();
+	// Create a new date object using the timestamp
+	const date = new Date(parseInt(timestamp));
 
-	return `${currentMonth} ${day}, ${year}`;
+	// Adjust for the timezone offset to get the correct GMT date
+	const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+
+	// Extract the month, day, and year from the UTC date
+	const monthNum = utcDate.getMonth();
+	const day = utcDate.getDate();
+	const year = utcDate.getFullYear();
+
+	// Define the month names
+	const months = [
+		"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+	];
+
+	// Construct the formatted date string
+	const formattedDate = `${months[monthNum]} ${day} ${year}`;
+
+	// Log and return the formatted date string
+	console.log(formattedDate);
+	return formattedDate;
 };
+
 
 const SingleTask = ({ filteredTask }) => {
 	const auth_ID = Auth.getProfile().authenticatedPerson.authID
@@ -34,7 +46,7 @@ const SingleTask = ({ filteredTask }) => {
 	// const [queryTask] = useQuery(QUERY_TASK);
 	// const [goalState, setGoalState] = useState(true);
 	const { taskId } = useParams();
-	const { data:{task} } = useQuery(QUERY_TASK, {
+	const { data: { task } } = useQuery(QUERY_TASK, {
 		variables: { taskId: taskId },
 	})
 	console.log('where is this')
@@ -45,33 +57,44 @@ const SingleTask = ({ filteredTask }) => {
 	const [deleteTask] = useMutation(DELETE_TASK);
 
 	const handleDelClick = async () => {
-		try {
-			await deleteTask({
-				variables: { taskId: taskId },
-			});
-			window.location.replace("/tasks");
-		} catch (err) {
-			console.log("catching error");
-			throw err;
+		if (confirm("Are you sure you want to delete?")) { // Use confirm here
+			try {
+				await deleteTask({
+					variables: { taskId: taskId },
+				});
+				// Use the router's navigation method instead of window.location.replace
+				// if you're using React Router or a similar library
+				window.location.replace("/tasks");
+			} catch (err) {
+				console.log("Error deleting task:", err);
+				// Handle the error appropriately
+				// Throwing the error here may not be necessary unless you want a higher-level function to handle it.
+			}
 		}
 	};
 
+
 	const [taskData, settaskData] = useState(task || {});
 	console.log(taskData);
+	console.log(taskData.completionDate);
 
 
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
 
-		settaskData((prevState) => {
-			console.log("Old state:", prevState);
-			console.log("New value for", name, ":", value);
-
-			return {
+		if (name === 'completionDate') {
+			// When the input field is for completionDate, convert the value to a timestamp
+			settaskData((prevState) => ({
+				...prevState,
+				// Convert the date string to a timestamp
+				[name]: Date.parse(value),
+			}));
+		} else {
+			settaskData((prevState) => ({
 				...prevState,
 				[name]: value,
-			};
-		});
+			}))
+		}
 	};
 
 	const [changeTask] = useMutation(EDIT_TASK, { refetchQueries: ["user", QUERY_USER, "task", QUERY_TASK] });
@@ -113,7 +136,6 @@ const SingleTask = ({ filteredTask }) => {
 
 	const editTaskClick = () => {
 		// const [taskData, settaskData] = useState({});
-		handleSubmit();
 		seteditTask(!editTask);
 	};
 
@@ -121,25 +143,25 @@ const SingleTask = ({ filteredTask }) => {
 		seteditTask(false);
 	};
 
-const [checked, setChecked] = useState(task.completed);
-const [buttonText, setButtonText] = useState(
-	task.completed ? "ReOpen" : "Complete"
-);
+	const [checked, setChecked] = useState(task.completed);
+	const [buttonText, setButtonText] = useState(
+		task.completed ? "ReOpen" : "Complete"
+	);
 
-const toggleCompletion = () => {
-	setChecked(!checked);
-	setButtonText(checked ? "Complete" : "ReOpen");
-};
+	const toggleCompletion = () => {
+		setChecked(!checked);
+		setButtonText(checked ? "Complete" : "ReOpen");
+	};
 
-const [updateTaskCompletion] = useMutation(EDIT_TASK);
+	const [updateTaskCompletion] = useMutation(EDIT_TASK);
 
-useEffect(() => {
-	if (checked !== task.completed) {
-		updateTaskCompletion({
-			variables: { taskId: task._id, completed: checked },
-		});
-	}
-}, [checked, task.completed, task._id, updateTaskCompletion]);
+	useEffect(() => {
+		if (checked !== task.completed) {
+			updateTaskCompletion({
+				variables: { taskId: task._id, completed: checked },
+			});
+		}
+	}, [checked, task.completed, task._id, updateTaskCompletion]);
 
 
 	return (

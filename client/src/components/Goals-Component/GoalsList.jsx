@@ -10,17 +10,20 @@ const GoalsList = ({ goals = [] }) => {
 
   const format_date = (timestamp) => {
     //month is index 0-11. must add 1 to get correct month
-    let timeStamp = new Date(parseInt(timestamp));
-    let monthNum = timeStamp.getMonth();
-    const months = [
-      "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
-    ];
-    let currentMonth = months[monthNum];
-    let day = timeStamp.getDate();
-    let year = timeStamp.getFullYear();
+    const date = new Date(parseInt(timestamp));
+  
+    // Adjust for the timezone offset to get the correct GMT date
+    const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
 
-    return `${currentMonth} ${day}, ${year}`;
-  };
+    let monthNum = utcDate.getMonth()
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec',
+    ]
+    let currentMonth = months[monthNum]
+    let day = utcDate.getDate()
+    let year = utcDate.getFullYear()
+
+    return `${currentMonth} ${day}, ${year}`
+  }
 
   const [filter, setFilter] = useState('active')
 

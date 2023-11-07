@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import '../Dashboard/Dashboard.css'
 import { useState, useEffect } from 'react'
 import CheckboxComponent from './Checkbox'
+// import format_date from "../../utils/helpers";
+
 
 const TasksList = ({ tasks = [] }) => {
   if (!tasks.length) {
@@ -13,13 +15,17 @@ const TasksList = ({ tasks = [] }) => {
 
   const format_date = (timestamp) => {
     //month is index 0-11. must add 1 to get correct month
-    let timeStamp = new Date(parseInt(timestamp))
-    let monthNum = timeStamp.getMonth()
+    const date = new Date(parseInt(timestamp));
+  
+    // Adjust for the timezone offset to get the correct GMT date
+    const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+
+    let monthNum = utcDate.getMonth()
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec',
     ]
     let currentMonth = months[monthNum]
-    let day = timeStamp.getDate()
-    let year = timeStamp.getFullYear()
+    let day = utcDate.getDate()
+    let year = utcDate.getFullYear()
 
     return `${currentMonth} ${day}, ${year}`
   }
