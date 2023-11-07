@@ -21,16 +21,11 @@ const resolvers = {
 
 		// Queries to locate a single instance
 		user: async (_, { authID }) => {
-			// console.log({ serverUser: authID })
 			return User.findOne({ authID: authID }).populate('tasks').populate('goals').populate('measurables');
 		},
 		goal: async (_, { goalId }) => {
-			console.log(goalId);
 			return Goal.findById(goalId).populate('user').populate('tasks').populate('measurables');
 		},
-		// goal: async (_, { goalId }) => {
-		// 	console.log('goal query server log')
-		// },
 		task: async (_, { taskId }) => {
 			return Task.findById(taskId).populate([{path:'user'},{path:'goal'},{path:'measurable'}]);
 		},
@@ -207,10 +202,12 @@ const resolvers = {
 			const user = await User.findOne({ authID: context.user.authID });
 
 			const task = await Task.findById(taskId);
-
+			const updatedTask = await Task.findByIdAndUpdate(
+				taskId,
+				{ title, description, completionDate, priority, completed, goal },
+				{ new: true }
+			).populate("goal");
 			
-			console.log("server console");
-			console.log(goal);
 
 			if (goal === "")
 			{
@@ -219,7 +216,7 @@ const resolvers = {
 
 			if (goal) {
 				const goal1 = await Goal.findById(goal);
-
+				console.log(goal1);
 				if (!goal1) {
 					throw new Error("Goal not found");
 				}
@@ -229,11 +226,13 @@ const resolvers = {
 				}
 
 				const updatedGoal = await Goal.findByIdAndUpdate(
-					goal1,
+					goal,
 					{ $push: { tasks: task._id }},
 					{ new: true }
 				);
 			}
+
+			console.log(task);
 
 			if (!task) {
 				throw new Error('Task not found');
@@ -243,11 +242,7 @@ const resolvers = {
 				throw AuthenticationError;
 			}
 
-			const updatedTask = await Task.findByIdAndUpdate(
-				taskId,
-				{ title, description, completionDate, priority, completed, goal },
-				{ new: true }
-			).populate("goal");
+			
 			return updatedTask;
 		},
 
@@ -281,11 +276,8 @@ const resolvers = {
 			if (!context.user) {
 				throw AuthenticationError;
 			}
-			console.log("Pass 1st IF")
 			const user = await User.findOne({ authID: context.user.authID });
-			console.log(user);
 			const goal = await Goal.findById(goalId);
-			console.log(goal);
 			if (!goal) {
 				throw new Error('Goal not found');
 			}
