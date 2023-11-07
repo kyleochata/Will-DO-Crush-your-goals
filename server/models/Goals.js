@@ -31,6 +31,10 @@ const goalSchema = new Schema({
 		required: true,
 		default: false,
 	},
+	measures: {
+		type: String,
+		required: true,
+	},
 	user: {
 		type: Schema.Types.ObjectId,
 		ref: "User",

@@ -37,8 +37,6 @@ const SingleTask = ({ filteredTask }) => {
 	const { loading, data: { task } } = useQuery(QUERY_TASK, {
 		variables: { taskId: taskId },
 	})
-	console.log('where is this')
-	console.log(task);
 
 	const [editTask, seteditTask] = useState(false);
 
@@ -97,9 +95,6 @@ const SingleTask = ({ filteredTask }) => {
 		try {
 			taskData.taskId = taskData._id;
 			taskData.goal = selectRef.current.value;
-			console.log("selectrefval");
-			console.log(selectRef.current.value);
-			console.log(taskData);
 			// await updatedTask({...taskData,goal:selectRef.current.value});
 			const bbc = await updatedTask(taskData);
 			window.location.reload();
@@ -212,12 +207,12 @@ const SingleTask = ({ filteredTask }) => {
 										<option value="High">High</option>
 									</select>
 								</label>
-								<label>
+								<label className={style.addTaskModalTxt}>
 									Add to Goal:
-									<br></br>
 									<select
 										name="goal"
 										ref={selectRef}
+										className={style.addTaskModalInput}
 									>
 										<option value="">None</option>
 										{goals.map((goal) => (

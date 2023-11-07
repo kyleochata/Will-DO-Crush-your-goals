@@ -30,6 +30,7 @@ const typeDefs = `
     completionDate: String!
     createdAt: String!
     completed: Boolean!
+    measures: String!
     user: User
     tasks: [Task]
     measurables: [Measurable]
