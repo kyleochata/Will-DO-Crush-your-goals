@@ -207,7 +207,12 @@ const resolvers = {
 			const user = await User.findOne({ authID: context.user.authID });
 
 			const task = await Task.findById(taskId);
-
+			
+			const updatedTask = await Task.findByIdAndUpdate(
+				taskId,
+				{ title, description, completionDate, priority, completed, goal },
+				{ new: true }
+			).populate("goal");
 			
 			console.log("server console");
 			console.log(goal);
@@ -243,11 +248,6 @@ const resolvers = {
 				throw AuthenticationError;
 			}
 
-			const updatedTask = await Task.findByIdAndUpdate(
-				taskId,
-				{ title, description, completionDate, priority, completed, goal },
-				{ new: true }
-			).populate("goal");
 			return updatedTask;
 		},
 
