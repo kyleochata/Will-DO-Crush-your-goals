@@ -1,36 +1,32 @@
 import { useState, useEffect } from "react";
-import Checkbox from "../../components/TaskComponents/ReUsableCheckbox";
 import { useMutation } from "@apollo/client";
 import { EDIT_GOAL} from "../../utils/mutations";
 
 const CheckboxComponent = ({ goal }) => {
+
 	const [checked, setChecked] = useState(goal.completed);
+  const [buttonText, setButtonText] = useState(
+    goal.completed ? "ReOpen" : "Complete"
+  );
 
-	const handleCheckbox = () => {
-		setChecked(!checked);
-	};
+  const toggleCompletion = () => {
+    setChecked(!checked);
+    setButtonText(checked ? "Complete" : "ReOpen");
+  };
 
-	const [updateTaskCompletion] = useMutation(EDIT_GOAL);
+  const [updateGoalCompletion] = useMutation(EDIT_GOAL);
 
-	useEffect(() => {
-		if (checked === true) {
-			updateTaskCompletion({
-				variables: { goalId: goal._id, completed: true },
-			});
-		} else {
-			updateTaskCompletion({
-				variables: { goalId: goal._id, completed: false },
-			});
-		}
-	}, [checked]);
+  useEffect(() => {
+    if (checked !== goal.completed) {
+      updateGoalCompletion({
+        variables: { goalId: goal._id, completed: checked },
+      });
+    }
+  }, [checked, goal.completed, goal._id, updateGoalCompletion]);
 
 	return (
 		<div>
-			<Checkbox
-				label="Complete"
-				value={goal.completed}
-				onChange={handleCheckbox}
-			/>
+			<button onClick={toggleCompletion} className="dashButton">{buttonText}</button>
 		</div>
 	);
 };

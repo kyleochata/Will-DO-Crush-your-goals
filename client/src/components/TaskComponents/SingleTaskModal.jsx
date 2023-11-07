@@ -192,7 +192,7 @@ useEffect(() => {
 			)}
 			{editTask && (
 				<div className={style.editContent}>
-					<div className={style.editTitle}>EDIT GOAL</div>
+					<div className={style.editTitle}>EDIT TASK</div>
 					<div className={style.formContainer}>
 						<form onSubmit={handleSubmit} className={style.addTaskForm}>
 							<div className={style.formInputs}>
