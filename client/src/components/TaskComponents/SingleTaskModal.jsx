@@ -179,12 +179,14 @@ useEffect(() => {
 								</div>
 								<div className="liItem">
 									<h3 className="subHeader">Goal</h3>
-									{!taskData.goal ? (<p>No Goal Assigned</p>) : (
+									{!taskData.goal ? (
+										<p>No Goal Assigned</p>
+									) : (
 										<Link to={`/goals/${taskData.goal._id}`}>
 											<p className="singlePageText"> {taskData.goal.title}</p>
 										</Link>
 									)}
-									</div>
+								</div>
 							</div>
 						</article>
 					</div>
@@ -244,11 +246,16 @@ useEffect(() => {
 										<option value="High">High</option>
 									</select>
 								</label>
-								<label>
+								<label className={style.addTaskModalTxt}>
 									Add to Goal:
 									<br></br>
-									<select name="goal" ref={selectRef}>
-										<option value="target">None</option>
+									<select
+										name="goal"
+										className={style.addTaskModalInput}
+										ref={selectRef}
+										defaultValue={taskData.goal ? taskData.goal._id : "None"}
+									>
+										<option value="">None</option>
 										{goals.map((goal) => (
 											<option key={goal._id} value={goal._id}>
 												{goal.title}
