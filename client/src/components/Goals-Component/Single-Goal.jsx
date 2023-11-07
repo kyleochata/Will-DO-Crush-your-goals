@@ -11,19 +11,8 @@ const format_date2 = (timestamp) => {
   let timeStamp = new Date(parseInt(timestamp))
   let monthNum = timeStamp.getMonth()
   const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ]
+		"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",
+	];
   let currentMonth = months[monthNum]
   let day = timeStamp.getDate()
   let year = timeStamp.getFullYear()
@@ -67,14 +56,6 @@ const SingleGoal = ({ goalInfo }) => {
   console.log('here')
   console.log(goalData)
 
-  // const handleInputChange = (event) => {
-  //   setGoalData({
-  //     ...goalData,
-  //     [event.target.name]: event.target.value,
-  //   });
-  //   console.log(goalData);
-  // };
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
@@ -114,8 +95,6 @@ const SingleGoal = ({ goalInfo }) => {
     updatedGoal(goalData)
     setEditGoal(!editGoal)
   }
-
-  //asdasdasdsadab
 
   const addMeasurableClick = async (event) => {
     event.preventDefault()
@@ -194,9 +173,6 @@ const SingleGoal = ({ goalInfo }) => {
                 </div>
               </div>
             </article>
-          </div>
-          <div>
-            {/* Complete button  <Link to={`/goals/${goal._id}`}> FIND WAY to switch completed BOOLEAN to true for that goal id. FIND WAY to edit goal - Maybe reuse AddGoalBtn or create a new modal similar to add goal but add update goal btn. Need data to be shown and assigned to user. */}
           </div>
           <div>
             <section>heres for you to add measurables</section>
@@ -293,9 +269,5 @@ const SingleGoal = ({ goalInfo }) => {
     </div>
   )
 }
-
-// goalData.defaultProps = {
-// 	measureables: [],
-// };
 
 export default SingleGoal
