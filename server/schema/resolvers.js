@@ -201,10 +201,10 @@ const resolvers = {
 
 		// Edit a single task
 		editTask: async (_, { taskId, title, description, completionDate, priority, completed,goal }, context) => {
-			// if (!context.user) {
-			// 	throw AuthenticationError;
-			// }
-			// const user = await User.findOne({ authID: context.user.authID });
+			if (!context.user) {
+				throw AuthenticationError;
+			}
+			const user = await User.findOne({ authID: context.user.authID });
 
 			const task = await Task.findById(taskId);
 
@@ -224,9 +224,9 @@ const resolvers = {
 					throw new Error("Goal not found");
 				}
 
-				// if (goal.user.toString() !== user._id.toString()) {
-				// 	throw AuthenticationError;
-				// }
+				if (goal.user.toString() !== user._id.toString()) {
+					throw AuthenticationError;
+				}
 
 				const updatedGoal = await Goal.findByIdAndUpdate(
 					goal1,
@@ -239,9 +239,9 @@ const resolvers = {
 				throw new Error('Task not found');
 			}
 
-			// if (task.user.toString() !== user._id.toString()) {
-			// 	throw AuthenticationError;
-			// }
+			if (task.user.toString() !== user._id.toString()) {
+				throw AuthenticationError;
+			}
 
 			const updatedTask = await Task.findByIdAndUpdate(
 				taskId,
