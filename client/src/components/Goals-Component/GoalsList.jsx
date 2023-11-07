@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import "../Dashboard/Dashboard.css";
+import "../../components/Dashboard/Dashboard.css";
 import { useState, useEffect } from "react";
 
 // Add task will link to a modal to add a task
 const GoalsList = ({ goals = [] }) => {
   if (!goals.length) {
-    return <h3 className={style.noTasks}>NO GOALS YET</h3>;
+    return <h3 className={"noTasks"}>NO GOALS YET</h3>;
   }
 
   const [filter, setFilter] = useState("all");
