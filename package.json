@@ -1,8 +1,11 @@
 {
-  "name": "MERN task List",
+  "name": "mern-task-list",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
+  "engines": {
+    "node": "18.17.1"
+  },
   "scripts": {
     "start": "node server --ignore client",
     "develop": "concurrently \"cd server && npm run start\" \"cd client && npm run dev\"",
