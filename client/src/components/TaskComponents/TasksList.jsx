@@ -88,14 +88,21 @@ const TasksList = ({ tasks = [] }) => {
 					<div className="cardText" key={task._id}>
 						
 							<div className="liItem">
-              <Link to={`/tasks/${task._id}`}>
 								<h2 className="taskListTitle">{task.title}</h2>
 								<pre className="regularText">{task.description}</pre>
 								<p className="regularText">
 									{format_date(task.completionDate)}
 								</p>
+
+                <div className="dashButtonContainer">
+                      <Link to={`/tasks/${task._id}`}>
+                <button className="dashButton">Details</button>
                 </Link>
-                <CheckboxComponent task={task} name={task._id} />
+                <CheckboxComponent
+                  task={task} name={task._id}
+                  
+                  />
+                  </div>
 							</div>	
 					</div>
 				))

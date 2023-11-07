@@ -49,8 +49,6 @@ const SingleTask = ({ filteredTask }) => {
 	const { data: { task } } = useQuery(QUERY_TASK, {
 		variables: { taskId: taskId },
 	})
-	console.log('where is this')
-	console.log(task);
 
 	const [editTask, seteditTask] = useState(false);
 
@@ -115,24 +113,33 @@ const SingleTask = ({ filteredTask }) => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-
-
+	  
 		try {
-			taskData.taskId = taskData._id;
-			taskData.goal = selectRef.current.value;
-			console.log("selectrefval");
-			console.log(selectRef.current.value);
-			console.log(taskData);
-			// await updatedTask({...taskData,goal:selectRef.current.value});
-			const bbc = await updatedTask(taskData);
-			window.location.reload();
-			seteditTask(false); // I changed this to false to close the edit form on submit
-			// You might want to refetch task data here if needed
+		  const updatedTaskData = {
+			...taskData,
+			taskId: taskData._id,
+			goal: selectRef.current.value,
+		  };
+	  
+		  // Check if there are changes in the taskData
+		  if (
+			updatedTaskData.title !== task.title ||
+			updatedTaskData.description !== task.description ||
+			updatedTaskData.completionDate !== task.completionDate ||
+			updatedTaskData.priority !== task.priority ||
+			updatedTaskData.goal !== task.goal
+		  ) {
+			// Only update the task if there are changes
+			await updatedTask(updatedTaskData);
+		  }
+	  
+		  window.location.reload();
+		  seteditTask(false);
 		} catch (error) {
-			console.error("Error updating task:", error);
-			// Update UI to show error message
+		  console.error("Error updating task:", error);
 		}
-	};
+	  };
+	  
 
 	const editTaskClick = () => {
 		// const [taskData, settaskData] = useState({});
@@ -270,7 +277,6 @@ const SingleTask = ({ filteredTask }) => {
 								</label>
 								<label className={style.addTaskModalTxt}>
 									Add to Goal:
-									<br></br>
 									<select
 										name="goal"
 										className={style.addTaskModalInput}
