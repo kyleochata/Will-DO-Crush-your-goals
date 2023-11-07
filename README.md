@@ -67,7 +67,7 @@ This application relies on the following software:
 - [![Express][Express.js]][Express-url]
 - [![MongoDB][MongoDB]][Mongo-url]
 - [![D3][D3.js]][D3-url]
-- [![Render][Render]][Render-url]
+- [![Heroku][Heroku]][Heroku-url]
 
 <p align="right">(<a href="#back_to_top">back to top</a>)</p>
 
@@ -101,14 +101,6 @@ Single Task Page
 Report Page 
 <br><br>
 <hr>
-
-#### Gif showing the application in action:
-
-<img src="">NEED TO UPDATE
-
-<br><br>
-
-<p align="right">(<a href="#back_to_top">back to top</a>)</p>
 
 ## Contributing
 
@@ -184,3 +176,5 @@ You can get in touch with the creators through:
 [React-url]: https://react.dev/
 [ReactRouter]: https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white
 [rr-url]: https://reactrouter.com/en/main
+[Heroku]: https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white
+[Heroku-url]: https://www.heroku.com/
