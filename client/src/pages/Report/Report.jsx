@@ -345,12 +345,3 @@ const Report = () => {
 
 export default Report
 
-// to work on after MVP
-// const findTreeData = async (goalID) => {
-//   const goalData = await useQuery(QUERY_GOAL, { variables: { goalID } })
-//   console.log(goalData)
-// }
-// const handleSelectChange = ({ target }) => {
-//   console.log(target.value)
-//   setTreeData(target.value)
-// }
